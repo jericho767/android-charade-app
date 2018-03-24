@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6a3286</color>
+    <color name="colorPrimaryDark">#8d5496</color>
+    <color name="colorAccent">#d66503</color>
+
+    <color name="colorDefault">#c6cdd1</color>
+    <color name="colorDefaultDark">#7b8083</color>
+    <color name="colorDefaultAccent">#3e3e3e</color>
+
+    <color name="colorSuccess">#00CC48</color>
+    <color name="colorSuccessDark">#197F3D</color>
+    <color name="colorSuccessAccent">#ffffff</color>
+
+    <color name="colorError">#FF0100</color>
+    <color name="colorErrorDark">#7F0100</color>
+    <color name="colorErrorAccent">#ffffff</color>
+
+    <color name="colorClearDarkBackground">#50000000</color>
+    <color name="colorClearDarkText">#ffffff</color>
+
+    <color name="colorClearErrorBackground">#507f0100</color>
+    <color name="colorClearErrorText">@color/colorErrorAccent</color>
+
+    <color name="colorClearSuccessBackground">#50197f3d</color>
+    <color name="colorClearSuccessText">@color/colorSuccessAccent</color>
+</resources>

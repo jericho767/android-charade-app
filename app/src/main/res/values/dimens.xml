@@ -1,0 +1,18 @@
+<resources>
+    <dimen name="dp_fab">16dp</dimen>
+    <dimen name="dp_xs">4dp</dimen>
+    <dimen name="dp_sm">8dp</dimen>
+    <dimen name="dp_md">12dp</dimen>
+    <dimen name="dp_lg">24dp</dimen>
+    <dimen name="dp_xlg">32dp</dimen>
+    <dimen name="dp_x2lg">40dp</dimen>
+    <dimen name="dp_x3lg">48dp</dimen>
+    <dimen name="dp_x4lg">56dp</dimen>
+    <dimen name="font_h1">70sp</dimen>
+    <dimen name="font_h2">60sp</dimen>
+    <dimen name="font_lg">50sp</dimen>
+    <dimen name="font_md">40sp</dimen>
+    <dimen name="font_sm">30sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="weight_bs_grid">12</dimen>
+</resources>

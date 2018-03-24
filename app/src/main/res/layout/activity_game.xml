@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal" android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/game_controls"
+            android:orientation="vertical">
+
+            <TextView android:id="@+id/game_word"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:text="Hello world"
+                android:gravity="center_vertical"
+                android:autoSizeTextType="uniform"/>
+
+            <TextView android:id="@+id/count_pass"
+                style="@style/GameCountPass"/>
+
+            <TextView android:id="@+id/count_check"
+                style="@style/GameCountCheck"/>
+        </RelativeLayout>
+
+        <LinearLayout android:id="@+id/game_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="@dimen/weight_bs_grid"
+            android:layout_alignParentBottom="true">
+
+            <Button android:id="@+id/game_button_pass"
+                style="@style/GameButtonControlError"/>
+
+            <LinearLayout android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView android:id="@+id/game_timer"
+                    style="@style/GameTimer"/>
+            </LinearLayout>
+
+            <Button android:id="@+id/game_button_check"
+                style="@style/GameButtonControlSuccess"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

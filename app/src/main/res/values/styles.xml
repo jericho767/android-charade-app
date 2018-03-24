@@ -1,0 +1,141 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/app_name</item>
+        <item name="android:textSize">@dimen/font_h1</item>
+    </style>
+
+    <style name="SplashSubText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/app_subtext</item>
+        <item name="android:textSize">@dimen/font_h2</item>
+    </style>
+
+    <style name="FloatingActionButton">
+        <item name="android:clickable">true</item>
+        <item name="android:src">@drawable/ic_add</item>
+        <item name="android:id">@id/fab_add</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="android:layout_margin">@dimen/dp_fab</item>
+    </style>
+
+    <style name="Container">
+        <item name="android:layout_marginTop">@dimen/dp_md</item>
+        <item name="android:layout_marginBottom">@dimen/dp_md</item>
+        <item name="android:layout_marginLeft">@dimen/dp_sm</item>
+        <item name="android:layout_marginRight">@dimen/dp_sm</item>
+    </style>
+
+    <style name="FormControlButtonDefault">
+        <item name="android:background">@drawable/button_default</item>
+        <item name="android:paddingLeft">@dimen/dp_sm</item>
+        <item name="android:paddingRight">@dimen/dp_sm</item>
+        <item name="android:paddingTop">@dimen/dp_xs</item>
+        <item name="android:paddingBottom">@dimen/dp_xs</item>
+    </style>
+
+    <style name="ButtonIconAdd">
+        <item name="android:background">@drawable/button_default</item>
+        <item name="android:src">@drawable/ic_add</item>
+    </style>
+
+    <style name="TextClearError">
+        <item name="android:textColor">@color/colorClearErrorText</item>
+        <item name="android:background">@color/colorClearErrorBackground</item>
+    </style>
+
+    <style name="TextClearSuccess">
+        <item name="android:textColor">@color/colorClearSuccessText</item>
+        <item name="android:background">@color/colorClearSuccessBackground</item>
+    </style>
+
+    <style name="TextClearDark">
+        <item name="android:textColor">@color/colorClearDarkText</item>
+        <item name="android:background">@color/colorClearDarkBackground</item>
+    </style>
+
+    <style name="ButtonSuccess">
+        <item name="android:textColor">@color/colorSuccessAccent</item>
+        <item name="android:background">@drawable/button_success</item>
+    </style>
+
+    <style name="ButtonError">
+        <item name="android:background">@drawable/button_error</item>
+        <item name="android:textColor">@color/colorErrorAccent</item>
+    </style>
+
+    <style name="GameButtonControls">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">@dimen/font_md</item>
+        <item name="android:layout_weight">4</item>
+    </style>
+
+    <style name="GameButtonControlError" parent="@style/GameButtonControls">
+        <item name="android:layout_gravity">start</item>
+        <item name="android:text">@string/button_pass</item>
+        <item name="android:background">@drawable/button_error</item>
+        <item name="android:textColor">@color/colorErrorAccent</item>
+    </style>
+
+    <style name="GameButtonControlSuccess" parent="@style/GameButtonControls">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:text">@string/button_check</item>
+        <item name="android:background">@drawable/button_success</item>
+        <item name="android:textColor">@color/colorSuccessAccent</item>
+    </style>
+
+    <style name="GameTimer" parent="@style/TextClearDark">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/font_sm</item>
+        <item name="android:paddingLeft">@dimen/dp_md</item>
+        <item name="android:paddingRight">@dimen/dp_md</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="GameCount">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/font_sm</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:text">0</item>
+        <item name="android:paddingLeft">@dimen/dp_md</item>
+        <item name="android:paddingRight">@dimen/dp_md</item>
+    </style>
+
+    <style name="GameCountPass" parent="GameCount">
+        <item name="android:background">@color/colorClearErrorBackground</item>
+        <item name="android:textColor">@color/colorClearErrorText</item>
+        <item name="android:layout_alignParentEnd">false</item>
+    </style>
+
+    <style name="GameCountCheck" parent="GameCount">
+        <item name="android:background">@color/colorClearSuccessBackground</item>
+        <item name="android:textColor">@color/colorClearSuccessText</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+</resources>
