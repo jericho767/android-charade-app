@@ -102,7 +102,7 @@ public class Game {
         ArrayList<Word> words = new ArrayList<>();
 
         for (Word word : mWords) {
-            if (word.mCheckedAtRound == -1) {
+            if (word.mCheckedAtRound == 0) {
                 words.add(word);
             }
         }
@@ -118,7 +118,7 @@ public class Game {
         public Word(String mWord) {
             this.mWord = mWord;
             this.mPassCount = 0;
-            this.mCheckedAtRound = -1;
+            this.mCheckedAtRound = 0;
         }
 
         public String getmWord() {
