@@ -61,7 +61,7 @@ public class Game {
 
     // TODO: Add javadoc
     public String check() {
-        mWords.get(mCurrentWordIndex).setmCheckedAtRound(mCurrentRound);
+        mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRound);
         return getWord();
     }
 
@@ -95,7 +95,7 @@ public class Game {
         }
 
         mCurrentWordIndex = rand.nextInt(wordsCount - 1);
-        return mWords.get(mCurrentWordIndex).getmWord();
+        return mWords.get(mCurrentWordIndex).getWord();
     }
 
     private ArrayList<Word> fetchWordsFromPassedWords() {
@@ -121,11 +121,11 @@ public class Game {
             this.mCheckedAtRound = 0;
         }
 
-        public String getmWord() {
+        public String getWord() {
             return mWord;
         }
 
-        public int getmPassCount() {
+        public int getPassCount() {
             return mPassCount;
         }
 
@@ -133,11 +133,11 @@ public class Game {
             this.mPassCount++;
         }
 
-        public void setmCheckedAtRound(int mCheckedAtRound) {
+        public void setCheckedAtRound(int mCheckedAtRound) {
             this.mCheckedAtRound = mCheckedAtRound;
         }
 
-        public int getmCheckedAtRound() {
+        public int getCheckedAtRound() {
             return mCheckedAtRound;
         }
     }
