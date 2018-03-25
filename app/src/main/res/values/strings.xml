@@ -31,6 +31,7 @@
     <string name="button_create">CREATE</string>
     <string name="button_confirm">CONFIRM</string>
     <string name="button_delete">DELETE</string>
+    <string name="button_add">ADD</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">CANCEL</string>
     <string name="button_pass">PASS (10)</string>

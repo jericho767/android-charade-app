@@ -57,6 +57,7 @@
     </style>
 
     <style name="ButtonIconAdd">
+        <item name="android:contentDescription">@string/button_add</item>
         <item name="android:background">@drawable/btn_default</item>
         <item name="android:src">@drawable/ic_add</item>
     </style>
