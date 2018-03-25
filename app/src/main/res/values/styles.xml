@@ -49,7 +49,7 @@
     </style>
 
     <style name="FormControlButtonDefault">
-        <item name="android:background">@drawable/button_default</item>
+        <item name="android:background">@drawable/btn_default</item>
         <item name="android:paddingLeft">@dimen/dp_sm</item>
         <item name="android:paddingRight">@dimen/dp_sm</item>
         <item name="android:paddingTop">@dimen/dp_xs</item>
@@ -57,7 +57,7 @@
     </style>
 
     <style name="ButtonIconAdd">
-        <item name="android:background">@drawable/button_default</item>
+        <item name="android:background">@drawable/btn_default</item>
         <item name="android:src">@drawable/ic_add</item>
     </style>
 
@@ -78,11 +78,11 @@
 
     <style name="ButtonSuccess">
         <item name="android:textColor">@color/colorSuccessAccent</item>
-        <item name="android:background">@drawable/button_success</item>
+        <item name="android:background">@drawable/btn_success</item>
     </style>
 
     <style name="ButtonError">
-        <item name="android:background">@drawable/button_error</item>
+        <item name="android:background">@drawable/btn_error</item>
         <item name="android:textColor">@color/colorErrorAccent</item>
     </style>
 
@@ -96,14 +96,14 @@
     <style name="GameButtonControlError" parent="@style/GameButtonControls">
         <item name="android:layout_gravity">start</item>
         <item name="android:text">@string/button_pass</item>
-        <item name="android:background">@drawable/button_error</item>
+        <item name="android:background">@drawable/btn_error</item>
         <item name="android:textColor">@color/colorErrorAccent</item>
     </style>
 
     <style name="GameButtonControlSuccess" parent="@style/GameButtonControls">
         <item name="android:layout_gravity">end</item>
         <item name="android:text">@string/button_check</item>
-        <item name="android:background">@drawable/button_success</item>
+        <item name="android:background">@drawable/btn_success</item>
         <item name="android:textColor">@color/colorSuccessAccent</item>
     </style>
 
