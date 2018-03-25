@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import data.PlayList;
 import sprobe.training.miniproject.R;
@@ -55,13 +56,26 @@ public class Util {
         baseContext.startActivity(intent);
     }
 
-    // TODO: Add javadoc
+    /**
+     * I don't about this one. I remembered this in a dream and forgot about it<br>
+     * in another dream.
+     *
+     * @param activity the current activity (usually you give it a <code>Activity.this</code>
+     */
     public static void goFullscreen(AppCompatActivity activity) {
         activity.getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_FULLSCREEN
                 | SYSTEM_UI_FLAG_HIDE_NAVIGATION | SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
-    // TODO: Add javadoc
+    /**
+     * Want to tell something? This is your guy.
+     *
+     * @param baseContext it's just <code>Activity.this</code> or a <code>this</code>
+     * @param toast a <code>Toast</code> class
+     * @param message what you want to shout and tell. Like how was your day? Was it awesome?
+     *
+     * @return remember that <code>Toast</code> class you've given? I'm giving it back.
+     */
     public static Toast showToast(Context baseContext, Toast toast, String message) {
         try {
             toast.setText(message);
@@ -95,7 +109,13 @@ public class Util {
         return names;
     }
 
-    // TODO: Add javadoc
+    /**
+     * Use this when that annoying system UI shows. It will hide it for you. FOR GOOD!<br>
+     * HAHAHA! I'm just kidding. What I mean hide is, just hide it. Like: "Hey! you shouldn't<br>
+     * be here", that kind of hide? You know what I mean.
+     *
+     * @param activity the current activity (usually you give it a <code>Activity.this</code>
+     */
     public static void hideTheSystemUiWhenShown(final AppCompatActivity activity) {
         final int TIME_HIDE_AFTER = 2000;
         final View.OnSystemUiVisibilityChangeListener listener = new
@@ -119,7 +139,13 @@ public class Util {
                 .setOnSystemUiVisibilityChangeListener(listener);
     }
 
-    // TODO: Add javadoc
+    /**
+     * Humans like to have it divided. Like: seconds, minutes, hours, days, weeks, etc, etc.
+     *
+     * @param seconds the number of seconds that will be divided
+     *
+     * @return give that human what it wants. One that is not a sore in his eyes.
+     */
     public static String formatSecondsToTime(long seconds) {
         String output = "";
         int min = Integer.parseInt(String.valueOf(seconds / 60));
@@ -138,6 +164,15 @@ public class Util {
         output += sec;
 
         return output;
+    }
+
+    /**
+     * Gets the locale. Like really. HAHAHA! I don't know about this one seriously *sobs*
+     *
+     * @return returns that locale.
+     */
+    public static Locale getLocale() {
+        return Locale.getDefault();
     }
 
 }

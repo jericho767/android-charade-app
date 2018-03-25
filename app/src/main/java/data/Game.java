@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-    // The words poll
+    public static final String MESSAGE_CANNOT_PASS = "You shall not pass!";
+
     private ArrayList<Word> mWords;
 
     // Index of the current word in the poll of words
     private int mCurrentWordIndex;
 
-    private int mCurrentRound;
-    private int mCurrentRoundPassCount;
+    private int mCurrentRoundCounter;
+    private ArrayList<Integer> mCurrentRoundPassedWordIndeces;
 
     /***
      * Settings
@@ -21,13 +22,13 @@ public class Game {
     // number of passes
     private int mMaxPasses;
 
-    public Game(int mMaxPasses, ArrayList<String> words, boolean mIsIncludePassed) {
+    public Game(int mMaxPasses, String[] words, boolean mIsIncludePassed) {
         this.mMaxPasses = mMaxPasses;
         this.mWords = createWords(words);
         this.mIsIncludePassed = mIsIncludePassed;
     }
 
-    private ArrayList<Word> createWords(ArrayList<String> words) {
+    private ArrayList<Word> createWords(String[] words) {
         ArrayList<Word> mWords = new ArrayList<>();
 
         for (String word : words) {
@@ -37,108 +38,136 @@ public class Game {
         return mWords;
     }
 
-    public String startRound() {
-        if (mCurrentRound < 1) {
-            mCurrentRound = 1;
+    public void startRound() {
+        if (mCurrentRoundCounter < 1) {
+            mCurrentRoundCounter = 1;
         } else {
-            mCurrentRound++;
+            mCurrentRoundCounter++;
         }
 
-        mCurrentRoundPassCount = 0;
-        return getWord();
+        mCurrentRoundPassedWordIndeces = new ArrayList<>();
     }
 
     public void endRound() {
-        mCurrentRoundPassCount = 0;
+        mCurrentRoundPassedWordIndeces = new ArrayList<>();
+    }
+
+    public Word getCurentWord() {
+        return mWords.get(mCurrentWordIndex);
     }
 
     // TODO: Add javadoc
-    public String pass() {
-        mCurrentRoundPassCount++;
-        mWords.get(mCurrentWordIndex).incrementPassCount();
-        return getWord();
-    }
+    public Word getWord() {
+        ArrayList<Integer> pollOfWords = new ArrayList<>();
+        Word word;
 
-    // TODO: Add javadoc
-    public String check() {
-        mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRound);
-        return getWord();
-    }
-
-    public boolean canPass() {
-        if (mCurrentRoundPassCount < mMaxPasses) {
-            return true;
-        }
-
-        return false;
-    }
-
-    // TODO: Add javadoc
-    public String getWord() {
-        Random rand = new Random();
-        int wordsCount = mWords.size();
-
-        if (wordsCount == 0) {
-            if (mIsIncludePassed) {
-                ArrayList<Word> passedWords = fetchWordsFromPassedWords();
-                if (passedWords.size() < 1) {
-                    // No more words
-                    return null;
-                } else {
-                    this.mWords = passedWords;
-                    getWord();
-                }
-            } else {
-                // No more words
-                return null;
+        for (int i = 0; i < mWords.size() ; i++) {
+            word = mWords.get(i);
+            if ((!word.isChecked() && word.getPassCount() < 1) ||
+                    (!word.isChecked() && mIsIncludePassed)) {
+                pollOfWords.add(i);
             }
         }
 
-        mCurrentWordIndex = rand.nextInt(wordsCount - 1);
-        return mWords.get(mCurrentWordIndex).getWord();
+        int countOfPollOfWords = pollOfWords.size();
+
+        if (countOfPollOfWords < 1) {
+            // No more words
+            return null;
+        } else {
+            Random rand = new Random();
+            mCurrentWordIndex = pollOfWords.get(rand.nextInt(countOfPollOfWords));
+            return mWords.get(mCurrentWordIndex);
+        }
     }
 
-    private ArrayList<Word> fetchWordsFromPassedWords() {
-        ArrayList<Word> words = new ArrayList<>();
+    // TODO: Add javadoc
+    public void pass() {
+        mCurrentRoundPassedWordIndeces.add(mCurrentWordIndex);
+        mWords.get(mCurrentWordIndex).incrementPassCount();
+    }
+
+    // TODO: Add javadoc
+    public void check() {
+        mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRoundCounter);
+    }
+
+    public ArrayList<Word> getCheckedWordsInCurrentRound() {
+        ArrayList<Word> checkedWords = new ArrayList<>();
 
         for (Word word : mWords) {
-            if (word.mCheckedAtRound == 0) {
-                words.add(word);
+            if (word.getCheckedAtRound() == mCurrentRoundCounter) {
+                checkedWords.add(word);
             }
         }
 
-        return words;
+        return checkedWords;
     }
 
+    public ArrayList<Word> getPassedWordsInCurrentRound() {
+        ArrayList<Word> passedWords = new ArrayList<>();
+
+        for (Integer index : mCurrentRoundPassedWordIndeces) {
+            passedWords.add(mWords.get(index));
+        }
+
+        return passedWords;
+    }
+
+    public int getRemainingPasses() {
+        return mMaxPasses - mCurrentRoundPassedWordIndeces.size();
+    }
+
+    /**
+     * I don't know about this one... it's just too complicated.
+     * But yeah, it just returns a boolean, just run through the code.
+     *
+     * @return
+     *  <code>true</code> - can pass<br>
+     *  <code>false</code> - cannot pass
+     */
+    public boolean canPass() {
+        return getRemainingPasses() > 0;
+    }
+
+    /**
+     * This is the Word class.<br>
+     * I will let you figure it out, what it is.
+     */
     public class Word {
-        private String mWord;
+        private String mText;
         private int mPassCount;
         private int mCheckedAtRound;
 
-        public Word(String mWord) {
-            this.mWord = mWord;
+        private Word(String mText) {
+            this.mText = mText;
             this.mPassCount = 0;
             this.mCheckedAtRound = 0;
         }
 
-        public String getWord() {
-            return mWord;
+        public String getText() {
+            return mText;
         }
 
-        public int getPassCount() {
+        private int getPassCount() {
             return mPassCount;
         }
 
-        public void incrementPassCount() {
+        private void incrementPassCount() {
             this.mPassCount++;
         }
 
-        public void setCheckedAtRound(int mCheckedAtRound) {
+        private void setCheckedAtRound(int mCheckedAtRound) {
             this.mCheckedAtRound = mCheckedAtRound;
         }
 
-        public int getCheckedAtRound() {
+        private boolean isChecked() {
+            return mCheckedAtRound > 0;
+        }
+
+        private int getCheckedAtRound() {
             return mCheckedAtRound;
         }
     }
+
 }

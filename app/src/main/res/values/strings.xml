@@ -24,9 +24,6 @@
     <string name="action_help_order">180</string>
     <string name="action_about_order">200</string>
 
-    <string name="title_list_list">PLAY-lists</string>
-    <string name="title_activity_list_add">Create new playList</string>
-
     <string name="button_submit">SUBMIT</string>
     <string name="button_create">CREATE</string>
     <string name="button_confirm">CONFIRM</string>
@@ -34,11 +31,15 @@
     <string name="button_add">ADD</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">CANCEL</string>
-    <string name="button_pass">PASS (10)</string>
+    <string name="button_pass">PASS</string>
     <string name="button_check">CHECK</string>
+    <string name="button_game_start">Tap to start.</string>
+    <string name="button_game_resume">Tap to resume.</string>
 
     <string name="placeholder_list_name">Enter playList name</string>
     <string name="placeholder_add_list_item">Enter playList ite</string>
     <string name="title_activity_list_index">List</string>
     <string name="title_activity_game">Game Activity</string>
+    <string name="title_list_list">PLAY-lists</string>
+    <string name="title_activity_list_add">Create new playList</string>
 </resources>

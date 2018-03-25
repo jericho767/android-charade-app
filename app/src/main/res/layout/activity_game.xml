@@ -17,9 +17,16 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
-                android:text="Hello world"
                 android:gravity="center_vertical"
-                android:autoSizeTextType="uniform"/>
+                android:autoSizeTextType="uniform"
+                android:textSize="@dimen/font_lg"/>
+
+            <TextView android:id="@+id/game_overlay_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="@dimen/font_sm"
+                android:text="@string/button_game_start"/>
 
             <TextView android:id="@+id/count_pass"
                 style="@style/GameCountPass"/>
