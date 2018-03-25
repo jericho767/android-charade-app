@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
                     android:hint="@string/placeholder_list_name"
-                    android:layout_marginRight="@dimen/dp_sm"/>
+                    android:layout_marginEnd="@dimen/dp_sm"/>
 
                 <ImageButton
                     android:id="@+id/submit"
