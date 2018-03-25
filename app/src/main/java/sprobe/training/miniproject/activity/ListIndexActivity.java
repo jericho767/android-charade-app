@@ -31,9 +31,11 @@ public class ListIndexActivity extends AppCompatActivity {
             String validateItemName = validateItemName(itemName);
 
             if (!validateItemName.isEmpty()) {
-                mToast = Util.showToast(getBaseContext(), mToast, validateItemName);
+                mToast = Util.showToast(ListIndexActivity.this,
+                        mToast, validateItemName);
             } else {
-                mToast = Util.showToast(getBaseContext(), mToast, PlayList.SUCCESS_ITEM_ADD());
+                mToast = Util.showToast(ListIndexActivity.this,
+                        mToast, PlayList.SUCCESS_ITEM_ADD());
 
                 storeListItem(itemName);
 

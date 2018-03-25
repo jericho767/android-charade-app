@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Util.nextActivity(getBaseContext(), new ListListActivity());
+                        Util.nextActivity(MainActivity.this, new ListListActivity());
                     }
                 }, WAIT_SPLASH_TO_FINISH);
             }

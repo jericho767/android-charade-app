@@ -24,7 +24,7 @@ public class ListListActivity extends AppCompatActivity {
     private View.OnClickListener listenerAddList = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Util.nextActivity(getBaseContext(), new ListAddActivity());
+            Util.nextActivity(ListListActivity.this, new ListAddActivity());
         }
     };
 

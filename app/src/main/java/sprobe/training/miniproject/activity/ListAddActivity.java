@@ -31,7 +31,8 @@ public class ListAddActivity extends AppCompatActivity {
                 // Pass bundle to next activity
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", storeList(name));
-                Util.nextActivity(getBaseContext(), new ListIndexActivity(), bundle);
+                Util.nextActivity(ListAddActivity.this,
+                        new ListIndexActivity(), bundle);
             }
         }
 
