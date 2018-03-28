@@ -130,44 +130,4 @@ public class Game {
         return getRemainingPasses() > 0;
     }
 
-    /**
-     * This is the Word class.<br>
-     * I will let you figure it out, what it is.
-     */
-    public class Word {
-        private String mText;
-        private int mPassCount;
-        private int mCheckedAtRound;
-
-        private Word(String mText) {
-            this.mText = mText;
-            this.mPassCount = 0;
-            this.mCheckedAtRound = 0;
-        }
-
-        public String getText() {
-            return mText;
-        }
-
-        private int getPassCount() {
-            return mPassCount;
-        }
-
-        private void incrementPassCount() {
-            this.mPassCount++;
-        }
-
-        private void setCheckedAtRound(int mCheckedAtRound) {
-            this.mCheckedAtRound = mCheckedAtRound;
-        }
-
-        private boolean isChecked() {
-            return mCheckedAtRound > 0;
-        }
-
-        private int getCheckedAtRound() {
-            return mCheckedAtRound;
-        }
-    }
-
 }

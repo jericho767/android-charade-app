@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import common.Util;
 import data.Game;
+import data.Word;
 import sprobe.training.miniproject.R;
 
 public class GameActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String MESSAGE_GAME_END = "That's all folks!";
     private static final String MESSAGE_GAME_PAUSED = "Game is paused you imbecile.";
+    private static final String MESSAGE_GAME_ENDED = "Game is already over champ.";
 
     private Toast mToast;
 
@@ -62,7 +64,7 @@ public class GameActivity extends AppCompatActivity {
 
                     mBtnPass.setText(getPassButtonText(mGame.getRemainingPasses()));
 
-                    Game.Word word = mGame.getWord();
+                    Word word = mGame.getWord();
 
                     if (word == null) {
                         endGame();
@@ -74,7 +76,11 @@ public class GameActivity extends AppCompatActivity {
                             , Game.MESSAGE_CANNOT_PASS);
                 }
             } else {
-                Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_PAUSED);
+                if (mRemainingMilliseconds == 0) {
+                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_ENDED);
+                } else {
+                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_PAUSED);
+                }
             }
         }
     };
@@ -87,7 +93,7 @@ public class GameActivity extends AppCompatActivity {
                 mViewCountCheck.setText(String.valueOf(mGame
                         .getCheckedWordsInCurrentRound().size()));
 
-                Game.Word word = mGame.getWord();
+                Word word = mGame.getWord();
 
                 if (word == null) {
                     endGame();
@@ -95,7 +101,11 @@ public class GameActivity extends AppCompatActivity {
                     mViewGameWord.setText(word.getText());
                 }
             } else {
-                Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_PAUSED);
+                if (mRemainingMilliseconds == 0) {
+                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_ENDED);
+                } else {
+                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_PAUSED);
+                }
             }
         }
     };
@@ -103,7 +113,7 @@ public class GameActivity extends AppCompatActivity {
     private View.OnClickListener mListenerViewGameOverlay = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Game.Word word = mGame.getWord();
+            Word word = mGame.getWord();
 
             if (word != null) {
                 mGame.startRound();
@@ -186,7 +196,6 @@ public class GameActivity extends AppCompatActivity {
                 1000) {
             public void onTick(long millisUntilFinished) {
                 mRemainingMilliseconds = millisUntilFinished - (millisUntilFinished % 1000);
-//                mRemainingMilliseconds = millisUntilFinished;
                 setTextOfTimer(mRemainingMilliseconds);
             }
 
@@ -209,7 +218,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void pauseGame() {
-        Log.wtf("[PAUSED] TIME LEFT: ", String.valueOf(mRemainingMilliseconds));
         mViewGameWord.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimension(R.dimen.font_sm));
         mViewGameWord.setText(getResources().getString(R.string.button_game_resume));

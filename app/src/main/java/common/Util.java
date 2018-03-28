@@ -57,7 +57,7 @@ public class Util {
     }
 
     /**
-     * I don't about this one. I remembered this in a dream and forgot about it<br>
+     * I don't know about this one. I remembered this in a dream and forgot about it<br>
      * in another dream.
      *
      * @param activity the current activity (usually you give it a <code>Activity.this</code>
