@@ -48,10 +48,7 @@ public class RoundEndActivity extends AppCompatActivity {
         RoundWordsAdapter adapter = new RoundWordsAdapter(this
                 , mGame.getUncheckedWordsInCurrentRound()
                 , mGame.getCheckedWordsInCurrentRound()
-                , mGame.getCurrentWordIndex()
-                , getResources().getString(R.string.round_subtext_checked)
-                , getResources().getString(R.string.round_subtext_passed)
-                , getResources().getString(R.string.round_subtext_last_word));
+                , mGame.getCurrentWordIndex());
 
         mListUncheckedWords.setAdapter(adapter.getUncheckedWordsAdapter());
         mListCheckedWords.setAdapter(adapter.getCheckedWordsAdapter());

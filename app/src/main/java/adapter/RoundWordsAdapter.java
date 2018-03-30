@@ -18,9 +18,7 @@ public class RoundWordsAdapter {
     private LayoutInflater mInflater;
     private CheckedWordsAdapter mCheckedWordsAdapter;
     private UncheckedWordsAdapter mUncheckedWordsAdapter;
-    private String mSubtextChecked;
-    private String mSubtextPassed;
-    private String mSubtextLastWord;
+    private Context mContext;
 
     public CheckedWordsAdapter getCheckedWordsAdapter() {
         return mCheckedWordsAdapter;
@@ -51,7 +49,6 @@ public class RoundWordsAdapter {
 
         @Override
         public long getItemId(int position) {
-            // TODO: After the database thingy modify this
             return position;
         }
 
@@ -75,9 +72,11 @@ public class RoundWordsAdapter {
             viewWordHolder.mViewText.setText(word.getText());
 
             if (position == mIndexOfLastWord) {
-                viewWordHolder.mViewSubtext.setText(mSubtextLastWord);
+                viewWordHolder.mViewSubtext.setText(mContext.getResources()
+                        .getString(R.string.round_subtext_last_word));
             } else {
-                viewWordHolder.mViewSubtext.setText(mSubtextPassed);
+                viewWordHolder.mViewSubtext.setText(mContext.getResources()
+                        .getString(R.string.round_subtext_passed));
             }
 
             return convertView;
@@ -105,7 +104,6 @@ public class RoundWordsAdapter {
 
         @Override
         public long getItemId(int position) {
-            // TODO: After the database thingy modify this
             return position;
         }
 
@@ -128,10 +126,13 @@ public class RoundWordsAdapter {
             viewWordHolder.mViewText.setText(mWords.get(position).getText());
 
             if (position == mIndexOfLastWord) {
-                viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale(),
-                        "%s | %s", mSubtextChecked, mSubtextLastWord));
+                viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale()
+                        , "%s | %s"
+                        , mContext.getResources().getString(R.string.round_subtext_checked)
+                        , mContext.getResources().getString(R.string.round_subtext_last_word)));
             } else {
-                viewWordHolder.mViewSubtext.setText(mSubtextChecked);
+                viewWordHolder.mViewSubtext.setText(mContext.getResources()
+                        .getString(R.string.round_subtext_checked));
             }
 
             return convertView;
@@ -139,17 +140,11 @@ public class RoundWordsAdapter {
     }
 
     public RoundWordsAdapter(Context context, List<Word> uncheckedWords,
-                             List<Word> checkedWords, int lastWordIndex,
-                             String subtextChecked, String subtextPassed,
-                             String mSubtextLastWord) {
-        this.mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords, lastWordIndex);
-        this.mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
-
-        this.mSubtextChecked = subtextChecked;
-        this.mSubtextPassed = subtextPassed;
-        this.mSubtextLastWord = mSubtextLastWord;
-
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                             List<Word> checkedWords, int lastWordIndex) {
+        mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords, lastWordIndex);
+        mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
+        mContext = context;
+        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     private class ViewWordHolder {
