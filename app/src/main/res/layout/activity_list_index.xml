@@ -1,54 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent"
+    <include layout="@layout/common_action_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/common_action_bar"/>
-
-        <RelativeLayout
+        <LinearLayout android:layout_above="@+id/form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <LinearLayout android:layout_above="@+id/form"
+            <ListView
+                android:stackFromBottom="true"
+                android:id="@+id/list_items"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
-                <ListView
-                    android:stackFromBottom="true"
-                    android:id="@+id/list_items"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+        <LinearLayout android:id="@+id/form"
+            android:padding="@dimen/dp_sm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:weightSum="12">
 
-            <LinearLayout android:id="@+id/form"
-                android:padding="@dimen/dp_sm"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/item_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal"
-                android:layout_alignParentBottom="true"
-                android:weightSum="12">
+                android:layout_weight="10"
+                android:hint="@string/placeholder_list_name"
+                android:layout_marginEnd="@dimen/dp_sm"/>
 
-                <EditText
-                    android:id="@+id/item_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:hint="@string/placeholder_list_name"
-                    android:layout_marginEnd="@dimen/dp_sm"/>
-
-                <ImageButton
-                    android:id="@+id/submit"
-                    style="@style/ButtonIconAdd"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2" />
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
-
+            <ImageButton
+                android:contentDescription="@string/button_add"
+                android:id="@+id/submit"
+                style="@style/ButtonIconAdd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

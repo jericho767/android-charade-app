@@ -24,13 +24,13 @@
     <string name="action_help_order">180</string>
     <string name="action_about_order">200</string>
 
-    <string name="button_submit">SUBMIT</string>
-    <string name="button_create">CREATE</string>
-    <string name="button_confirm">CONFIRM</string>
-    <string name="button_delete">DELETE</string>
-    <string name="button_add">ADD</string>
+    <string name="button_submit">Submit</string>
+    <string name="button_create">Create</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_add">Add</string>
     <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
+    <string name="button_cancel">Cancel</string>
     <string name="button_pass">PASS</string>
     <string name="button_check">CHECK</string>
     <string name="button_game_start">Tap timer to start.</string>

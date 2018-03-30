@@ -30,7 +30,7 @@
         android:tooltipText="@string/action_settings"
         android:orderInCategory="@string/action_settings_order"
         android:title="@string/action_settings"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_sort"
         android:icon="@drawable/ic_sort"

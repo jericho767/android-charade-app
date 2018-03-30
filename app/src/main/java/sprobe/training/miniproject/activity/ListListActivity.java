@@ -1,5 +1,6 @@
 package sprobe.training.miniproject.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import sprobe.training.miniproject.R;
 public class ListListActivity extends AppCompatActivity {
     private FloatingActionButton mFabAdd;
     private Toast mExitAppToast;
-    private final String MESSAGE_EXIT_APP = "Tap again i dare you. I DOUBLE DARE YOU!";
+    private static final String MESSAGE_EXIT_APP = "Tap again i dare you. I DOUBLE DARE YOU!"; // TODO: Move to strings.xml
 
     private View.OnClickListener listenerAddList = new View.OnClickListener() {
         @Override
@@ -36,13 +37,14 @@ public class ListListActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("ShowToast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_list);
         Util.addToolbar(this, false);
 
-        // Fetch views
+        // Fetch views // TODO: Move to a method
         ListView listView = findViewById(R.id.lists);
         mFabAdd = findViewById(R.id.fab_add);
 
@@ -74,11 +76,8 @@ public class ListListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -93,7 +92,7 @@ public class ListListActivity extends AppCompatActivity {
             mExitAppToast.cancel();
             this.finishAffinity();
         } else {
-            mExitAppToast.setText(this.MESSAGE_EXIT_APP);
+            mExitAppToast.setText(MESSAGE_EXIT_APP);
             mExitAppToast.show();
         }
     }

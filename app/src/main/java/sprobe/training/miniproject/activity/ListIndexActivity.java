@@ -1,5 +1,6 @@
 package sprobe.training.miniproject.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -60,13 +61,14 @@ public class ListIndexActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("ShowToast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_index);
         Util.addToolbar(this, true);
 
-        // Fetch views
+        // Fetch views // TODO: Move to a method
         mViewItemName = findViewById(R.id.item_name);
         mBtnSubmit = findViewById(R.id.submit);
         ListView listView = findViewById(R.id.list_items);
@@ -76,9 +78,9 @@ public class ListIndexActivity extends AppCompatActivity {
         // Get the bundle from the intent
         Bundle bundle = getIntent().getExtras();
 
-        if (bundle.getInt("id", 0) == 0) {
-            // TODO Go back to list activity, then say something like we are not feeling well
-        } else {
+        if (bundle != null && bundle.getInt("id", 0) == 0) {
+            Util.nextActivity(this, new ListListActivity());
+        } else if (bundle != null) {
             mPlayList = PlayList.getList(bundle.getInt("id"));
 
             Util.setToolbarTitle(this, mPlayList.getName());

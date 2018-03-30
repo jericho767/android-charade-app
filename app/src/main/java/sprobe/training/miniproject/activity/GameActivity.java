@@ -33,9 +33,9 @@ public class GameActivity extends AppCompatActivity {
     private TextView mViewCountPass;
     private TextView mViewCountCheck;
 
-    private static final String MESSAGE_GAME_END = "That's all folks!";
-    private static final String MESSAGE_GAME_PAUSED = "Game is paused you imbecile.";
-    private static final String MESSAGE_GAME_ENDED = "Game is already over champ.";
+    private static final String MESSAGE_GAME_END = "That's all folks!"; // TODO: Move to strings.xml
+    private static final String MESSAGE_GAME_PAUSED = "Game is paused you imbecile."; // TODO: Move to strings.xml
+    private static final String MESSAGE_GAME_ENDED = "Game is already over champ."; // TODO: Move to strings.xml
 
     private Toast mToast;
 
@@ -123,18 +123,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
     };
-    /*
-    private View.OnClickListener mListenerViewGameOverlay = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Word word = mGame.getWord();
 
-            if (word != null) {
-                startRound(view, word);
-            }
-        }
-    };
-    */
     @Override
     @SuppressLint({"ShowToast"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +140,7 @@ public class GameActivity extends AppCompatActivity {
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
 
-        // Fetch views
+        // Fetch views // TODO: Move this to a method
         mViewCountCheck = findViewById(R.id.count_check);
         mViewCountPass = findViewById(R.id.count_pass);
         mViewGameWord = findViewById(R.id.game_word);
@@ -174,7 +163,6 @@ public class GameActivity extends AppCompatActivity {
         Util.hideTheSystemUiWhenShown(this);
         mBtnCheck.setOnClickListener(mListenerBtnCheck);
         mBtnPass.setOnClickListener(mListenerBtnPass);
-        /*mViewGameWordOverlay.setOnClickListener(mListenerViewGameOverlay);*/
         mViewGameTimer.setOnTouchListener(mListenerGameTimer);
     }
 
@@ -207,6 +195,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void endRound() {
         mToast.cancel();
+        // TODO: Remove log
         Log.wtf("GAME | INDEX OF THE LAST WORD: ", mGame.getCurrentWordIndex() + "");
         Bundle bundle = new Bundle();
         bundle.putString("game", Util.gameToJson(mGame));

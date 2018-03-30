@@ -63,7 +63,7 @@ public class PlayList {
         // TODO: Remove test
         ArrayList<PlayList> playLists = new ArrayList<>();
         playLists.add(new PlayList("one", new ArrayList<>(Arrays.asList("we"))));
-        playLists.add(new PlayList("twoo", new ArrayList<>(Arrays.asList(
+        playLists.add(new PlayList("two", new ArrayList<>(Arrays.asList(
                 "one", "two"))));
         return playLists;
     }

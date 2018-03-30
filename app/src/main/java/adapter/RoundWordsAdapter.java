@@ -18,9 +18,9 @@ public class RoundWordsAdapter {
     private LayoutInflater mInflater;
     private CheckedWordsAdapter mCheckedWordsAdapter;
     private UncheckedWordsAdapter mUncheckedWordsAdapter;
-    private static final String SUBTEXT_CHECKED = "CHECKED";
-    private static final String SUBTEXT_PASSED = "PASSED";
-    private static final String SUBTEXT_LAST_WORD = "LAST WORD";
+    private static final String SUBTEXT_CHECKED = "CHECKED"; // TODO: Move to strings.xml
+    private static final String SUBTEXT_PASSED = "PASSED"; // TODO: Move to strings.xml
+    private static final String SUBTEXT_LAST_WORD = "LAST WORD"; // TODO: Move to strings.xml
 
     public CheckedWordsAdapter getCheckedWordsAdapter() {
         return mCheckedWordsAdapter;

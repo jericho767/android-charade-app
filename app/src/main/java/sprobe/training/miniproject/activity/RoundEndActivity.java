@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
 
 import adapter.RoundWordsAdapter;
 import common.Util;
@@ -19,7 +18,6 @@ public class RoundEndActivity extends AppCompatActivity {
     private TextView mLabelCheckedWords;
     private ListView mListUncheckedWords;
     private ListView mListCheckedWords;
-    private Toolbar mToolbar;
 
     private Game mGame;
 
@@ -60,7 +58,6 @@ public class RoundEndActivity extends AppCompatActivity {
         mLabelCheckedWords = findViewById(R.id.round_label_checked_words);
         mListUncheckedWords = findViewById(R.id.round_unchecked_words);
         mListCheckedWords = findViewById(R.id.round_checked_words);
-        mToolbar = findViewById(R.id.toolbar);
     }
 
     private void setRoundEndCountUncheckedWords(TextView viewLabelUncheckedWords) {
