@@ -7,15 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-import data.Garbage;
 import common.Util;
+import data.PlayList;
+import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
 public class ListAddActivity extends AppCompatActivity {
     private TextInputLayout mLayoutName;
     private TextInputEditText mViewName;
     private Button mBtnSubmit;
+    private DatabaseHelper db;
 
     private View.OnClickListener listenerAddList = new View.OnClickListener() {
         @Override
@@ -28,25 +31,37 @@ public class ListAddActivity extends AppCompatActivity {
             } else {
                 mLayoutName.setError(null);
 
-                // Pass bundle to next activity
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", storeList(name));
-                Util.nextActivity(ListAddActivity.this,
-                        new ListIndexActivity(), bundle);
+                long playListId = storeList(name);
+
+                if (playListId == -1) {
+                    Toast.makeText(ListAddActivity.this
+                            , getResources().getString(R.string.playlist_error_message_not_insert)
+                            , Toast.LENGTH_SHORT).show();
+                    Util.nextActivity(ListAddActivity.this
+                            , new ListListActivity());
+                } else {
+                    // Pass bundle to next activity
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("id", playListId);
+                    Util.nextActivity(ListAddActivity.this
+                            , new ListIndexActivity(), bundle);
+                }
             }
         }
 
         private String validateName(String name) {
-            if (name.length() < Garbage.NAME_LENGTH_MIN
-                    || name.length() > Garbage.NAME_LENGTH_MAX) {
-                return Garbage.ERROR_NAME_LENGTH();
+            if (name.length() < PlayList.NAME_LENGTH_MIN
+                    || name.length() > PlayList.NAME_LENGTH_MAX) {
+                return String.format(Util.getLocale()
+                        , getResources().getString(R.string.playlist_error_message_length)
+                        , "Name", PlayList.NAME_LENGTH_MIN, PlayList.NAME_LENGTH_MAX);
             } else {
                 return "";
             }
         }
 
-        private int storeList(String name) {
-            return Garbage.store(new Garbage(name));
+        private long storeList(String name) {
+            return db.insertPlaylist(name);
         }
     };
 
@@ -55,6 +70,7 @@ public class ListAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_add);
         Util.addToolbar(this, true);
+        db = new DatabaseHelper(this);
 
         fetchViews();
         bindListeners();

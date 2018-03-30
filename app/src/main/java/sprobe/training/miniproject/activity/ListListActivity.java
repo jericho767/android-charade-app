@@ -51,8 +51,8 @@ public class ListListActivity extends AppCompatActivity {
         mExitAppToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 
         ArrayList<Garbage> garbage = Garbage.getLists();
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, Util.getNamesFromPlayLists(garbage));
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this
+                , android.R.layout.simple_list_item_1, Util.getNamesFromPlayLists(garbage));
         listView.setAdapter(adapter);
 
         // Bind listeners

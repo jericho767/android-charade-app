@@ -41,9 +41,9 @@ public class RoundEndActivity extends AppCompatActivity {
         // Set round parameters
         setRoundEndCountUncheckedWords(mLabelUncheckedWords);
         setRoundEndCountCheckedWords(mLabelCheckedWords);
-        Util.setToolbarTitle(this, String.format(Util.getLocale(),
-                getResources().getString(R.string.round_title_end),
-                mGame.getCurrentRoundNumber()));
+        Util.setToolbarTitle(this, String.format(Util.getLocale()
+                , getResources().getString(R.string.round_title_end)
+                , mGame.getCurrentRoundNumber()));
 
         RoundWordsAdapter adapter = new RoundWordsAdapter(this,
                 mGame.getUncheckedWordsInCurrentRound(),

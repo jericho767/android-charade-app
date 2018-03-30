@@ -201,8 +201,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String getPassButtonText(int remainingPasses) {
-        return String.format(Util.getLocale(), "%s (%d)",
-                getResources().getString(R.string.button_pass), remainingPasses);
+        return String.format(Util.getLocale(), "%s (%d)"
+                , getResources().getString(R.string.button_pass), remainingPasses);
     }
 
     @Override
@@ -212,8 +212,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setCountDownTimer() {
-        mCountDownTimer = new CountDownTimer(mRemainingMilliseconds,
-                1000) {
+        mCountDownTimer = new CountDownTimer(mRemainingMilliseconds
+                , 1000) {
             public void onTick(long millisUntilFinished) {
                 mRemainingMilliseconds = millisUntilFinished - (millisUntilFinished % 1000);
                 setTextOfTimer(mRemainingMilliseconds);
@@ -231,15 +231,15 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void resumeGame() {
-        mViewGameWord.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimension(R.dimen.font_lg));
+        mViewGameWord.setTextSize(TypedValue.COMPLEX_UNIT_PX
+                , getResources().getDimension(R.dimen.font_lg));
         mViewGameWord.setText(mGame.getCurrentWord().getText());
         continueTimer();
     }
 
     private void pauseGame() {
-        mViewGameWord.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimension(R.dimen.font_sm));
+        mViewGameWord.setTextSize(TypedValue.COMPLEX_UNIT_PX
+                , getResources().getDimension(R.dimen.font_sm));
         mViewGameWord.setText(getResources().getString(R.string.button_game_resume));
         pauseTimer();
     }

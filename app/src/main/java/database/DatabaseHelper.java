@@ -17,6 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_PLAYLIST_ID = "id";
     public static final String COL_PLAYLIST_NAME = "name";
 
+    public static final int DATABASE_VERSION = 1;
+
     private SQLiteDatabase db;
 
     public DatabaseHelper(Context context, int version) {
@@ -25,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         db = this.getWritableDatabase();
     }
 
