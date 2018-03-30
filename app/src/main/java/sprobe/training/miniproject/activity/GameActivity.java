@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import common.Util;
 import data.Game;
 import data.Word;
+import database.DBWord;
+import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
 public class GameActivity extends AppCompatActivity {
@@ -125,19 +129,30 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Util.goFullscreen(this);
 
+        DatabaseHelper db = new DatabaseHelper(this);
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 
         // TODO: Replace this with actual values
         int numberOfPasses = 3;
-        String[] words = {"One", "Two", "Three", "Four"};
+        ArrayList<String> words = new ArrayList<>();
         boolean includePasses = true;
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null && bundle.getLong("playListId") > 0) {
+            words = getTexts(db.selectWordsFromPlayList(bundle.getLong("playListId")));
+        }
+
+        if (words.size() == 0) {
+            mToast.setText(getResources().getString(R.string.game_message_no_list));
+            mToast.show();
+            Util.nextActivity(this, new ListListActivity());
+        }
+
         fetchViews();
 
         // Initialize the game
-        Bundle bundle = getIntent().getExtras();
         if (bundle == null || bundle.getString("game") == null) {
             mGame = new Game(numberOfPasses, words, includePasses);
         } else {
@@ -146,6 +161,16 @@ public class GameActivity extends AppCompatActivity {
 
         readyRound();
         bindListeners();
+    }
+
+    private ArrayList<String> getTexts(ArrayList<DBWord> dbWords) {
+        ArrayList<String> words = new ArrayList<>();
+
+        for (DBWord dbWord : dbWords) {
+            words.add(dbWord.getText());
+        }
+
+        return words;
     }
 
     private void bindListeners() {

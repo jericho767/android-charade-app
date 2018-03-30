@@ -66,7 +66,6 @@ public class ListIndexActivity extends AppCompatActivity {
                 long wordId = db.insertWord(word.getText(), mPlayList.getId());
 
                 if (wordId == -1) {
-                    // TODO: Maybe report that something went wrong. Huh? Uhhmm. How about no?
                     Log.wtf("INSERT|WORD|ERROR: ", word.toString());
                 } else {
                     Log.i("INSERT|WORD|SUCCESS: ", word.toString());

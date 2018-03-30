@@ -1,7 +1,6 @@
 package data;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the Word class.<br>
@@ -18,18 +17,8 @@ public class Word {
         this.mCheckedAtRound = 0;
     }
 
-    static List<Word> createWords(String[] texts) {
-        List<Word> words = new ArrayList<>();
-
-        for (String text : texts) {
-            words.add(new Word(text));
-        }
-
-        return words;
-    }
-
-    public static List<Word> createWords(ArrayList<String> texts) {
-        List<Word> words = new ArrayList<>();
+    static ArrayList<Word> createWords(ArrayList<String> texts) {
+        ArrayList<Word> words = new ArrayList<>();
 
         for (String text : texts) {
             words.add(new Word(text));

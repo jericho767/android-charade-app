@@ -50,6 +50,7 @@
     <string name="title_list_list">PLAY-lists</string>
     <string name="title_activity_list_add">Create new playList</string>
 
+    <string name="game_message_no_list">Cannot start game.</string>
     <string name="game_message_ended">Game is already over champ.</string>
     <string name="game_message_paused">Game is paused you imbecile.</string>
     <string name="game_message_end">That\'s all folks!</string>

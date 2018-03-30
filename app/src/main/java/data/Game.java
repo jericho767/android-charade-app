@@ -20,9 +20,9 @@ public class Game {
     // number of passes
     private int mMaxPasses;
 
-    public Game(int mMaxPasses, String[] words, boolean mIsIncludePassed) {
+    public Game(int mMaxPasses, ArrayList<String> words, boolean mIsIncludePassed) {
         this.mMaxPasses = mMaxPasses;
-        this.mWords = (ArrayList<Word>) Word.createWords(words);
+        this.mWords = Word.createWords(words);
         this.mIsIncludePassed = mIsIncludePassed;
     }
 
