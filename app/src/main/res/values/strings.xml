@@ -2,6 +2,8 @@
     <string name="app_name">Guess what.</string>
     <string name="app_subtext">What?</string>
 
+    <string name="app_message_on_close">Tap again i dare you. I DOUBLE DARE YOU!</string>
+
     <string name="action_about">About</string>
     <string name="action_help">Help</string>
     <string name="action_settings">Settings</string>
@@ -39,6 +41,7 @@
     <string name="playlist_error_message_not_insert">Something went wrong.</string>
     <string name="playlist_error_message_length">%s can only be %d-%d characters long.</string>
     <string name="playlist_success_message_add_item">Item successfully added.</string>
+    <string name="playlist_label_word_count">Has %d words.</string>
 
     <string name="placeholder_list_name">Enter play-list name</string>
     <string name="placeholder_add_list_item">Enter play-list item</string>
