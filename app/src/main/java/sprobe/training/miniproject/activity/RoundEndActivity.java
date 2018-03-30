@@ -101,7 +101,8 @@ public class RoundEndActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_play) {
-            // TODO: Implement click
+            // TODO: Implement more of this click
+            mGame.endRound();
             return true;
         }
 

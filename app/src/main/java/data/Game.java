@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-    public static final String MESSAGE_CANNOT_PASS = "You shall not pass!"; // TODO: Move to strings.xml
-    public static final String MESSAGE_CANNOT_PASS_NO_MORE_WORDS = "This is the last word."; // TODO: Move to strings.xml
+    public static final String MESSAGE_CANNOT_PASS = "You shall not pass!";
+    public static final String MESSAGE_CANNOT_PASS_NO_MORE_WORDS = "This is the last word.";
 
     private ArrayList<Word> mWords;
 
