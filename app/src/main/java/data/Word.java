@@ -31,7 +31,7 @@ public class Word {
         this.mCheckedAtRound = mCheckedAtRound;
     }
 
-    public boolean isChecked() {
+    boolean isChecked() {
         return mCheckedAtRound > 0;
     }
 
