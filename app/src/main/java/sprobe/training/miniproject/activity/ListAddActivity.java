@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import common.Util;
-import data.PlayList;
+import database.DBPlayList;
 import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
@@ -50,11 +50,11 @@ public class ListAddActivity extends AppCompatActivity {
         }
 
         private String validateName(String name) {
-            if (name.length() < PlayList.NAME_LENGTH_MIN
-                    || name.length() > PlayList.NAME_LENGTH_MAX) {
+            if (name.length() < DBPlayList.NAME_LENGTH_MIN
+                    || name.length() > DBPlayList.NAME_LENGTH_MAX) {
                 return String.format(Util.getLocale()
                         , getResources().getString(R.string.playlist_error_message_length)
-                        , "Name", PlayList.NAME_LENGTH_MIN, PlayList.NAME_LENGTH_MAX);
+                        , "Name", DBPlayList.NAME_LENGTH_MIN, DBPlayList.NAME_LENGTH_MAX);
             } else {
                 return "";
             }
