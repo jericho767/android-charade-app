@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import data.Game;
-import data.PlayList;
+import data.Garbage;
 import sprobe.training.miniproject.R;
 
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -117,15 +117,15 @@ public class Util {
     /**
      * It's darn self-explanatory.
      *
-     * @param playLists the list of PlayList
+     * @param garbages the list of Garbage
      *
      * @return Array of names
      */
-    public static ArrayList<String> getNamesFromPlayLists(ArrayList<PlayList> playLists) {
+    public static ArrayList<String> getNamesFromPlayLists(ArrayList<Garbage> garbages) {
         ArrayList<String> names = new ArrayList<>();
 
-        for (PlayList playList : playLists) {
-            names.add(playList.getName());
+        for (Garbage garbage : garbages) {
+            names.add(garbage.getName());
         }
 
         return names;

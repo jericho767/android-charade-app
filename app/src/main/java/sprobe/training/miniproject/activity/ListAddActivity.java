@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import data.PlayList;
+import data.Garbage;
 import common.Util;
 import sprobe.training.miniproject.R;
 
@@ -37,16 +37,16 @@ public class ListAddActivity extends AppCompatActivity {
         }
 
         private String validateName(String name) {
-            if (name.length() < PlayList.NAME_LENGTH_MIN
-                    || name.length() > PlayList.NAME_LENGTH_MAX) {
-                return PlayList.ERROR_NAME_LENGTH();
+            if (name.length() < Garbage.NAME_LENGTH_MIN
+                    || name.length() > Garbage.NAME_LENGTH_MAX) {
+                return Garbage.ERROR_NAME_LENGTH();
             } else {
                 return "";
             }
         }
 
         private int storeList(String name) {
-            return PlayList.store(new PlayList(name));
+            return Garbage.store(new Garbage(name));
         }
     };
 

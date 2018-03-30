@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 // TODO: Search this place! Head to foot.
 
-public class PlayList {
+public class Garbage {
     public final static int ITEM_LENGTH_MAX = 60;
     public final static int ITEM_LENGTH_MIN = 1;
 
@@ -16,17 +16,17 @@ public class PlayList {
     private String name;
     private ArrayList<String> items;
 
-    public PlayList(String name, ArrayList<String> items) {
+    public Garbage(String name, ArrayList<String> items) {
         this.name = name;
         this.items = items;
     }
 
-    public PlayList(String name) {
+    public Garbage(String name) {
         this.name = name;
         this.items = new ArrayList<>();
     }
 
-    private PlayList(String name, ArrayList<String> items, int mId) {
+    private Garbage(String name, ArrayList<String> items, int mId) {
         this.mId = mId;
         this.name = name;
         this.items = items;
@@ -38,43 +38,43 @@ public class PlayList {
     }
 
     protected void save() {
-        PlayList.store(this);
+        Garbage.store(this);
     }
 
     protected void update() {
         // TODO: Implement
     }
 
-    public static int store(PlayList playList) {
+    public static int store(Garbage garbage) {
         // TODO: Implement
         return 1;
     }
 
-    public static PlayList getList(int mId) {
+    public static Garbage getList(int mId) {
         // TODO: Implement
 
         // TODO: Remove test
         ArrayList<String> items = new ArrayList<>();
         items.add("Item 1");
-        return new PlayList("Sample", items, mId);
+        return new Garbage("Sample", items, mId);
     }
 
-    public static ArrayList<PlayList> getLists() {
+    public static ArrayList<Garbage> getLists() {
         // TODO: Implement
 
         // TODO: Remove test
-        ArrayList<PlayList> playLists = new ArrayList<>();
-        playLists.add(new PlayList("one", new ArrayList<>(Arrays.asList("we"))));
-        playLists.add(new PlayList("two", new ArrayList<>(Arrays.asList(
+        ArrayList<Garbage> garbage = new ArrayList<>();
+        garbage.add(new Garbage("one", new ArrayList<>(Arrays.asList("we"))));
+        garbage.add(new Garbage("two", new ArrayList<>(Arrays.asList(
                 "one", "two"))));
-        return playLists;
+        return garbage;
     }
 
-    public static ArrayList<String> getPlayListsNames(ArrayList<PlayList> playLists) {
+    public static ArrayList<String> getPlayListsNames(ArrayList<Garbage> garbages) {
         ArrayList<String> names = new ArrayList<>();
 
-        for (PlayList playList : playLists) {
-            names.add(playList.getName());
+        for (Garbage garbage : garbages) {
+            names.add(garbage.getName());
         }
 
         return names;

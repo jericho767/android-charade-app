@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 import adapter.PlayListWordsAdapter;
 import common.Util;
-import data.PlayList;
+import data.Garbage;
 import sprobe.training.miniproject.R;
 
 public class ListIndexActivity extends AppCompatActivity {
 
     private EditText mViewItemName;
-    private PlayList mPlayList;
+    private Garbage mGarbage;
     private Toast mToast;
     private ImageButton mBtnSubmit;
     private ListView mListWords;
@@ -37,20 +37,20 @@ public class ListIndexActivity extends AppCompatActivity {
                         mToast, validateItemName);
             } else {
                 mToast = Util.showToast(ListIndexActivity.this,
-                        mToast, PlayList.SUCCESS_ITEM_ADD());
+                        mToast, Garbage.SUCCESS_ITEM_ADD());
 
                 storeListItem(itemName);
 
-                mPlayList.getItems().add(mViewItemName.getText().toString());
+                mGarbage.getItems().add(mViewItemName.getText().toString());
                 mPlayListAdapter.notifyDataSetChanged();
                 mViewItemName.setText(null);
             }
         }
 
         private String validateItemName(String name) {
-            if (name.length() < PlayList.ITEM_LENGTH_MIN
-                    || name.length() > PlayList.ITEM_LENGTH_MAX) {
-                return PlayList.ERROR_ITEM_LENGTH();
+            if (name.length() < Garbage.ITEM_LENGTH_MIN
+                    || name.length() > Garbage.ITEM_LENGTH_MAX) {
+                return Garbage.ERROR_ITEM_LENGTH();
             } else {
                 return "";
             }
@@ -77,19 +77,19 @@ public class ListIndexActivity extends AppCompatActivity {
         if (bundle != null && bundle.getInt("id", 0) == 0) {
             Util.nextActivity(this, new ListListActivity());
         } else if (bundle != null) {
-            mPlayList = PlayList.getList(bundle.getInt("id"));
+            mGarbage = Garbage.getList(bundle.getInt("id"));
 
             // Set name in the toolbar
-            Util.setToolbarTitle(this, mPlayList.getName());
+            Util.setToolbarTitle(this, mGarbage.getName());
 
             // Set list
             mPlayListAdapter = new PlayListWordsAdapter(this
-                    , mPlayList.getItems());
+                    , mGarbage.getItems());
             mListWords.setAdapter(mPlayListAdapter);
         }
 
         // Show keyboard when there are no items on the list
-        if (mPlayList.getItems().size() == 0) {
+        if (mGarbage.getItems().size() == 0) {
             mViewItemName.requestFocus();
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import common.Util;
-import data.PlayList;
+import data.Garbage;
 import sprobe.training.miniproject.R;
 
 public class ListListActivity extends AppCompatActivity {
@@ -50,9 +50,9 @@ public class ListListActivity extends AppCompatActivity {
 
         mExitAppToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 
-        ArrayList<PlayList> playLists = PlayList.getLists();
+        ArrayList<Garbage> garbage = Garbage.getLists();
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, Util.getNamesFromPlayLists(playLists));
+                android.R.layout.simple_list_item_1, Util.getNamesFromPlayLists(garbage));
         listView.setAdapter(adapter);
 
         // Bind listeners
