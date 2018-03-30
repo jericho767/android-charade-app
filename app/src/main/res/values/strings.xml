@@ -38,6 +38,7 @@
 
     <string name="playlist_error_message_not_insert">Something went wrong.</string>
     <string name="playlist_error_message_length">%s can only be %d-%d characters long.</string>
+    <string name="playlist_success_message_add_item">Item successfully added.</string>
 
     <string name="placeholder_list_name">Enter play-list name</string>
     <string name="placeholder_add_list_item">Enter play-list item</string>

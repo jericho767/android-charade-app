@@ -9,18 +9,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import data.Word;
+import database.DBWord;
 import sprobe.training.miniproject.R;
 
 public class PlayListWordsAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<Word> mWords;
+    private ArrayList<DBWord> mWords;
 
-    public PlayListWordsAdapter(Context context, ArrayList<String> texts) {
+    public PlayListWordsAdapter(Context context, ArrayList<DBWord> words) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mWords = Word.createWords(texts);
+        mWords = words;
+    }
+
+    public void addItem(DBWord word) {
+        mWords.add(word);
+        this.notifyDataSetChanged();
+    }
+
+    public ArrayList<DBWord> getWords() {
+        return mWords;
     }
 
     @Override
@@ -29,14 +37,13 @@ public class PlayListWordsAdapter extends BaseAdapter {
     }
 
     @Override
-    public Word getItem(int i) {
+    public DBWord getItem(int i) {
         return mWords.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        // TODO: After the database thingy modify this
-        return i;
+        return mWords.get(i).getId();
     }
 
     @SuppressLint("InflateParams")
@@ -52,7 +59,7 @@ public class PlayListWordsAdapter extends BaseAdapter {
             viewWordHolder = (ViewWordHolder) view.getTag();
         }
 
-        Word word = mWords.get(i);
+        DBWord word = mWords.get(i);
         viewWordHolder.mViewText.setText(word.getText());
 
         return view;

@@ -3,6 +3,7 @@ package sprobe.training.miniproject.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,16 +15,19 @@ import android.widget.Toast;
 
 import adapter.PlayListWordsAdapter;
 import common.Util;
-import data.Garbage;
+import database.DBPlayList;
+import database.DBWord;
+import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
 public class ListIndexActivity extends AppCompatActivity {
 
     private EditText mViewItemName;
-    private Garbage mGarbage;
     private Toast mToast;
     private ImageButton mBtnSubmit;
     private ListView mListWords;
+    private DBPlayList mPlayList;
+    private DatabaseHelper db;
     private PlayListWordsAdapter mPlayListAdapter;
 
     private View.OnClickListener listenerAddListItem = new View.OnClickListener() {
@@ -36,30 +40,40 @@ public class ListIndexActivity extends AppCompatActivity {
                 mToast = Util.showToast(ListIndexActivity.this,
                         mToast, validateItemName);
             } else {
-                mToast = Util.showToast(ListIndexActivity.this,
-                        mToast, Garbage.SUCCESS_ITEM_ADD());
+                mToast = Util.showToast(ListIndexActivity.this, mToast
+                        , getResources().getString(R.string.playlist_success_message_add_item));
 
-                storeListItem(itemName);
-
-                mGarbage.getItems().add(mViewItemName.getText().toString());
-                mPlayListAdapter.notifyDataSetChanged();
+                mPlayListAdapter.addItem(new DBWord(mViewItemName.getText().toString()));
                 mViewItemName.setText(null);
             }
         }
 
         private String validateItemName(String name) {
-            if (name.length() < Garbage.ITEM_LENGTH_MIN
-                    || name.length() > Garbage.ITEM_LENGTH_MAX) {
-                return Garbage.ERROR_ITEM_LENGTH();
+            if (name.length() < DBWord.TEXT_LENGTH_MIN
+                    || name.length() > DBWord.TEXT_LENGTH_MAX) {
+                return String.format(
+                        getResources().getString(R.string.playlist_error_message_length),
+                        "Text", DBWord.TEXT_LENGTH_MIN, DBWord.TEXT_LENGTH_MAX);
             } else {
                 return "";
             }
         }
-
-        private void storeListItem(String listItem) {
-            // TODO: Oh crap! ABORT MISSION! I REPEAT! ABORT MISSION!
-        }
     };
+
+    private void storeWords() {
+        for(DBWord word : mPlayListAdapter.getWords()) {
+            if (word.getId() == 0) {
+                long wordId = db.insertWord(word.getText(), mPlayList.getId());
+
+                if (wordId == -1) {
+                    // TODO: Maybe report that something went wrong. Huh? Uhhmm. How about no?
+                    Log.wtf("INSERT|WORD|ERROR: ", word.toString());
+                } else {
+                    Log.i("INSERT|WORD|SUCCESS: ", word.toString());
+                }
+            }
+        }
+    }
 
     @SuppressLint("ShowToast")
     @Override
@@ -70,31 +84,38 @@ public class ListIndexActivity extends AppCompatActivity {
 
         fetchViews();
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
+        db = new DatabaseHelper(this);
 
         // Get the bundle from the intent
         Bundle bundle = getIntent().getExtras();
 
-        if (bundle != null && bundle.getInt("id", 0) == 0) {
+        if (bundle != null && bundle.getLong("id", 0) == 0) {
             Util.nextActivity(this, new ListListActivity());
         } else if (bundle != null) {
-            mGarbage = Garbage.getList(bundle.getInt("id"));
+            mPlayList = db.selectPlayListById(bundle.getLong("id"));
 
             // Set name in the toolbar
-            Util.setToolbarTitle(this, mGarbage.getName());
+            Util.setToolbarTitle(this, mPlayList.getName());
 
             // Set list
             mPlayListAdapter = new PlayListWordsAdapter(this
-                    , mGarbage.getItems());
+                    , db.selectWordsFromPlayList(mPlayList.getId()));
             mListWords.setAdapter(mPlayListAdapter);
         }
 
         // Show keyboard when there are no items on the list
-        if (mGarbage.getItems().size() == 0) {
+        if (mPlayListAdapter.getCount() == 0) {
             mViewItemName.requestFocus();
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
 
         bindListeners();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        storeWords();
     }
 
     private void fetchViews() {

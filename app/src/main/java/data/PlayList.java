@@ -12,10 +12,10 @@ public class PlayList {
     public static final int NAME_LENGTH_MIN = 1;
     public static final int NAME_LENGTH_MAX = 16;
 
-
     // Use to RETRIEVE a PlayList instance using the playlist ID
     public PlayList(Context context, long id) {
         db = new DatabaseHelper(context);
         // TODO: Implement here retrieving
     }
+
 }
