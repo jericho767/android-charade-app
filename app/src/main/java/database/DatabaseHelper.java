@@ -41,12 +41,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(String.format("CREATE TABLE %s " +
                 "(%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "%s TEXT, %s INTEGER FOREIGN KEY)",
-                TABLE_WORD_NAME, COL_WORD_ID, COL_WORD_TEXT, COL_WORD_PLAYLIST_ID));
+                "%s TEXT, %s INTEGER FOREIGN KEY)"
+                , TABLE_WORD_NAME, COL_WORD_ID, COL_WORD_TEXT, COL_WORD_PLAYLIST_ID));
 
         sqLiteDatabase.execSQL(String.format("CREATE TABLE %s " +
-                "(%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT)",
-                TABLE_PLAYLIST_NAME, COL_PLAYLIST_ID, COL_PLAYLIST_NAME));
+                "(%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT)"
+                , TABLE_PLAYLIST_NAME, COL_PLAYLIST_ID, COL_PLAYLIST_NAME));
     }
 
     @Override

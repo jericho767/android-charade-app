@@ -45,13 +45,13 @@ public class RoundEndActivity extends AppCompatActivity {
                 , getResources().getString(R.string.round_title_end)
                 , mGame.getCurrentRoundNumber()));
 
-        RoundWordsAdapter adapter = new RoundWordsAdapter(this,
-                mGame.getUncheckedWordsInCurrentRound(),
-                mGame.getCheckedWordsInCurrentRound(),
-                mGame.getCurrentWordIndex(),
-                getResources().getString(R.string.round_subtext_checked),
-                getResources().getString(R.string.round_subtext_passed),
-                getResources().getString(R.string.round_subtext_last_word));
+        RoundWordsAdapter adapter = new RoundWordsAdapter(this
+                , mGame.getUncheckedWordsInCurrentRound()
+                , mGame.getCheckedWordsInCurrentRound()
+                , mGame.getCurrentWordIndex()
+                , getResources().getString(R.string.round_subtext_checked)
+                , getResources().getString(R.string.round_subtext_passed)
+                , getResources().getString(R.string.round_subtext_last_word));
 
         mListUncheckedWords.setAdapter(adapter.getUncheckedWordsAdapter());
         mListCheckedWords.setAdapter(adapter.getCheckedWordsAdapter());
@@ -65,15 +65,15 @@ public class RoundEndActivity extends AppCompatActivity {
     }
 
     private void setRoundEndCountUncheckedWords(TextView viewLabelUncheckedWords) {
-        viewLabelUncheckedWords.setText(String.format(Util.getLocale(),
-                getResources().getString(R.string.round_title_unchecked_words) + " (%d)",
-                mGame.getUncheckedWordsInCurrentRound().size()));
+        viewLabelUncheckedWords.setText(String.format(Util.getLocale()
+                , getResources().getString(R.string.round_title_unchecked_words) + " (%d)"
+                , mGame.getUncheckedWordsInCurrentRound().size()));
     }
 
     private void setRoundEndCountCheckedWords(TextView viewLabelCheckedWords) {
-        viewLabelCheckedWords.setText(String.format(Util.getLocale(),
-                getResources().getString(R.string.round_title_checked_words) + " (%d)",
-                mGame.getCheckedWordsInCurrentRound().size()));
+        viewLabelCheckedWords.setText(String.format(Util.getLocale()
+                , getResources().getString(R.string.round_title_checked_words) + " (%d)"
+                , mGame.getCheckedWordsInCurrentRound().size()));
     }
 
     @Override

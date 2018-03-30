@@ -71,8 +71,8 @@ public class Util {
      * @param nextActivity Where will I go activity. Pass here: <code>new ClassActivity()</code>.
      * @param bundle The bundle you are passing. Is it not obvious?
      */
-    public static void nextActivity(Context baseContext,
-                                    AppCompatActivity nextActivity, Bundle bundle) {
+    public static void nextActivity(Context baseContext
+            , AppCompatActivity nextActivity, Bundle bundle) {
         Intent intent = new Intent(baseContext, nextActivity.getClass());
         intent.putExtras(bundle);
         baseContext.startActivity(intent);
