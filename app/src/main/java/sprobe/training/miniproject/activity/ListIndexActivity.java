@@ -68,11 +68,10 @@ public class ListIndexActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_index);
         Util.addToolbar(this, true);
 
-        // Fetch views // TODO: Move to a method
-        mViewItemName = findViewById(R.id.item_name);
-        mBtnSubmit = findViewById(R.id.submit);
-        ListView listView = findViewById(R.id.list_items);
+        fetchViews();
 
+        // TODO: Use adapter classes
+        ListView listView = findViewById(R.id.list_items);
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 
         // Get the bundle from the intent
@@ -95,8 +94,15 @@ public class ListIndexActivity extends AppCompatActivity {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
 
+        bindListeners();
+    }
 
-        // Bind listeners
+    private void fetchViews() {
+        mViewItemName = findViewById(R.id.item_name);
+        mBtnSubmit = findViewById(R.id.submit);
+    }
+
+    private void bindListeners() {
         mBtnSubmit.setOnClickListener(listenerAddListItem);
     }
 
