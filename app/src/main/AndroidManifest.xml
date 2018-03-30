@@ -36,7 +36,11 @@
             android:name=".activity.GameActivity"
             android:label="@string/title_activity_game"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RoundEndActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +16,27 @@ import sprobe.training.miniproject.R;
 
 public class RoundWordsAdapter {
     private LayoutInflater mInflater;
-    private Context mContext;
     private CheckedWordsAdapter mCheckedWordsAdapter;
     private UncheckedWordsAdapter mUncheckedWordsAdapter;
     private static final String SUBTEXT_CHECKED = "CHECKED";
     private static final String SUBTEXT_PASSED = "PASSED";
+    private static final String SUBTEXT_LAST_WORD = "LAST WORD";
+
+    public CheckedWordsAdapter getCheckedWordsAdapter() {
+        return mCheckedWordsAdapter;
+    }
+
+    public UncheckedWordsAdapter getUncheckedWordsAdapter() {
+        return mUncheckedWordsAdapter;
+    }
 
     private class UncheckedWordsAdapter extends BaseAdapter {
         private List<Word> mWords;
+        private int mIndexOfLastWord;
 
-        public UncheckedWordsAdapter(List<Word> mWords) {
+        private UncheckedWordsAdapter(List<Word> mWords, int indexOfLastWord) {
             this.mWords = mWords;
+            this.mIndexOfLastWord = indexOfLastWord;
         }
 
         @Override
@@ -59,16 +70,23 @@ public class RoundWordsAdapter {
                 viewWordHolder = (ViewWordHolder) convertView.getTag();
             }
 
-            viewWordHolder.mViewText.setText(mWords.get(position).getText());
-            viewWordHolder.mViewSubtext.setText(SUBTEXT_PASSED);
-            return null;
+            Word word = mWords.get(position);
+            viewWordHolder.mViewText.setText(word.getText());
+            // TODO: Remove log
+            Log.wtf("ADAPTER | INDEX OF THE LAST WORD: ", mIndexOfLastWord + "");
+            if (position == mIndexOfLastWord && !word.isChecked()) {
+                viewWordHolder.mViewSubtext.setText(SUBTEXT_LAST_WORD);
+            } else {
+                viewWordHolder.mViewSubtext.setText(SUBTEXT_PASSED);
+            }
+            return convertView;
         }
     }
 
     private class CheckedWordsAdapter extends BaseAdapter {
         private List<Word> mWords;
 
-        public CheckedWordsAdapter(List<Word> mWords) {
+        private CheckedWordsAdapter(List<Word> mWords) {
             this.mWords = mWords;
         }
 
@@ -105,16 +123,16 @@ public class RoundWordsAdapter {
 
             viewWordHolder.mViewText.setText(mWords.get(position).getText());
             viewWordHolder.mViewSubtext.setText(SUBTEXT_CHECKED);
-            return null;
+            return convertView;
         }
     }
 
-    public RoundWordsAdapter(Context context, List<Word> uncheckedWords, List<Word> checkedWords) {
-        this.mContext = context;
+    public RoundWordsAdapter(Context context, List<Word> uncheckedWords,
+                             List<Word> checkedWords, int lastWordIndex) {
         this.mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords);
-        this.mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords);
+        this.mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
 
-        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     private class ViewWordHolder {

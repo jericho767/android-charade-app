@@ -81,7 +81,7 @@ public class ListIndexActivity extends AppCompatActivity {
         } else {
             mPlayList = PlayList.getList(bundle.getInt("id"));
 
-            getSupportActionBar().setTitle(mPlayList.getName());
+            Util.setToolbarTitle(this, mPlayList.getName());
 
             mAdapterListItems = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1, mPlayList.getItems());

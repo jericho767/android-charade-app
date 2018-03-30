@@ -3,6 +3,7 @@ package sprobe.training.miniproject.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
@@ -18,6 +19,7 @@ import data.Word;
 import sprobe.training.miniproject.R;
 
 public class GameActivity extends AppCompatActivity {
+    private long mTimeLimit = 20000; // TODO: Set it right
     private long mRemainingMilliseconds;
     private CountDownTimer mCountDownTimer;
     private boolean mIsTimerOn;
@@ -37,18 +39,25 @@ public class GameActivity extends AppCompatActivity {
 
     private Toast mToast;
 
-    private View.OnTouchListener mListenerGameWord = new View.OnTouchListener() {
+    private View.OnTouchListener mListenerGameTimer = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            view.performClick();
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (mIsTimerOn) {
-                    pauseGame();
-                } else {
-                    resumeGame();
+            if (mGame.getCurrentRoundNumber() < 1) {
+                Word word = mGame.getWord();
+
+                if (word != null) {
+                    startRound(mViewGameWordOverlay, word);
+                }
+            } else {
+                view.performClick();
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (mIsTimerOn) {
+                        pauseGame();
+                    } else {
+                        resumeGame();
+                    }
                 }
             }
-
             return false;
         }
     };
@@ -57,7 +66,9 @@ public class GameActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             if (mIsTimerOn) {
-                if (mGame.canPass()) {
+                int pollOfWordsCount = mGame.pollOfWordsCount();
+
+                if (mGame.canPass() && pollOfWordsCount > 1) {
                     mGame.pass();
                     mViewCountPass.setText(String.valueOf(mGame
                             .getPassedWordsInCurrentRound().size()));
@@ -71,6 +82,9 @@ public class GameActivity extends AppCompatActivity {
                     } else {
                         mViewGameWord.setText(word.getText());
                     }
+                } else if (pollOfWordsCount < 2) {
+                    Util.showToast(GameActivity.this, mToast,
+                            Game.MESSAGE_CANNOT_PASS_NO_MORE_WORDS);
                 } else {
                     Util.showToast(GameActivity.this, mToast
                             , Game.MESSAGE_CANNOT_PASS);
@@ -109,23 +123,18 @@ public class GameActivity extends AppCompatActivity {
             }
         }
     };
-
+    /*
     private View.OnClickListener mListenerViewGameOverlay = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Word word = mGame.getWord();
 
             if (word != null) {
-                mGame.startRound();
-                startTimer();
-
-                view.setVisibility(View.GONE);
-                mViewGameWord.setText(word.getText());
-                mViewGameWord.setVisibility(View.VISIBLE);
+                startRound(view, word);
             }
         }
     };
-
+    */
     @Override
     @SuppressLint({"ShowToast"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +148,7 @@ public class GameActivity extends AppCompatActivity {
         int numberOfPasses = 3;
         String[] words = {"One", "Two", "Three", "Four"};
         boolean includePasses = true;
-        int timelimit = 5000;
-        mRemainingMilliseconds = timelimit;
+        mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
 
         // Fetch views
@@ -153,31 +161,56 @@ public class GameActivity extends AppCompatActivity {
         mViewGameWordOverlay = findViewById(R.id.game_overlay_text);
 
         // Initialize the game
-        mGame = new Game(numberOfPasses, words, includePasses);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null || bundle.getString("game") == null) {
+            mGame = new Game(numberOfPasses, words, includePasses);
+        } else {
+            mGame = Util.jsonToGame(bundle.getString("game"));
+        }
 
-        mBtnPass.setText(getPassButtonText(numberOfPasses));
-        setTextOfTimer(mRemainingMilliseconds);
-        setCountDownTimer();
+        readyRound();
 
         // Bind listeners
         Util.hideTheSystemUiWhenShown(this);
         mBtnCheck.setOnClickListener(mListenerBtnCheck);
         mBtnPass.setOnClickListener(mListenerBtnPass);
-        mViewGameWordOverlay.setOnClickListener(mListenerViewGameOverlay);
-        mViewGameWord.setOnTouchListener(mListenerGameWord);
+        /*mViewGameWordOverlay.setOnClickListener(mListenerViewGameOverlay);*/
+        mViewGameTimer.setOnTouchListener(mListenerGameTimer);
     }
 
     private void endGame() {
-        // TODO: Implement
+        // TODO: Implement CORRECTLY? RIGHTEOUSLY? WITH ALL THE BEST YOU'VE GOT!
         mViewGameWord.setText("");
         mViewGameWord.setVisibility(View.GONE);
         mViewGameWordOverlay.setText(MESSAGE_GAME_END);
         mViewGameWordOverlay.setVisibility(View.VISIBLE);
     }
 
+    private void readyRound() {
+        mViewGameWord.setVisibility(View.INVISIBLE);
+        mViewGameWordOverlay.setText(getResources().getString(R.string.button_game_start));
+        mViewGameWordOverlay.setVisibility(View.VISIBLE);
+
+        mBtnPass.setText(getPassButtonText(mGame.getMaxPasses()));
+        setTextOfTimer(mTimeLimit);
+        setCountDownTimer();
+    }
+
+    private void startRound(View viewGameOverlay, Word word) {
+        mGame.startRound();
+        viewGameOverlay.setVisibility(View.GONE);
+        mViewGameWord.setText(word.getText());
+        mViewGameWord.setVisibility(View.VISIBLE);
+
+        startTimer();
+    }
+
     private void endRound() {
-        // TODO: Implement
-        Log.wtf("END ROUND", "Round ends. " + mRemainingMilliseconds);
+        mToast.cancel();
+        Log.wtf("GAME | INDEX OF THE LAST WORD: ", mGame.getCurrentWordIndex() + "");
+        Bundle bundle = new Bundle();
+        bundle.putString("game", Util.gameToJson(mGame));
+        Util.nextActivity(this, new RoundEndActivity(), bundle);
     }
 
     private String getPassButtonText(int remainingPasses) {
@@ -213,7 +246,7 @@ public class GameActivity extends AppCompatActivity {
     private void resumeGame() {
         mViewGameWord.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimension(R.dimen.font_lg));
-        mViewGameWord.setText(mGame.getCurentWord().getText());
+        mViewGameWord.setText(mGame.getCurrentWord().getText());
         continueTimer();
     }
 
@@ -225,13 +258,19 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void continueTimer() {
+        mIsTimerOn = true;
         setCountDownTimer();
         mCountDownTimer.start();
     }
 
     private void startTimer() {
-        mIsTimerOn = true;
-        mCountDownTimer.start();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mIsTimerOn = true;
+                mCountDownTimer.start();
+            }
+        }, 1000);
     }
 
     private void pauseTimer() {

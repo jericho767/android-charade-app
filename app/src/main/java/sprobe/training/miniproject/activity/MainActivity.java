@@ -10,8 +10,8 @@ import common.Util;
 import sprobe.training.miniproject.R;
 
 public class MainActivity extends AppCompatActivity {
-    private final int WAIT_SUB_TEXT_SHOW = 2000;
-    private final int WAIT_SPLASH_TO_FINISH = 2000;
+    private final int WAIT_SUB_TEXT_SHOW = 0;
+    private final int WAIT_SPLASH_TO_FINISH = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

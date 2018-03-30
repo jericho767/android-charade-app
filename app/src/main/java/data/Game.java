@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Game {
     public static final String MESSAGE_CANNOT_PASS = "You shall not pass!";
+    public static final String MESSAGE_CANNOT_PASS_NO_MORE_WORDS = "This is the last word.";
 
     private ArrayList<Word> mWords;
 
@@ -38,6 +39,14 @@ public class Game {
         return mWords;
     }
 
+    public int getMaxPasses() {
+        return mMaxPasses;
+    }
+
+    public int getCurrentRoundNumber() {
+        return mCurrentRoundCounter;
+    }
+
     public void startRound() {
         if (mCurrentRoundCounter < 1) {
             mCurrentRoundCounter = 1;
@@ -52,44 +61,71 @@ public class Game {
         mCurrentRoundPassedWordIndeces = new ArrayList<>();
     }
 
-    public Word getCurentWord() {
+    public int getCurrentWordIndex () {
+        return mCurrentWordIndex;
+    }
+
+    public Word getCurrentWord() {
         return mWords.get(mCurrentWordIndex);
     }
 
-    // TODO: Add javadoc
+    /**
+     * Yow! Word.
+     *
+     * @return returns a word.
+     */
     public Word getWord() {
-        ArrayList<Integer> pollOfWords = new ArrayList<>();
-        Word word;
-
-        for (int i = 0; i < mWords.size() ; i++) {
-            word = mWords.get(i);
-            if ((!word.isChecked() && word.getPassCount() < 1) ||
-                    (!word.isChecked() && mIsIncludePassed)) {
-                pollOfWords.add(i);
-            }
-        }
-
+        ArrayList<Integer> pollOfWords = getPollOfWords();
         int countOfPollOfWords = pollOfWords.size();
 
         if (countOfPollOfWords < 1) {
             // No more words
             return null;
         } else {
-            Random rand = new Random();
-            mCurrentWordIndex = pollOfWords.get(rand.nextInt(countOfPollOfWords));
+            if (countOfPollOfWords < 2) {
+                // There's only 1 word index left, get that.
+                mCurrentWordIndex = pollOfWords.get(0);
+            } else {
+                Random rand = new Random();
+                int index;
+
+                do {
+                    index = rand.nextInt(countOfPollOfWords);
+                } while (pollOfWords.get(index) == mCurrentWordIndex);
+
+                mCurrentWordIndex = pollOfWords.get(index);
+            }
+
             return mWords.get(mCurrentWordIndex);
         }
     }
 
-    // TODO: Add javadoc
+    /**
+     * Uhhmm... Ahh.. PASS!
+     */
     public void pass() {
         mCurrentRoundPassedWordIndeces.add(mCurrentWordIndex);
         mWords.get(mCurrentWordIndex).incrementPassCount();
     }
 
-    // TODO: Add javadoc
+    /**
+     * Make a fist. Tap chest with the fist TWICE! Kiss that fist. And point up.
+     */
     public void check() {
         mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRoundCounter);
+    }
+
+    public ArrayList<Word> getUncheckedWordsInCurrentRound() {
+        ArrayList<Word> words = new ArrayList<>();
+
+        if (!mWords.get(mCurrentWordIndex).isChecked()) {
+            // Include last word in the unchecked words
+            words.add(mWords.get(mCurrentWordIndex));
+        }
+
+        words.addAll(getPassedWordsInCurrentRound());
+
+        return words;
     }
 
     public ArrayList<Word> getCheckedWordsInCurrentRound() {
@@ -120,7 +156,7 @@ public class Game {
 
     /**
      * I don't know about this one... it's just too complicated.
-     * But yeah, it just returns a boolean, just run through the code.
+     * But yeah, it just returns a boolean, just run through the code, help yourself.
      *
      * @return
      *  <code>true</code> - can pass<br>
@@ -130,4 +166,32 @@ public class Game {
         return getRemainingPasses() > 0;
     }
 
+    /**
+     * Count the remaining words that needs to be guessed
+     *
+     * @return Guess what?
+     */
+    public int pollOfWordsCount() {
+        return getPollOfWords().size();
+    }
+
+    /**
+     * Gets the indeces of the words that are still on the poll
+     *
+     * @return Read description. :)
+     */
+    private ArrayList<Integer> getPollOfWords() {
+        ArrayList<Integer> pollOfWords = new ArrayList<>();
+        Word word;
+
+        for (int i = 0; i < mWords.size() ; i++) {
+            word = mWords.get(i);
+            if ((!word.isChecked() && word.getPassCount() < 1) ||
+                    (!word.isChecked() && mIsIncludePassed)) {
+                pollOfWords.add(i);
+            }
+        }
+
+        return pollOfWords;
+    }
 }

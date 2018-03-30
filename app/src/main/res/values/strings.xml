@@ -33,20 +33,20 @@
     <string name="button_cancel">CANCEL</string>
     <string name="button_pass">PASS</string>
     <string name="button_check">CHECK</string>
-    <string name="button_game_start">Tap to start.</string>
-    <string name="button_game_resume">Tap to resume.</string>
+    <string name="button_game_start">Tap timer to start.</string>
+    <string name="button_game_resume">Tap timer to resume.</string>
 
-    <string name="placeholder_list_name">Enter playList name</string>
-    <string name="placeholder_add_list_item">Enter playList ite</string>
+    <string name="placeholder_list_name">Enter play-list name</string>
+    <string name="placeholder_add_list_item">Enter play-list item</string>
     <string name="title_activity_list_index">List</string>
     <string name="title_activity_game">Game Activity</string>
     <string name="title_list_list">PLAY-lists</string>
     <string name="title_activity_list_add">Create new playList</string>
 
+    <string name="round_title_end">End of Round #%d</string>
     <string name="round_title_unchecked_words">Unchecked words</string>
-    <string name="round_title_checked_words">Unchecked words</string>
+    <string name="round_title_checked_words">Checked words</string>
     <string name="round_title_statistics">Statistics</string>
-    <string name="round_label_count_unchecked_words"># of unchecked words: </string>
-    <string name="round_label_count_checked_words"># of checked words: </string>
-    <string name="round_label_button_start_round">START NEXT ROUND</string>
+    <string name="round_label_button_start_round">NEXT ROUND</string>
+    <string name="title_activity_round_end">Round End</string>
 </resources>

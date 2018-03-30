@@ -9,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
+import data.Game;
 import data.PlayList;
 import sprobe.training.miniproject.R;
 
@@ -21,14 +24,33 @@ import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 
 public class Util {
     /**
-     * Adds the toolbar. Simple. No hassle.
+     * Adds the toolbar. Simple. No hassle. <br><br>
+     *
+     * But really there's still something you need to do
+     * like, include the toolbar layout to your <code>activity.xml</code>.
      *
      * @param activity Current activity. Usually <code>this</code> value will be passed here.
+     * @param hasBackButton Should toolbar have back button?
      */
     public static void addToolbar(AppCompatActivity activity, boolean hasBackButton) {
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(hasBackButton);
+
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(hasBackButton);
+        }
+    }
+
+    /**
+     * Sets the title of the toolbar. Duh.
+     *
+     * @param activity Current activity. Usually <code>this</code> value will be passed here.
+     * @param title I think this one is obvious. Or should I link you to StackOverflow?
+     */
+    public static void setToolbarTitle(AppCompatActivity activity, String title) {
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setTitle(title);
+        }
     }
 
     /**
@@ -57,7 +79,7 @@ public class Util {
     }
 
     /**
-     * I don't know about this one. I remembered this in a dream and forgot about it<br>
+     * I don't know about this one. I remembered this in a dream and forgot about it
      * in another dream.
      *
      * @param activity the current activity (usually you give it a <code>Activity.this</code>
@@ -111,7 +133,7 @@ public class Util {
 
     /**
      * Use this when that annoying system UI shows. It will hide it for you. FOR GOOD!<br>
-     * HAHAHA! I'm just kidding. What I mean hide is, just hide it. Like: "Hey! you shouldn't<br>
+     * HAHAHA! I'm just kidding. What I mean hide is, just hide it. Like: "Hey! you shouldn't
      * be here", that kind of hide? You know what I mean.
      *
      * @param activity the current activity (usually you give it a <code>Activity.this</code>
@@ -164,6 +186,28 @@ public class Util {
         output += sec;
 
         return output;
+    }
+
+    /**
+     * Give me <code>Game</code> instance, i give you string.
+     *
+     * @param game <code>Game</code> instance you giving me
+     *
+     * @return Json string i give you
+     */
+    public static String gameToJson(Game game) {
+        return new Gson().toJson(game);
+    }
+
+    /**
+     * You want <code>Game</code> back? Okay, give me back my string.
+     *
+     * @param gameJson json string of game
+     *
+     * @return <code>Game</code> class
+     */
+    public static Game jsonToGame(String gameJson) {
+        return new Gson().fromJson(gameJson, Game.class);
     }
 
     /**

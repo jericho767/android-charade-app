@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="3">
+    android:layout_height="match_parent">
 
-    <RelativeLayout android:layout_height="match_parent"
-        android:layout_width="0dp" android:layout_weight="1"
-        android:orientation="vertical">
+    <LinearLayout android:id="@+id/round_word_labels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:baselineAligned="false">
 
-        <TextView android:id="@+id/round_label_unchecked_words"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/round_title_unchecked_words"
-            android:layout_alignParentTop="true"/>
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
 
-        <ListView android:id="@+id/round_unchecked_words"
-            android:layout_below="@+id/round_label_unchecked_words"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </RelativeLayout>
-
-    <RelativeLayout android:layout_weight="1"
-        android:layout_width="0dp" android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView android:id="@+id/round_label_checked_words"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/round_title_checked_words"
-            android:layout_alignParentTop="true"/>
-
-        <ListView android:id="@+id/round_checked_words"
-            android:layout_below="@+id/round_label_checked_words"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </RelativeLayout>
-
-    <RelativeLayout android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <LinearLayout android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-
-            <TextView android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/round_title_statistics"
-                android:textAlignment="center"/>
-            <TextView android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/round_count_unchecked_words"
-                android:text="@string/round_label_count_unchecked_words"/>
-            <TextView android:id="@+id/round_count_checked_words"
+            <TextView android:id="@+id/round_label_unchecked_words"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="@string/round_label_count_checked_words"/>
-            <Button android:id="@+id/round_button_start_round"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/round_label_button_start_round"/>
+                android:layout_gravity="center_vertical"
+                android:text="@string/round_title_unchecked_words"/>
         </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+        <RelativeLayout android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/round_label_checked_words"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_x4lg"
+                android:text="@string/round_title_checked_words"/>
+
+            <Button android:id="@+id/round_button_start_round"
+                style="@style/FormControlButtonDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/round_label_button_start_round"
+                android:layout_toEndOf="@+id/round_label_checked_words"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/round_word_labels"
+        android:weightSum="2"
+        android:baselineAligned="false">
+
+        <LinearLayout android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1">
+
+            <ListView android:id="@+id/round_unchecked_words"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1">
+
+            <ListView android:id="@+id/round_checked_words"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
