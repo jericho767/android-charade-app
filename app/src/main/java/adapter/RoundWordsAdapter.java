@@ -51,6 +51,7 @@ public class RoundWordsAdapter {
 
         @Override
         public long getItemId(int position) {
+            // TODO: After the database thingy modify this
             return position;
         }
 
@@ -104,6 +105,7 @@ public class RoundWordsAdapter {
 
         @Override
         public long getItemId(int position) {
+            // TODO: After the database thingy modify this
             return position;
         }
 
