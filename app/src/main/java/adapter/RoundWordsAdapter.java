@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import common.Util;
 import data.Word;
 import sprobe.training.miniproject.R;
 
@@ -72,20 +73,23 @@ public class RoundWordsAdapter {
             Word word = mWords.get(position);
             viewWordHolder.mViewText.setText(word.getText());
 
-            if (position == mIndexOfLastWord && !word.isChecked()) {
+            if (position == mIndexOfLastWord) {
                 viewWordHolder.mViewSubtext.setText(SUBTEXT_LAST_WORD);
             } else {
                 viewWordHolder.mViewSubtext.setText(SUBTEXT_PASSED);
             }
+
             return convertView;
         }
     }
 
     private class CheckedWordsAdapter extends BaseAdapter {
         private List<Word> mWords;
+        private int mIndexOfLastWord;
 
-        private CheckedWordsAdapter(List<Word> mWords) {
+        private CheckedWordsAdapter(List<Word> mWords, int indexOfLastWord) {
             this.mWords = mWords;
+            this.mIndexOfLastWord = indexOfLastWord;
         }
 
         @Override
@@ -120,14 +124,21 @@ public class RoundWordsAdapter {
             }
 
             viewWordHolder.mViewText.setText(mWords.get(position).getText());
-            viewWordHolder.mViewSubtext.setText(SUBTEXT_CHECKED);
+
+            if (position == mIndexOfLastWord) {
+                viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale(),
+                        "%s | %s", SUBTEXT_CHECKED, SUBTEXT_LAST_WORD));
+            } else {
+                viewWordHolder.mViewSubtext.setText(SUBTEXT_CHECKED);
+            }
+
             return convertView;
         }
     }
 
     public RoundWordsAdapter(Context context, List<Word> uncheckedWords,
                              List<Word> checkedWords, int lastWordIndex) {
-        this.mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords);
+        this.mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords, lastWordIndex);
         this.mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
