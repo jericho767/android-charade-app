@@ -2,7 +2,6 @@ package adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,9 @@ public class RoundWordsAdapter {
     private LayoutInflater mInflater;
     private CheckedWordsAdapter mCheckedWordsAdapter;
     private UncheckedWordsAdapter mUncheckedWordsAdapter;
-    private static final String SUBTEXT_CHECKED = "CHECKED"; // TODO: Move to strings.xml
-    private static final String SUBTEXT_PASSED = "PASSED"; // TODO: Move to strings.xml
-    private static final String SUBTEXT_LAST_WORD = "LAST WORD"; // TODO: Move to strings.xml
+    private static final String SUBTEXT_CHECKED = "CHECKED";
+    private static final String SUBTEXT_PASSED = "PASSED";
+    private static final String SUBTEXT_LAST_WORD = "LAST WORD";
 
     public CheckedWordsAdapter getCheckedWordsAdapter() {
         return mCheckedWordsAdapter;
@@ -72,8 +71,7 @@ public class RoundWordsAdapter {
 
             Word word = mWords.get(position);
             viewWordHolder.mViewText.setText(word.getText());
-            // TODO: Remove log
-            Log.wtf("ADAPTER | INDEX OF THE LAST WORD: ", mIndexOfLastWord + "");
+
             if (position == mIndexOfLastWord && !word.isChecked()) {
                 viewWordHolder.mViewSubtext.setText(SUBTEXT_LAST_WORD);
             } else {
