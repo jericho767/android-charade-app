@@ -18,9 +18,9 @@ public class RoundWordsAdapter {
     private LayoutInflater mInflater;
     private CheckedWordsAdapter mCheckedWordsAdapter;
     private UncheckedWordsAdapter mUncheckedWordsAdapter;
-    private static final String SUBTEXT_CHECKED = "CHECKED";
-    private static final String SUBTEXT_PASSED = "PASSED";
-    private static final String SUBTEXT_LAST_WORD = "LAST WORD";
+    private String mSubtextChecked;
+    private String mSubtextPassed;
+    private String mSubtextLastWord;
 
     public CheckedWordsAdapter getCheckedWordsAdapter() {
         return mCheckedWordsAdapter;
@@ -74,9 +74,9 @@ public class RoundWordsAdapter {
             viewWordHolder.mViewText.setText(word.getText());
 
             if (position == mIndexOfLastWord) {
-                viewWordHolder.mViewSubtext.setText(SUBTEXT_LAST_WORD);
+                viewWordHolder.mViewSubtext.setText(mSubtextLastWord);
             } else {
-                viewWordHolder.mViewSubtext.setText(SUBTEXT_PASSED);
+                viewWordHolder.mViewSubtext.setText(mSubtextPassed);
             }
 
             return convertView;
@@ -127,9 +127,9 @@ public class RoundWordsAdapter {
 
             if (position == mIndexOfLastWord) {
                 viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale(),
-                        "%s | %s", SUBTEXT_CHECKED, SUBTEXT_LAST_WORD));
+                        "%s | %s", mSubtextChecked, mSubtextLastWord));
             } else {
-                viewWordHolder.mViewSubtext.setText(SUBTEXT_CHECKED);
+                viewWordHolder.mViewSubtext.setText(mSubtextChecked);
             }
 
             return convertView;
@@ -137,9 +137,15 @@ public class RoundWordsAdapter {
     }
 
     public RoundWordsAdapter(Context context, List<Word> uncheckedWords,
-                             List<Word> checkedWords, int lastWordIndex) {
+                             List<Word> checkedWords, int lastWordIndex,
+                             String subtextChecked, String subtextPassed,
+                             String mSubtextLastWord) {
         this.mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords, lastWordIndex);
         this.mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
+
+        this.mSubtextChecked = subtextChecked;
+        this.mSubtextPassed = subtextPassed;
+        this.mSubtextLastWord = mSubtextLastWord;
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
