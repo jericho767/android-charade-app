@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import common.Util;
 import data.Word;
@@ -29,12 +29,12 @@ public class RoundWordsAdapter {
     }
 
     private class UncheckedWordsAdapter extends BaseAdapter {
-        private List<Word> mWords;
+        private ArrayList<Word> mWords;
         private int mIndexOfLastWord;
 
-        private UncheckedWordsAdapter(List<Word> mWords, int indexOfLastWord) {
-            this.mWords = mWords;
-            this.mIndexOfLastWord = indexOfLastWord;
+        private UncheckedWordsAdapter(ArrayList<Word> words, int indexOfLastWord) {
+            mWords = words;
+            mIndexOfLastWord = indexOfLastWord;
         }
 
         @Override
@@ -84,12 +84,12 @@ public class RoundWordsAdapter {
     }
 
     private class CheckedWordsAdapter extends BaseAdapter {
-        private List<Word> mWords;
+        private ArrayList<Word> mWords;
         private int mIndexOfLastWord;
 
-        private CheckedWordsAdapter(List<Word> mWords, int indexOfLastWord) {
-            this.mWords = mWords;
-            this.mIndexOfLastWord = indexOfLastWord;
+        private CheckedWordsAdapter(ArrayList<Word> words, int indexOfLastWord) {
+            mWords = words;
+            mIndexOfLastWord = indexOfLastWord;
         }
 
         @Override
@@ -139,8 +139,8 @@ public class RoundWordsAdapter {
         }
     }
 
-    public RoundWordsAdapter(Context context, List<Word> uncheckedWords,
-                             List<Word> checkedWords, int lastWordIndex) {
+    public RoundWordsAdapter(Context context, ArrayList<Word> uncheckedWords,
+                             ArrayList<Word> checkedWords, int lastWordIndex) {
         mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords, lastWordIndex);
         mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
         mContext = context;
