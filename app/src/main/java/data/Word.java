@@ -1,5 +1,8 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is the Word class.<br>
  * I will let you figure it out, what it is.
@@ -9,10 +12,30 @@ public class Word {
     private int mPassCount;
     private int mCheckedAtRound;
 
-    Word(String mText) {
+    private Word(String mText) {
         this.mText = mText;
         this.mPassCount = 0;
         this.mCheckedAtRound = 0;
+    }
+
+    static List<Word> createWords(String[] texts) {
+        List<Word> words = new ArrayList<>();
+
+        for (String text : texts) {
+            words.add(new Word(text));
+        }
+
+        return words;
+    }
+
+    public static List<Word> createWords(ArrayList<String> texts) {
+        List<Word> words = new ArrayList<>();
+
+        for (String text : texts) {
+            words.add(new Word(text));
+        }
+
+        return words;
     }
 
     public String getText() {

@@ -1,12 +1,14 @@
 package adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import data.Word;
@@ -16,9 +18,9 @@ public class PlayListWordsAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<Word> mWords;
 
-    public PlayListWordsAdapter(LayoutInflater mInflater, List<Word> mWords) {
-        this.mInflater = mInflater;
-        this.mWords = mWords;
+    public PlayListWordsAdapter(Context context, ArrayList<String> texts) {
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mWords = Word.createWords(texts);
     }
 
     @Override

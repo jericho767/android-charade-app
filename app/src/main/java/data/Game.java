@@ -22,18 +22,8 @@ public class Game {
 
     public Game(int mMaxPasses, String[] words, boolean mIsIncludePassed) {
         this.mMaxPasses = mMaxPasses;
-        this.mWords = createWords(words);
+        this.mWords = (ArrayList<Word>) Word.createWords(words);
         this.mIsIncludePassed = mIsIncludePassed;
-    }
-
-    private ArrayList<Word> createWords(String[] words) {
-        ArrayList<Word> mWords = new ArrayList<>();
-
-        for (String word : words) {
-            mWords.add(new Word(word));
-        }
-
-        return mWords;
     }
 
     public int getMaxPasses() {

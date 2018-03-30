@@ -7,12 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import adapter.PlayListWordsAdapter;
 import common.Util;
 import data.PlayList;
 import sprobe.training.miniproject.R;
@@ -21,9 +21,10 @@ public class ListIndexActivity extends AppCompatActivity {
 
     private EditText mViewItemName;
     private PlayList mPlayList;
-    private ArrayAdapter<String> mAdapterListItems;
     private Toast mToast;
     private ImageButton mBtnSubmit;
+    private ListView mListWords;
+    private PlayListWordsAdapter mPlayListAdapter;
 
     private View.OnClickListener listenerAddListItem = new View.OnClickListener() {
         @Override
@@ -41,8 +42,7 @@ public class ListIndexActivity extends AppCompatActivity {
                 storeListItem(itemName);
 
                 mPlayList.getItems().add(mViewItemName.getText().toString());
-                mAdapterListItems.notifyDataSetChanged();
-
+                mPlayListAdapter.notifyDataSetChanged();
                 mViewItemName.setText(null);
             }
         }
@@ -69,9 +69,6 @@ public class ListIndexActivity extends AppCompatActivity {
         Util.addToolbar(this, true);
 
         fetchViews();
-
-        // TODO: Use adapter classes
-        ListView listView = findViewById(R.id.list_items);
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 
         // Get the bundle from the intent
@@ -82,13 +79,16 @@ public class ListIndexActivity extends AppCompatActivity {
         } else if (bundle != null) {
             mPlayList = PlayList.getList(bundle.getInt("id"));
 
+            // Set name in the toolbar
             Util.setToolbarTitle(this, mPlayList.getName());
 
-            mAdapterListItems = new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1, mPlayList.getItems());
-            listView.setAdapter(mAdapterListItems);
+            // Set list
+            mPlayListAdapter = new PlayListWordsAdapter(this
+                    , mPlayList.getItems());
+            mListWords.setAdapter(mPlayListAdapter);
         }
 
+        // Show keyboard when there are no items on the list
         if (mPlayList.getItems().size() == 0) {
             mViewItemName.requestFocus();
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -100,6 +100,7 @@ public class ListIndexActivity extends AppCompatActivity {
     private void fetchViews() {
         mViewItemName = findViewById(R.id.item_name);
         mBtnSubmit = findViewById(R.id.submit);
+        mListWords = findViewById(R.id.list_items);
     }
 
     private void bindListeners() {
