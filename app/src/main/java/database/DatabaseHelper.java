@@ -61,4 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_PLAYLIST_NAME, null, values);
     }
 
+    public long insertWord(String text, String playlistId) {
+        ContentValues values = new ContentValues();
+        values.put(COL_WORD_TEXT, text);
+        values.put(COL_WORD_PLAYLIST_ID, playlistId);
+
+        return db.insert(TABLE_WORD_NAME, null, values);
+    }
 }
