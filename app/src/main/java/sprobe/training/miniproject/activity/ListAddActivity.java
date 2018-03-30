@@ -56,12 +56,17 @@ public class ListAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_add);
         Util.addToolbar(this, true);
 
-        // Fetch views // TODO: Move to a method
-        this.mLayoutName = findViewById(R.id.name_layout);
-        this.mViewName = findViewById(R.id.name);
-        this.mBtnSubmit = findViewById(R.id.submit);
+        fetchViews();
+        bindListeners();
+    }
 
-        // Bind listeners
+    private void fetchViews() {
+        mLayoutName = findViewById(R.id.name_layout);
+        mViewName = findViewById(R.id.name);
+        mBtnSubmit = findViewById(R.id.submit);
+    }
+
+    private void bindListeners() {
         mBtnSubmit.setOnClickListener(listenerAddList);
     }
 

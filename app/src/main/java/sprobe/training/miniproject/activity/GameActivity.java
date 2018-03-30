@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +17,7 @@ import data.Word;
 import sprobe.training.miniproject.R;
 
 public class GameActivity extends AppCompatActivity {
-    private long mTimeLimit = 20000; // TODO: Set it right
+    private long mTimeLimit = 10000; // TODO: Set it right
     private long mRemainingMilliseconds;
     private CountDownTimer mCountDownTimer;
     private boolean mIsTimerOn;
