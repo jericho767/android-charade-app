@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-    public static final String MESSAGE_CANNOT_PASS = "You shall not pass!";
-    public static final String MESSAGE_CANNOT_PASS_NO_MORE_WORDS = "This is the last word.";
-
     private ArrayList<Word> mWords;
 
     // Index of the current word in the poll of words

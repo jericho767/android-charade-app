@@ -43,6 +43,12 @@
     <string name="title_list_list">PLAY-lists</string>
     <string name="title_activity_list_add">Create new playList</string>
 
+    <string name="game_message_ended">Game is already over champ.</string>
+    <string name="game_message_paused">Game is paused you imbecile.</string>
+    <string name="game_message_end">That\'s all folks!</string>
+    <string name="game_message_cannot_pass">You shall not.. PASS!</string>
+    <string name="game_message_last_word">This is the last word.</string>
+
     <string name="round_subtext_checked">CHECKED</string>
     <string name="round_subtext_passed">PASSED</string>
     <string name="round_subtext_last_word">LAST WORD</string>

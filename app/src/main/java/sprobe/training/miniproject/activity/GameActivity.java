@@ -33,15 +33,11 @@ public class GameActivity extends AppCompatActivity {
     private TextView mViewCountPass;
     private TextView mViewCountCheck;
 
-    private static final String MESSAGE_GAME_END = "That's all folks!"; // TODO: Move to strings.xml
-    private static final String MESSAGE_GAME_PAUSED = "Game is paused you imbecile."; // TODO: Move to strings.xml
-    private static final String MESSAGE_GAME_ENDED = "Game is already over champ."; // TODO: Move to strings.xml
-
     private Toast mToast;
 
-    private View.OnTouchListener mListenerGameTimer = new View.OnTouchListener() {
+    private View.OnClickListener mListenerGameTimer = new View.OnClickListener() {
         @Override
-        public boolean onTouch(View view, MotionEvent event) {
+        public void onClick(View view) {
             if (mGame.getCurrentRoundNumber() < 1) {
                 Word word = mGame.getWord();
 
@@ -49,16 +45,12 @@ public class GameActivity extends AppCompatActivity {
                     startRound(mViewGameWordOverlay, word);
                 }
             } else {
-                view.performClick();
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (mIsTimerOn) {
-                        pauseGame();
-                    } else {
-                        resumeGame();
-                    }
+                if (mIsTimerOn) {
+                    pauseGame();
+                } else {
+                    resumeGame();
                 }
             }
-            return false;
         }
     };
 
@@ -83,17 +75,19 @@ public class GameActivity extends AppCompatActivity {
                         mViewGameWord.setText(word.getText());
                     }
                 } else if (pollOfWordsCount < 2) {
-                    Util.showToast(GameActivity.this, mToast,
-                            Game.MESSAGE_CANNOT_PASS_NO_MORE_WORDS);
+                    Util.showToast(GameActivity.this, mToast
+                            , getResources().getString(R.string.game_message_last_word));
                 } else {
                     Util.showToast(GameActivity.this, mToast
-                            , Game.MESSAGE_CANNOT_PASS);
+                            , getResources().getString(R.string.game_message_cannot_pass));
                 }
             } else {
                 if (mRemainingMilliseconds == 0) {
-                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_ENDED);
+                    Util.showToast(GameActivity.this, mToast
+                            , getResources().getString(R.string.game_message_ended));
                 } else {
-                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_PAUSED);
+                    Util.showToast(GameActivity.this, mToast
+                            , getResources().getString(R.string.game_message_paused));
                 }
             }
         }
@@ -116,9 +110,11 @@ public class GameActivity extends AppCompatActivity {
                 }
             } else {
                 if (mRemainingMilliseconds == 0) {
-                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_ENDED);
+                    Util.showToast(GameActivity.this, mToast
+                            , getResources().getString(R.string.game_message_ended));
                 } else {
-                    Util.showToast(GameActivity.this, mToast, MESSAGE_GAME_PAUSED);
+                    Util.showToast(GameActivity.this, mToast
+                            , getResources().getString(R.string.game_message_paused));
                 }
             }
         }
@@ -140,14 +136,7 @@ public class GameActivity extends AppCompatActivity {
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
 
-        // Fetch views // TODO: Move this to a method
-        mViewCountCheck = findViewById(R.id.count_check);
-        mViewCountPass = findViewById(R.id.count_pass);
-        mViewGameWord = findViewById(R.id.game_word);
-        mViewGameTimer = findViewById(R.id.game_timer);
-        mBtnPass = findViewById(R.id.game_button_pass);
-        mBtnCheck = findViewById(R.id.game_button_check);
-        mViewGameWordOverlay = findViewById(R.id.game_overlay_text);
+        fetchViews();
 
         // Initialize the game
         Bundle bundle = getIntent().getExtras();
@@ -158,19 +147,32 @@ public class GameActivity extends AppCompatActivity {
         }
 
         readyRound();
+        bindListeners();
+    }
 
-        // Bind listeners
+    private void bindListeners() {
         Util.hideTheSystemUiWhenShown(this);
         mBtnCheck.setOnClickListener(mListenerBtnCheck);
         mBtnPass.setOnClickListener(mListenerBtnPass);
-        mViewGameTimer.setOnTouchListener(mListenerGameTimer);
+        mViewGameTimer.setOnClickListener(mListenerGameTimer);
+    }
+
+    private void fetchViews() {
+        mViewCountCheck = findViewById(R.id.count_check);
+        mViewCountPass = findViewById(R.id.count_pass);
+        mViewGameWord = findViewById(R.id.game_word);
+        mViewGameTimer = findViewById(R.id.game_timer);
+        mBtnPass = findViewById(R.id.game_button_pass);
+        mBtnCheck = findViewById(R.id.game_button_check);
+        mViewGameWordOverlay = findViewById(R.id.game_overlay_text);
     }
 
     private void endGame() {
         // TODO: Implement CORRECTLY? RIGHTEOUSLY? WITH ALL THE BEST YOU'VE GOT!
         mViewGameWord.setText("");
         mViewGameWord.setVisibility(View.GONE);
-        mViewGameWordOverlay.setText(MESSAGE_GAME_END);
+        mViewGameWordOverlay.setText(String.format(Util.getLocale(), "%s"
+                , getResources().getString(R.string.game_message_end)));
         mViewGameWordOverlay.setVisibility(View.VISIBLE);
     }
 
@@ -195,8 +197,6 @@ public class GameActivity extends AppCompatActivity {
 
     private void endRound() {
         mToast.cancel();
-        // TODO: Remove log
-        Log.wtf("GAME | INDEX OF THE LAST WORD: ", mGame.getCurrentWordIndex() + "");
         Bundle bundle = new Bundle();
         bundle.putString("game", Util.gameToJson(mGame));
         Util.nextActivity(this, new RoundEndActivity(), bundle);
