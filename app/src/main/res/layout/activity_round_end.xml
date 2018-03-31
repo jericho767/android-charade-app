@@ -10,14 +10,14 @@
         <LinearLayout android:id="@+id/round_word_labels"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
+            android:weightSum="@dimen/weight_bs_grid"
             android:baselineAligned="false"
             android:paddingTop="@dimen/dp_sm"
             android:paddingBottom="@dimen/dp_sm">
 
             <LinearLayout android:layout_height="wrap_content"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="@dimen/weight_half"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/dp_md">
 
@@ -31,7 +31,7 @@
             </LinearLayout>
             <RelativeLayout android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="@dimen/weight_half"
                 android:layout_marginStart="@dimen/dp_md">
 
                 <TextView android:id="@+id/round_label_checked_words"
@@ -45,12 +45,12 @@
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/round_word_labels"
-            android:weightSum="2"
+            android:weightSum="@dimen/weight_bs_grid"
             android:baselineAligned="false">
 
             <LinearLayout android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="@dimen/weight_half"
                 android:layout_marginEnd="@dimen/dp_md">
 
                 <ListView android:id="@+id/round_unchecked_words"
@@ -59,7 +59,7 @@
             </LinearLayout>
             <LinearLayout android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="@dimen/weight_half"
                 android:layout_marginStart="@dimen/dp_md">
 
                 <ListView android:id="@+id/round_checked_words"
