@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".activity.ListListActivity"
-            android:label="@string/title_list_list"
+            android:label="@string/title_activity_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ListAddActivity"
@@ -40,6 +40,10 @@
         <activity
             android:name=".activity.RoundEndActivity"
             android:screenOrientation="sensorLandscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

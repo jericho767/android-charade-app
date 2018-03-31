@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/common_action_bar"/>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:layout_marginBottom="@dimen/dp_md"
+            android:layout_marginTop="@dimen/dp_lg"
+            android:weightSum="@dimen/weight_bs_grid">
+
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:paddingStart="@dimen/dp_sm"
+                android:paddingEnd="@dimen/dp_md"
+                android:layout_weight="@dimen/weight_two_thirds"
+                android:orientation="vertical">
+
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_sm"
+                    android:text="@string/settings_text_time_limit"/>
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_subtext_time_limit"/>
+            </LinearLayout>
+
+            <RelativeLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="@dimen/weight_one_third">
+
+                <EditText android:id="@+id/settings_time_limit"
+                    android:layout_width="wrap_content"
+                    android:minWidth="@dimen/dp_x4lg"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:inputType="number"/>
+                <TextView android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/settings_time_limit"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="@dimen/dp_sm"
+                    android:labelFor="@+id/settings_time_limit"
+                    android:text="@string/settings_unit_time_limit"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:layout_marginBottom="@dimen/dp_md"
+            android:weightSum="@dimen/weight_bs_grid">
+
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:paddingStart="@dimen/dp_sm"
+                android:paddingEnd="@dimen/dp_md"
+                android:layout_weight="@dimen/weight_two_thirds"
+                android:layout_marginEnd="@dimen/dp_md"
+                android:orientation="vertical">
+
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_sm"
+                    android:text="@string/settings_text_number_of_passes"/>
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_subtext_number_of_passes"/>
+            </LinearLayout>
+
+            <RelativeLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="@dimen/weight_one_third">
+
+                <EditText android:id="@+id/settings_max_pass"
+                    android:layout_width="wrap_content"
+                    android:minWidth="@dimen/dp_x4lg"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:inputType="number"/>
+
+                <TextView android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/settings_max_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="@dimen/dp_sm"
+                    android:labelFor="@+id/settings_max_pass"
+                    android:text="@string/settings_unit_passes"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_md"
+            android:baselineAligned="false"
+            android:weightSum="@dimen/weight_bs_grid">
+
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:paddingStart="@dimen/dp_sm"
+                android:paddingEnd="@dimen/dp_md"
+                android:layout_weight="@dimen/weight_two_thirds"
+                android:layout_marginEnd="@dimen/dp_md"
+                android:orientation="vertical">
+
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_sm"
+                    android:text="@string/settings_text_include_passes"/>
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_subtext_include_passes"/>
+            </LinearLayout>
+
+            <RelativeLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="@dimen/weight_one_third">
+
+                <ToggleButton android:id="@+id/settings_include_passed_words"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/settings_include_passes_label_yes"
+                    android:textOff="@string/settings_include_passes_label_no"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

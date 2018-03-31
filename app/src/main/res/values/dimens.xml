@@ -15,4 +15,10 @@
     <dimen name="font_sm">30sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="weight_bs_grid">12</dimen>
+    <dimen name="weight_half">6</dimen>
+    <dimen name="weight_quarter">3</dimen>
+    <dimen name="weight_two_thirds">8</dimen>
+    <dimen name="weight_one_third">4</dimen>
+    <dimen name="weight_custom_10">10</dimen>
+    <dimen name="weight_custom_2">2</dimen>
 </resources>

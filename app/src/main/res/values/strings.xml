@@ -45,10 +45,6 @@
 
     <string name="placeholder_list_name">Enter play-list name</string>
     <string name="placeholder_add_list_item">Enter play-list item</string>
-    <string name="title_activity_list_index">List</string>
-    <string name="title_activity_game">Game Activity</string>
-    <string name="title_list_list">PLAY-lists</string>
-    <string name="title_activity_list_add">Create new playList</string>
 
     <string name="game_message_no_list">Cannot start game.</string>
     <string name="game_message_ended">Game is already over champ.</string>
@@ -65,5 +61,22 @@
     <string name="round_title_checked_words">Checked words</string>
     <string name="round_title_statistics">Statistics</string>
     <string name="round_label_button_start_round">NEXT ROUND</string>
+
+    <string name="settings_text_time_limit">Time Limit</string>
+    <string name="settings_subtext_time_limit">Duh. Time limit? Per round?</string>
+    <string name="settings_text_number_of_passes">Number of passes</string>
+    <string name="settings_subtext_number_of_passes">How many passes would there be?</string>
+    <string name="settings_unit_time_limit">seconds</string>
+    <string name="settings_unit_passes">passes</string>
+    <string name="settings_text_include_passes">Include passed words</string>
+    <string name="settings_subtext_include_passes">Include passed words in a whole game.</string>
+    <string name="settings_include_passes_label_yes">YES</string>
+    <string name="settings_include_passes_label_no">NO</string>
+
     <string name="title_activity_round_end">Round End</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_list_index">List</string>
+    <string name="title_activity_game">Game Activity</string>
+    <string name="title_activity_list_add">Create new playList</string>
+    <string name="title_activity_list">PLAY-lists</string>
 </resources>
