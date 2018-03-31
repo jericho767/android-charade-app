@@ -33,6 +33,7 @@
     <string name="button_add">Add</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_save">Save</string>
     <string name="button_pass">PASS</string>
     <string name="button_check">CHECK</string>
     <string name="button_game_start">Tap timer to start.</string>
@@ -68,10 +69,10 @@
     <string name="settings_subtext_number_of_passes">How many passes would there be?</string>
     <string name="settings_unit_time_limit">seconds</string>
     <string name="settings_unit_passes">passes</string>
-    <string name="settings_text_include_passes">Include passed words</string>
-    <string name="settings_subtext_include_passes">Include passed words in a whole game.</string>
-    <string name="settings_include_passes_label_yes">YES</string>
-    <string name="settings_include_passes_label_no">NO</string>
+    <string name="settings_text_include_passed">Include passed words</string>
+    <string name="settings_subtext_include_passed">Include passed words in whole game.</string>
+    <string name="settings_include_passed_label_yes">YES</string>
+    <string name="settings_include_passed_label_no">NO</string>
 
     <string name="title_activity_round_end">Round End</string>
     <string name="title_activity_settings">Settings</string>

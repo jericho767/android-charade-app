@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -21,6 +22,33 @@ import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 
 public class Util {
+    public static abstract class SHARED_PREF {
+        public static final String KEY = "sprobe.training.miniproject.PREF_FILE";
+
+        public static final String SETTINGS_KEY_TIME_LIMIT = "settings.tl";
+        public static final String SETTINGS_KEY_NUM_PASSES = "settings.mp";
+        public static final String SETTINGS_KEY_INCLUDE_PASSED = "settings.ip";
+
+        public static final int SETTINGS_MIN_TIME_LIMIT = 30;
+        public static final int SETTINGS_MAX_TIME_LIMIT = 999;
+        public static final int SETTINGS_MIN_NUM_PASSES = 0;
+        public static final int SETTINGS_MAX_NUM_PASSES = 99;
+
+        public static final int SETTINGS_DEFAULT_TIME_LIMIT = 120;
+        public static final int SETTINGS_DEFAULT_NUM_PASSES = 3;
+        public static final boolean SETTINGS_DEFAULT_INCLUDE_PASSED = true;
+    }
+
+    /**
+     * The method name says it ALL! And I mean ALL!!!
+     *
+     * @param activity the current activity. Pass here <code>this</code>.
+     */
+    public static void showKeyboard(AppCompatActivity activity) {
+        activity.getWindow()
+                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+
     /**
      * Adds the toolbar. Simple. No hassle. <br><br>
      *

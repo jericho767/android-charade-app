@@ -13,6 +13,7 @@
     <dimen name="font_lg">50sp</dimen>
     <dimen name="font_md">40sp</dimen>
     <dimen name="font_sm">30sp</dimen>
+    <dimen name="font_xs">20sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="weight_bs_grid">12</dimen>
     <dimen name="weight_half">6</dimen>
