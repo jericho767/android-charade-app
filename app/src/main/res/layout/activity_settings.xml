@@ -30,6 +30,7 @@
 
             <LinearLayout android:layout_height="wrap_content"
                 android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/dp_md"
                 android:layout_weight="@dimen/weight_two_thirds"
                 android:orientation="vertical">
 
@@ -51,7 +52,7 @@
 
                 <EditText android:id="@+id/settings_time_limit"
                     android:layout_width="wrap_content"
-                    android:minWidth="@dimen/dp_x4lg"
+                    android:minWidth="@dimen/dp_x3lg"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:inputType="number"/>
@@ -94,7 +95,7 @@
 
                 <EditText android:id="@+id/settings_num_pass"
                     android:layout_width="wrap_content"
-                    android:minWidth="@dimen/dp_x4lg"
+                    android:minWidth="@dimen/dp_x3lg"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:inputType="number"/>
@@ -134,11 +135,12 @@
                 android:layout_width="0dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="@dimen/weight_one_third"
-                android:layout_marginEnd="@dimen/dp_xs">
+                android:layout_marginEnd="@dimen/dp_sm">
 
                 <ToggleButton android:id="@+id/settings_include_passed_words"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/toggle_default"
                     android:textOn="@string/settings_include_passed_label_yes"
                     android:textOff="@string/settings_include_passed_label_no"/>
             </RelativeLayout>
