@@ -71,7 +71,11 @@ public class ListListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        if (id == R.id.action_settings) {
+            Util.nextActivity(this, new SettingsActivity());
+        }
+
+        return super.onOptionsItemSelected(item);
 
     }
 
