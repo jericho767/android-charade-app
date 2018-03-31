@@ -32,7 +32,7 @@
                 android:text="@string/round_title_checked_words"/>
 
             <Button android:id="@+id/round_button_start_round"
-                style="@style/FormControlButtonDefault"
+                style="@style/ButtonDefault"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/round_label_button_start_round"
