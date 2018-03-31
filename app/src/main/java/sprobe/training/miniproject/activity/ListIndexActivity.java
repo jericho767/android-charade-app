@@ -105,7 +105,7 @@ public class ListIndexActivity extends AppCompatActivity {
         // Show keyboard when there are no items on the list
         if (mPlayListAdapter.getCount() == 0) {
             mViewItemName.requestFocus();
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            Util.showKeyboard(this);
         }
 
         bindListeners();
