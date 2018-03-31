@@ -15,7 +15,7 @@
                         android:top="-10dp" android:bottom="2dp">
                         <shape>
                             <solid android:color="@android:color/transparent" />
-                            <stroke android:width="2dp" android:color="@color/colorDefaultDark" />
+                            <stroke android:width="3dp" android:color="@color/colorDefaultDark" />
                         </shape>
                     </item>
                 </layer-list>
@@ -32,7 +32,7 @@
                         android:top="-10dp" android:bottom="2dp">
                         <shape>
                             <solid android:color="@android:color/transparent" />
-                            <stroke android:width="2dp" android:color="@color/colorAccent" />
+                            <stroke android:width="3dp" android:color="@color/colorAccent" />
                         </shape>
                     </item>
                 </layer-list>
