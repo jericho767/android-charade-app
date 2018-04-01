@@ -136,7 +136,7 @@ public class GameActivity extends AppCompatActivity {
         // TODO: Replace this with actual values
         int numberOfPasses = 3;
         ArrayList<String> words = new ArrayList<>();
-        boolean includePasses = true;
+        boolean includePassed = true;
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
 
@@ -158,7 +158,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Initialize the game
         if (bundle == null || bundle.getString(Util.BUNDLE_KEYS.GAME_JSON) == null) {
-            mGame = new Game(numberOfPasses, words, includePasses);
+            mGame = new Game(numberOfPasses, words, includePassed);
         } else {
             mGame = Util.jsonToGame(bundle.getString(Util.BUNDLE_KEYS.GAME_JSON));
         }
