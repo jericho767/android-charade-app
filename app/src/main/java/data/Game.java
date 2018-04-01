@@ -13,6 +13,7 @@ public class Game {
 
     private int mCurrentRoundCounter;
     private ArrayList<Integer> mCurrentRoundPassedWordIndeces;
+    private ArrayList<Integer> mCurrentRoundCheckedWordIndeces;
 
     /**
      * Settings
@@ -29,6 +30,7 @@ public class Game {
         mCurrentWordIndex = -1;
         mCurrentRoundCounter = 0;
         mCurrentRoundPassedWordIndeces = new ArrayList<>();
+        mCurrentRoundCheckedWordIndeces = new ArrayList<>();
     }
 
     public int getMaxPasses() {
@@ -47,11 +49,13 @@ public class Game {
         }
 
         mCurrentRoundPassedWordIndeces = new ArrayList<>();
+        mCurrentRoundCheckedWordIndeces = new ArrayList<>();
     }
 
     public void endRound() {
         mCurrentWordIndex = -1;
         mCurrentRoundPassedWordIndeces = new ArrayList<>();
+        mCurrentRoundCheckedWordIndeces = new ArrayList<>();
     }
 
     public int getCurrentWordIndex () {
@@ -105,6 +109,7 @@ public class Game {
      * Make a fist. Tap chest with the fist TWICE! Kiss that fist. And point up.
      */
     public void check() {
+        mCurrentRoundCheckedWordIndeces.add(mCurrentWordIndex);
         mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRoundCounter);
     }
 
@@ -122,10 +127,8 @@ public class Game {
     public ArrayList<Word> getCheckedWordsInCurrentRound() {
         ArrayList<Word> checkedWords = new ArrayList<>();
 
-        for (Word word : mWords) {
-            if (word.getCheckedAtRound() == mCurrentRoundCounter) {
-                checkedWords.add(word);
-            }
+        for (Integer index : mCurrentRoundCheckedWordIndeces) {
+            checkedWords.add(mWords.get(index));
         }
 
         return checkedWords;
