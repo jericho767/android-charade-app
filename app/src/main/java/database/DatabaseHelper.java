@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DatabaseContract.DATABASE_NAME
                 , null, DatabaseContract.DATABASE_VERSION);
-        db = this.getWritableDatabase();
+        db = getWritableDatabase();
     }
 
     @Override

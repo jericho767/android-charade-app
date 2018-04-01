@@ -98,7 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         Util.addToolbar(this, true);
 
-        mSharedPref = this.getSharedPreferences(Util.SHARED_PREF.KEY, MODE_PRIVATE);
+        mSharedPref = getSharedPreferences(Util.SHARED_PREF.KEY, MODE_PRIVATE);
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         fetchViews();
         getSharedPref();

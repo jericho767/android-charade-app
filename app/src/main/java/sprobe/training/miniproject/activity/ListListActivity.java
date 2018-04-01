@@ -105,7 +105,7 @@ public class ListListActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (mExitAppToast.getView().isShown()) {
             mExitAppToast.cancel();
-            this.finishAffinity();
+            finishAffinity();
         } else {
             Util.showToast(this, mExitAppToast
                     , getResources().getString(R.string.app_message_on_close));

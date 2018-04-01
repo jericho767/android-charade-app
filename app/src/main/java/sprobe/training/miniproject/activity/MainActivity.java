@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Util.goFullscreen(this);
         setContentView(R.layout.activity_main);
-        this.proceedToHomeScreen();
+        proceedToHomeScreen();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        this.finishAffinity();
+        finishAffinity();
     }
 
     private void proceedToHomeScreen() {

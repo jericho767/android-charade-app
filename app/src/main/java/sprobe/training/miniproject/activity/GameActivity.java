@@ -182,7 +182,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void getSharedPref() {
-        SharedPreferences sharedPref = this.getSharedPreferences(Util.SHARED_PREF.KEY
+        SharedPreferences sharedPref = getSharedPreferences(Util.SHARED_PREF.KEY
                 , MODE_PRIVATE);
         mNumPasses = sharedPref.getInt(Util.SHARED_PREF.SETTINGS_KEY_NUM_PASSES
                 , Util.SHARED_PREF.SETTINGS_DEFAULT_NUM_PASSES);

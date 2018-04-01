@@ -44,11 +44,11 @@ public class Word {
     }
 
     void incrementPassCount() {
-        this.mPassCount++;
+        mPassCount++;
     }
 
-    void setCheckedAtRound(int mCheckedAtRound) {
-        this.mCheckedAtRound = mCheckedAtRound;
+    void setCheckedAtRound(int checkedAtRound) {
+        mCheckedAtRound = checkedAtRound;
     }
 
     boolean isChecked() {

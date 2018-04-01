@@ -24,7 +24,7 @@ public class PlayListWordsAdapter extends BaseAdapter {
 
     public void addItem(DBWord word) {
         mWords.add(word);
-        this.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public ArrayList<DBWord> getWords() {
