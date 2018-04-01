@@ -68,13 +68,8 @@ public class RoundWordsAdapter {
             Word word = mWords.get(position);
             viewWordHolder.mViewText.setText(word.getText());
 
-            if (position == getCount() - 1) {
-                viewWordHolder.mViewSubtext.setText(mContext.getResources()
-                        .getString(R.string.round_subtext_last_word));
-            } else {
-                viewWordHolder.mViewSubtext.setText(mContext.getResources()
+            viewWordHolder.mViewSubtext.setText(mContext.getResources()
                         .getString(R.string.round_subtext_passed));
-            }
 
             return convertView;
         }

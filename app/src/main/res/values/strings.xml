@@ -58,7 +58,6 @@
 
     <string name="round_subtext_checked">CHECKED</string>
     <string name="round_subtext_passed">PASSED</string>
-    <string name="round_subtext_last_word">LAST WORD</string>
     <string name="round_title_end">End of Round #%d</string>
     <string name="round_title_unchecked_words">Unchecked words</string>
     <string name="round_title_checked_words">Checked words</string>
