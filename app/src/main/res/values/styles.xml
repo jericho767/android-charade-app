@@ -152,4 +152,17 @@
         <item name="android:paddingEnd">@dimen/dp_md</item>
         <item name="android:textStyle">italic</item>
     </style>
+
+    <style name="ItemTextSM">
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingStart">@dimen/dp_sm</item>
+        <item name="android:paddingEnd">@dimen/dp_md</item>
+    </style>
+
+    <style name="ItemSubtextSM">
+        <item name="android:textSize">@dimen/font_x2s</item>
+        <item name="android:paddingStart">@dimen/dp_sm</item>
+        <item name="android:paddingEnd">@dimen/dp_md</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>
