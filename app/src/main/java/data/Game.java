@@ -3,6 +3,8 @@ package data;
 import java.util.ArrayList;
 import java.util.Random;
 
+import database.DBWord;
+
 public class Game {
     private ArrayList<Word> mWords;
 
@@ -20,9 +22,9 @@ public class Game {
     // number of passes
     private int mMaxPasses;
 
-    public Game(int mMaxPasses, ArrayList<String> words, boolean mIsIncludePassed) {
+    public Game(int mMaxPasses, ArrayList<DBWord> dbWords, boolean mIsIncludePassed) {
         this.mMaxPasses = mMaxPasses;
-        this.mWords = Word.createWords(words);
+        this.mWords = Word.createWords(dbWords);
         this.mIsIncludePassed = mIsIncludePassed;
     }
 

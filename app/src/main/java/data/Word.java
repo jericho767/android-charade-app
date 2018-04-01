@@ -2,26 +2,30 @@ package data;
 
 import java.util.ArrayList;
 
+import database.DBWord;
+
 /**
  * This is the Word class.<br>
  * I will let you figure it out, what it is.
  */
 public class Word {
     private String mText;
+    private long mId;
     private int mPassCount;
     private int mCheckedAtRound;
 
-    private Word(String mText) {
-        this.mText = mText;
-        this.mPassCount = 0;
-        this.mCheckedAtRound = 0;
+    private Word(String text, long id) {
+        mText = text;
+        mId = id;
+        mPassCount = 0;
+        mCheckedAtRound = 0;
     }
 
-    static ArrayList<Word> createWords(ArrayList<String> texts) {
+    static ArrayList<Word> createWords(ArrayList<DBWord> dbWords) {
         ArrayList<Word> words = new ArrayList<>();
 
-        for (String text : texts) {
-            words.add(new Word(text));
+        for (DBWord dbWord : dbWords) {
+            words.add(new Word(dbWord.getText(), dbWord.getId()));
         }
 
         return words;

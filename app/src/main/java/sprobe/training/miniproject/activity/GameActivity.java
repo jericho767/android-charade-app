@@ -135,15 +135,14 @@ public class GameActivity extends AppCompatActivity {
 
         // TODO: Replace this with actual values
         int numberOfPasses = 3;
-        ArrayList<String> words = new ArrayList<>();
+        ArrayList<DBWord> words = new ArrayList<>();
         boolean includePassed = true;
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID) > 0) {
-            words = getTexts(db.selectWordsFromPlayList(
-                    bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID)));
+            words = db.selectWordsFromPlayList(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
         }
 
         Log.wtf("WORDS", words.toString());
@@ -165,16 +164,6 @@ public class GameActivity extends AppCompatActivity {
 
         readyRound();
         bindListeners();
-    }
-
-    private ArrayList<String> getTexts(ArrayList<DBWord> dbWords) {
-        ArrayList<String> words = new ArrayList<>();
-
-        for (DBWord dbWord : dbWords) {
-            words.add(dbWord.getText());
-        }
-
-        return words;
     }
 
     private void bindListeners() {
