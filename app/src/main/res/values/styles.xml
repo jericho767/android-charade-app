@@ -140,6 +140,12 @@
         <item name="android:layout_alignParentEnd">true</item>
     </style>
 
+    <style name="ErrorMessage">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_xs</item>
+        <item name="android:textColor">@color/colorError</item>
+    </style>
+
     <style name="ItemText">
         <item name="android:textSize">@dimen/font_xs</item>
         <item name="android:textStyle">bold</item>

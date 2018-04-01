@@ -18,7 +18,10 @@
             <TextView android:id="@+id/settings_error_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_sm"
+                android:layout_marginEnd="@dimen/dp_sm"
                 android:layout_marginBottom="@dimen/dp_md"
+                style="@style/ErrorMessage"
                 android:visibility="gone"/>
         </LinearLayout>
 
@@ -55,6 +58,7 @@
                     android:minWidth="@dimen/dp_x3lg"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:maxLength="3"
                     android:inputType="number"/>
                 <TextView android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -98,6 +102,7 @@
                     android:minWidth="@dimen/dp_x3lg"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:maxLength="2"
                     android:inputType="number"/>
 
                 <TextView android:layout_height="wrap_content"

@@ -30,15 +30,64 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             mErrorMessage.setVisibility(View.GONE);
-            String validate = validate();
+            String errMsg = validation();
 
-            if (validate == null) {
+            if (errMsg == null) {
                 saveSharedPref();
+                Util.nextActivity(SettingsActivity.this, new ListListActivity());
+            } else {
+                showErrorMessage(errMsg);
             }
         }
 
-        private String validate() {
+        private String validation() {
+            String strTimeLimit = mTimeLimit.getText().toString();
+            String strNumPasses = mNumPasses.getText().toString();
+
+            if (strTimeLimit.length() == 0) {
+                return String.format(getResources().getString(R.string.err_msg_required)
+                        , "Time limit");
+            } else if (strNumPasses.length() == 0) {
+                return String.format(getResources().getString(R.string.err_msg_required)
+                        , "Number of passes");
+            }
+
+            try {
+                int timeLimit = Integer.parseInt(strTimeLimit);
+
+                if (timeLimit < Util.SHARED_PREF.SETTINGS_MIN_TIME_LIMIT
+                        || timeLimit > Util.SHARED_PREF.SETTINGS_MAX_TIME_LIMIT) {
+                    return String.format(getResources().getString(R.string.err_msg_length)
+                            , "Time limit"
+                            , Util.SHARED_PREF.SETTINGS_MIN_TIME_LIMIT
+                            , Util.SHARED_PREF.SETTINGS_MAX_TIME_LIMIT);
+                }
+            } catch (NumberFormatException e) {
+                return String.format(getResources().getString(R.string.err_msg_invalid)
+                        , "Time limit");
+            }
+
+            try {
+                int numPasses = Integer.parseInt(strNumPasses);
+
+                if (numPasses < Util.SHARED_PREF.SETTINGS_MIN_NUM_PASSES
+                        || numPasses > Util.SHARED_PREF.SETTINGS_MAX_NUM_PASSES) {
+                    return String.format(getResources().getString(R.string.err_msg_length)
+                            , "Number of passes"
+                            , Util.SHARED_PREF.SETTINGS_MIN_NUM_PASSES
+                            , Util.SHARED_PREF.SETTINGS_MAX_NUM_PASSES);
+                }
+            } catch (NumberFormatException e) {
+                return String.format(getResources().getString(R.string.err_msg_invalid)
+                        , "Number of passes ");
+            }
+
             return null;
+        }
+
+        private void showErrorMessage(String message) {
+            mErrorMessage.setText(message);
+            mErrorMessage.setVisibility(View.VISIBLE);
         }
     };
 

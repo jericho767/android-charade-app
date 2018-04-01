@@ -39,9 +39,7 @@
     <string name="button_game_start">Tap timer to start.</string>
     <string name="button_game_resume">Tap timer to resume.</string>
 
-    <string name="playlist_error_message_not_insert">Something went wrong.</string>
-    <string name="playlist_error_message_length">%s can only be %d-%d characters long.</string>
-    <string name="playlist_success_message_add_item">Item successfully added.</string>
+    <string name="playlist_message_item_added">Item successfully added.</string>
     <string name="playlist_label_word_count">Has %d words.</string>
 
     <string name="placeholder_list_name">Enter play-list name</string>
@@ -81,4 +79,10 @@
     <string name="title_activity_game">Game Activity</string>
     <string name="title_activity_list_add">Create new playList</string>
     <string name="title_activity_list">PLAY-lists</string>
+
+    <string name="err_msg_required">%s is required.</string>
+    <string name="err_msg_length">%s must be %d to %d only.</string>
+    <string name="err_msg_invalid">%s value is invalid.</string>
+    <string name="err_msg_crash">Something went wrong.</string>
+    <string name="err_msg_char_length">%s can only be %d-%d characters long.</string>
 </resources>
