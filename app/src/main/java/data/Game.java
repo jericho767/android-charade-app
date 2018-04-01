@@ -109,8 +109,10 @@ public class Game {
      * Make a fist. Tap chest with the fist TWICE! Kiss that fist. And point up.
      */
     public void check() {
-        mCurrentRoundCheckedWordIndeces.add(mCurrentWordIndex);
-        mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRoundCounter);
+        if (!mWords.get(mCurrentWordIndex).isChecked()) {
+            mCurrentRoundCheckedWordIndeces.add(mCurrentWordIndex);
+            mWords.get(mCurrentWordIndex).setCheckedAtRound(mCurrentRoundCounter);
+        }
     }
 
     public ArrayList<Word> getUncheckedWordsInCurrentRound() {
