@@ -81,7 +81,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 , id), null);
 
         if (res.getCount() != 0) {
-            return new DBPlayList(res.getLong(0), res.getString(1));
+            DBPlayList playList = null;
+
+            while (res.moveToNext()) {
+                playList = new DBPlayList(res.getLong(0), res.getString(1));
+            }
+
+            return playList;
         } else {
             return null;
         }
