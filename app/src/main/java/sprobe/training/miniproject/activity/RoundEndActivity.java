@@ -44,18 +44,18 @@ public class RoundEndActivity extends AppCompatActivity {
         }
 
         // Set round parameters
-        setRoundEndCountUncheckedWords(mLabelUncheckedWords);
-        setRoundEndCountCheckedWords(mLabelCheckedWords);
-        Util.setToolbarTitle(this, String.format(Util.getLocale()
-                , getResources().getString(R.string.round_title_end)
-                , mGame.getCurrentRoundNumber()));
-
         RoundWordsAdapter adapter = new RoundWordsAdapter(this
                 , mGame.getUncheckedWordsInCurrentRound()
                 , mGame.getCheckedWordsInCurrentRound());
 
         mListUncheckedWords.setAdapter(adapter.getUncheckedWordsAdapter());
         mListCheckedWords.setAdapter(adapter.getCheckedWordsAdapter());
+
+        setRoundEndCountUncheckedWords(mLabelUncheckedWords);
+        setRoundEndCountCheckedWords(mLabelCheckedWords);
+        Util.setToolbarTitle(this, String.format(Util.getLocale()
+                , getResources().getString(R.string.round_title_end)
+                , mGame.getCurrentRoundNumber()));
     }
 
     private void fetchViews() {
@@ -68,13 +68,13 @@ public class RoundEndActivity extends AppCompatActivity {
     private void setRoundEndCountUncheckedWords(TextView viewLabelUncheckedWords) {
         viewLabelUncheckedWords.setText(String.format(Util.getLocale()
                 , getResources().getString(R.string.round_title_unchecked_words) + " (%d)"
-                , mGame.getUncheckedWordsInCurrentRound().size()));
+                , mListUncheckedWords.getCount()));
     }
 
     private void setRoundEndCountCheckedWords(TextView viewLabelCheckedWords) {
         viewLabelCheckedWords.setText(String.format(Util.getLocale()
                 , getResources().getString(R.string.round_title_checked_words) + " (%d)"
-                , mGame.getCheckedWordsInCurrentRound().size()));
+                , mListCheckedWords.getCount()));
     }
 
     @Override
