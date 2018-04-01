@@ -200,6 +200,10 @@ public class GameActivity extends AppCompatActivity {
         mViewGameWordOverlay.setText(String.format(Util.getLocale(), "%s"
                 , getResources().getString(R.string.game_message_end)));
         mViewGameWordOverlay.setVisibility(View.VISIBLE);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Util.BUNDLE_KEYS.GAME_JSON, Util.gameToJson(mGame));
+        Util.nextActivity(this, new RoundEndActivity(), bundle);
     }
 
     private void readyRound() {
