@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
     private View.OnClickListener mListenerGameTimer = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (mGame.getCurrentRoundNumber() < 1) {
+            if (mGame.getCurrentWordIndex() == -1) {
                 Word word = mGame.getWord();
 
                 if (word != null) {

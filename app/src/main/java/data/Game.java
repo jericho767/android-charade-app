@@ -22,10 +22,13 @@ public class Game {
     // number of passes
     private int mMaxPasses;
 
-    public Game(int mMaxPasses, ArrayList<DBWord> dbWords, boolean mIsIncludePassed) {
-        this.mMaxPasses = mMaxPasses;
-        this.mWords = Word.createWords(dbWords);
-        this.mIsIncludePassed = mIsIncludePassed;
+    public Game(int maxPasses, ArrayList<DBWord> dbWords, boolean isIncludePassed) {
+        mMaxPasses = maxPasses;
+        mWords = Word.createWords(dbWords);
+        mIsIncludePassed = isIncludePassed;
+        mCurrentWordIndex = -1;
+        mCurrentRoundCounter = 0;
+        mCurrentRoundPassedWordIndeces = new ArrayList<>();
     }
 
     public int getMaxPasses() {
@@ -47,6 +50,7 @@ public class Game {
     }
 
     public void endRound() {
+        mCurrentWordIndex = -1;
         mCurrentRoundPassedWordIndeces = new ArrayList<>();
     }
 
