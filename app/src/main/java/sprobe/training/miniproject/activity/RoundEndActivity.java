@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import adapter.RoundWordsAdapter;
 import common.Util;
@@ -32,7 +33,9 @@ public class RoundEndActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null || bundle.getString(Util.BUNDLE_KEYS.GAME_JSON) == null) {
-            // TODO: Do I really have to do this? I mean look at this? Is this right?
+            Toast.makeText(this
+                    , getResources().getString(R.string.game_message_game_not_found)
+                    , Toast.LENGTH_LONG).show();
             Util.nextActivity(this, new ListListActivity());
         } else {
             mGame = Util.jsonToGame(bundle.getString(Util.BUNDLE_KEYS.GAME_JSON));
