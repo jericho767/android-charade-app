@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import adapter.PlayListListAdapter;
 import common.Util;
+import database.DBPlayList;
 import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
@@ -25,6 +27,19 @@ public class ListListActivity extends AppCompatActivity {
         public void onClick(View view) {
             Util.nextActivity(ListListActivity.this, new ListAddActivity());
         }
+    };
+
+    private AdapterView.OnItemClickListener mListenerItemClick =
+        new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                DBPlayList playList = (DBPlayList) adapterView.getItemAtPosition(i);
+
+                Bundle bundle = new Bundle();
+                bundle.putLong(Util.BUNDLE_KEYS.PLAYLIST_ID, playList.getId());
+                Util.nextActivity(ListListActivity.this
+                        , new ListIndexActivity(), bundle);
+            }
     };
 
     @SuppressLint("ShowToast")
@@ -52,6 +67,7 @@ public class ListListActivity extends AppCompatActivity {
 
     private void bindListeners() {
         mFabAdd.setOnClickListener(listenerAddList);
+        mListPlayList.setOnItemClickListener(mListenerItemClick);
     }
 
     @Override
