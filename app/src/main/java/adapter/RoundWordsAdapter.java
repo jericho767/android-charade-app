@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import common.Util;
 import data.Word;
 import sprobe.training.miniproject.R;
 
@@ -30,11 +29,9 @@ public class RoundWordsAdapter {
 
     private class UncheckedWordsAdapter extends BaseAdapter {
         private ArrayList<Word> mWords;
-        private int mIndexOfLastWord;
 
-        private UncheckedWordsAdapter(ArrayList<Word> words, int indexOfLastWord) {
+        private UncheckedWordsAdapter(ArrayList<Word> words) {
             mWords = words;
-            mIndexOfLastWord = indexOfLastWord;
         }
 
         @Override
@@ -85,11 +82,9 @@ public class RoundWordsAdapter {
 
     private class CheckedWordsAdapter extends BaseAdapter {
         private ArrayList<Word> mWords;
-        private int mIndexOfLastWord;
 
-        private CheckedWordsAdapter(ArrayList<Word> words, int indexOfLastWord) {
+        private CheckedWordsAdapter(ArrayList<Word> words) {
             mWords = words;
-            mIndexOfLastWord = indexOfLastWord;
         }
 
         @Override
@@ -124,23 +119,17 @@ public class RoundWordsAdapter {
             }
 
             viewWordHolder.mViewText.setText(mWords.get(position).getText());
-
-            if (position == mIndexOfLastWord) {
-                viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale(), "%s"
-                        , mContext.getResources().getString(R.string.round_subtext_checked)));
-            } else {
-                viewWordHolder.mViewSubtext.setText(mContext.getResources()
+            viewWordHolder.mViewSubtext.setText(mContext.getResources()
                         .getString(R.string.round_subtext_checked));
-            }
 
             return convertView;
         }
     }
 
     public RoundWordsAdapter(Context context, ArrayList<Word> uncheckedWords,
-                             ArrayList<Word> checkedWords, int lastWordIndex) {
-        mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords, lastWordIndex);
-        mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords, lastWordIndex);
+                             ArrayList<Word> checkedWords) {
+        mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords);
+        mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords);
         mContext = context;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
