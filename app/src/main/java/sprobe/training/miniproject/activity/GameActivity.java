@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
 public class GameActivity extends AppCompatActivity {
-    private long mTimeLimit = 10000; // TODO: Set it right
+    private long mTimeLimit = 20000; // TODO: Set it right
     private long mRemainingMilliseconds;
     private CountDownTimer mCountDownTimer;
     private boolean mIsTimerOn;
@@ -140,9 +141,11 @@ public class GameActivity extends AppCompatActivity {
         mIsTimerOn = false;
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null && bundle.getLong("playListId") > 0) {
+        if (bundle != null && bundle.getLong("id") > 0) {
             words = getTexts(db.selectWordsFromPlayList(bundle.getLong("playListId")));
         }
+
+        Log.wtf("WORDS", words.toString());
 
         if (words.size() == 0) {
             Util.showToast(this, mToast
@@ -221,7 +224,7 @@ public class GameActivity extends AppCompatActivity {
     private void endRound() {
         mToast.cancel();
         Bundle bundle = new Bundle();
-        bundle.putString("game", Util.gameToJson(mGame));
+        bundle.putString(Util.BUNDLE_KEYS.GAME_JSON, Util.gameToJson(mGame));
         Util.nextActivity(this, new RoundEndActivity(), bundle);
     }
 

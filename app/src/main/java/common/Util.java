@@ -22,7 +22,7 @@ import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 
 public class Util {
-    public static abstract class SHARED_PREF {
+    public static final class SHARED_PREF {
         public static final String KEY = "sprobe.training.miniproject.PREF_FILE";
 
         public static final String SETTINGS_KEY_TIME_LIMIT = "settings.tl";
@@ -37,6 +37,11 @@ public class Util {
         public static final int SETTINGS_DEFAULT_TIME_LIMIT = 120;
         public static final int SETTINGS_DEFAULT_NUM_PASSES = 3;
         public static final boolean SETTINGS_DEFAULT_INCLUDE_PASSED = true;
+    }
+
+    public static final class BUNDLE_KEYS {
+        public static final String PLAYLIST_ID = "id";
+        public static final String GAME_JSON = "game";
     }
 
     /**

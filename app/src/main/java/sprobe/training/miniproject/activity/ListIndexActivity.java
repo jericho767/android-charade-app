@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -135,7 +134,9 @@ public class ListIndexActivity extends AppCompatActivity {
             onBackPressed();
         } else if (id == R.id.action_play) {
             if (mPlayListAdapter.getCount() > 0) {
-                Util.nextActivity(this, new GameActivity());
+                Bundle bundle = new Bundle();
+                bundle.putLong(Util.BUNDLE_KEYS.PLAYLIST_ID, mPlayList.getId());
+                Util.nextActivity(this, new GameActivity(), bundle);
             } else {
                 Util.showToast(this, mToast
                         , getResources().getString(R.string.game_message_no_words));

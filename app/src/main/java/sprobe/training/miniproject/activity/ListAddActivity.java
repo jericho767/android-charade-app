@@ -42,7 +42,7 @@ public class ListAddActivity extends AppCompatActivity {
                 } else {
                     // Pass bundle to next activity
                     Bundle bundle = new Bundle();
-                    bundle.putLong("id", playListId);
+                    bundle.putLong(Util.BUNDLE_KEYS.PLAYLIST_ID, playListId);
                     Util.nextActivity(ListAddActivity.this
                             , new ListIndexActivity(), bundle);
                 }
