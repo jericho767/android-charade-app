@@ -1,11 +1,11 @@
 package sprobe.training.miniproject.activity;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +22,9 @@ import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
 public class GameActivity extends AppCompatActivity {
-    private long mTimeLimit = 20000; // TODO: Set it right
+    private long mTimeLimit;
+    private int mNumPasses;
+    private boolean mIncludePassed;
     private long mRemainingMilliseconds;
     private CountDownTimer mCountDownTimer;
     private boolean mIsTimerOn;
@@ -133,19 +135,17 @@ public class GameActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
 
-        // TODO: Replace this with actual values
-        int numberOfPasses = 3;
-        ArrayList<DBWord> words = new ArrayList<>();
-        boolean includePassed = true;
+        // Fetch shared preference settings
+        getSharedPref();
+
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
+        ArrayList<DBWord> words = new ArrayList<>();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID) > 0) {
             words = db.selectWordsFromPlayList(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
         }
-
-        Log.wtf("WORDS", words.toString());
 
         if (words.size() == 0) {
             Util.showToast(this, mToast
@@ -157,7 +157,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Initialize the game
         if (bundle == null || bundle.getString(Util.BUNDLE_KEYS.GAME_JSON) == null) {
-            mGame = new Game(numberOfPasses, words, includePassed);
+            mGame = new Game(mNumPasses, words, mIncludePassed);
         } else {
             mGame = Util.jsonToGame(bundle.getString(Util.BUNDLE_KEYS.GAME_JSON));
         }
@@ -181,6 +181,19 @@ public class GameActivity extends AppCompatActivity {
         mBtnPass = findViewById(R.id.game_button_pass);
         mBtnCheck = findViewById(R.id.game_button_check);
         mViewGameWordOverlay = findViewById(R.id.game_overlay_text);
+    }
+
+    private void getSharedPref() {
+        SharedPreferences sharedPref = this.getSharedPreferences(Util.SHARED_PREF.KEY
+                , MODE_PRIVATE);
+        mNumPasses = sharedPref.getInt(Util.SHARED_PREF.SETTINGS_KEY_NUM_PASSES
+                , Util.SHARED_PREF.SETTINGS_DEFAULT_NUM_PASSES);
+        mIncludePassed = sharedPref.getBoolean(Util.SHARED_PREF.SETTINGS_KEY_INCLUDE_PASSED
+                , Util.SHARED_PREF.SETTINGS_DEFAULT_INCLUDE_PASSED);
+
+        int timeLimitInSeconds = sharedPref.getInt(Util.SHARED_PREF.SETTINGS_KEY_TIME_LIMIT
+                , Util.SHARED_PREF.SETTINGS_DEFAULT_TIME_LIMIT);
+        mTimeLimit = Long.parseLong(String.valueOf(timeLimitInSeconds * 1000));
     }
 
     private void endGame() {
