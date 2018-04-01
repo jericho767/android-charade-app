@@ -8,6 +8,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import adapter.RoundWordsAdapter;
 import common.Util;
 import data.Game;
@@ -104,8 +106,12 @@ public class RoundEndActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_play) {
-            // TODO: Implement more of this click
             mGame.endRound();
+
+            Bundle bundle = new Bundle();
+            bundle.putString(Util.BUNDLE_KEYS.GAME_JSON, new Gson().toJson(mGame));
+            Util.nextActivity(this, new GameActivity(), bundle);
+
             return true;
         }
 

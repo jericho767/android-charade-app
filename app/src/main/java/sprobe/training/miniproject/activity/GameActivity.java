@@ -132,31 +132,29 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Util.goFullscreen(this);
 
-        DatabaseHelper db = new DatabaseHelper(this);
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
-
-        // Fetch shared preference settings
+        fetchViews();
         getSharedPref();
 
         mRemainingMilliseconds = mTimeLimit;
         mIsTimerOn = false;
-        ArrayList<DBWord> words = new ArrayList<>();
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID) > 0) {
-            words = db.selectWordsFromPlayList(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
-        }
-
-        if (words.size() == 0) {
-            Util.showToast(this, mToast
-                    , getResources().getString(R.string.game_message_list_not_found));
-            Util.nextActivity(this, new ListListActivity());
-        }
-
-        fetchViews();
-
-        // Initialize the game
         if (bundle == null || bundle.getString(Util.BUNDLE_KEYS.GAME_JSON) == null) {
+            ArrayList<DBWord> words = new ArrayList<>();
+
+            if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID) > 0) {
+                DatabaseHelper db = new DatabaseHelper(this);
+                words = db.selectWordsFromPlayList(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
+            }
+
+            if (words.size() == 0) {
+                Util.showToast(this, mToast
+                        , getResources().getString(R.string.game_message_list_not_found));
+                Util.nextActivity(this, new ListListActivity());
+            }
+
+            // Initialize the game
             mGame = new Game(mNumPasses, words, mIncludePassed);
         } else {
             mGame = Util.jsonToGame(bundle.getString(Util.BUNDLE_KEYS.GAME_JSON));
@@ -197,7 +195,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void endGame() {
-        // TODO: Implement CORRECTLY? RIGHTEOUSLY? WITH ALL THE BEST YOU'VE GOT!
         mViewGameWord.setText("");
         mViewGameWord.setVisibility(View.GONE);
         mViewGameWordOverlay.setText(String.format(Util.getLocale(), "%s"
