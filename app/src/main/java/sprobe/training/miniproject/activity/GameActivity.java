@@ -145,8 +145,8 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (words.size() == 0) {
-            mToast.setText(getResources().getString(R.string.game_message_no_list));
-            mToast.show();
+            Util.showToast(this, mToast
+                    , getResources().getString(R.string.game_message_list_not_found));
             Util.nextActivity(this, new ListListActivity());
         }
 

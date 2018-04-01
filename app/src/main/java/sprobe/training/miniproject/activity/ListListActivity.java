@@ -91,8 +91,8 @@ public class ListListActivity extends AppCompatActivity {
             mExitAppToast.cancel();
             this.finishAffinity();
         } else {
-            mExitAppToast.setText(getResources().getString(R.string.app_message_on_close));
-            mExitAppToast.show();
+            Util.showToast(this, mExitAppToast
+                    , getResources().getString(R.string.app_message_on_close));
         }
     }
 

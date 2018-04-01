@@ -47,7 +47,8 @@
     <string name="placeholder_list_name">Enter play-list name</string>
     <string name="placeholder_add_list_item">Enter play-list item</string>
 
-    <string name="game_message_no_list">Cannot start game.</string>
+    <string name="game_message_no_words">Really? No words? HELLO?</string>
+    <string name="game_message_list_not_found">Cannot start game.</string>
     <string name="game_message_ended">Game is already over champ.</string>
     <string name="game_message_paused">Game is paused you imbecile.</string>
     <string name="game_message_end">That\'s all folks!</string>

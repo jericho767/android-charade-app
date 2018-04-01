@@ -134,7 +134,12 @@ public class ListIndexActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             onBackPressed();
         } else if (id == R.id.action_play) {
-            Util.nextActivity(this, new GameActivity());
+            if (mPlayListAdapter.getCount() > 0) {
+                Util.nextActivity(this, new GameActivity());
+            } else {
+                Util.showToast(this, mToast
+                        , getResources().getString(R.string.game_message_no_words));
+            }
         }
 
         return super.onOptionsItemSelected(item);
