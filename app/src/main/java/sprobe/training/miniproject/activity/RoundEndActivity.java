@@ -31,11 +31,11 @@ public class RoundEndActivity extends AppCompatActivity {
         fetchViews();
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null || bundle.getString("game") == null) {
+        if (bundle == null || bundle.getString(Util.BUNDLE_KEYS.GAME_JSON) == null) {
             // TODO: Do I really have to do this? I mean look at this? Is this right?
             Util.nextActivity(this, new ListListActivity());
         } else {
-            mGame = Util.jsonToGame(bundle.getString("game"));
+            mGame = Util.jsonToGame(bundle.getString(Util.BUNDLE_KEYS.GAME_JSON));
         }
 
         // Set round parameters

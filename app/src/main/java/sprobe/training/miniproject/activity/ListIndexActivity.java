@@ -87,10 +87,10 @@ public class ListIndexActivity extends AppCompatActivity {
         // Get the bundle from the intent
         Bundle bundle = getIntent().getExtras();
 
-        if (bundle != null && bundle.getLong("id", 0) == 0) {
+        if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID, 0) == 0) {
             Util.nextActivity(this, new ListListActivity());
         } else if (bundle != null) {
-            mPlayList = db.selectPlayListById(bundle.getLong("id"));
+            mPlayList = db.selectPlayListById(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
 
             // Set name in the toolbar
             Util.setToolbarTitle(this, mPlayList.getName());

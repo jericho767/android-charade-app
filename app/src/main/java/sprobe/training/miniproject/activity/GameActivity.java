@@ -141,8 +141,9 @@ public class GameActivity extends AppCompatActivity {
         mIsTimerOn = false;
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null && bundle.getLong("id") > 0) {
-            words = getTexts(db.selectWordsFromPlayList(bundle.getLong("playListId")));
+        if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID) > 0) {
+            words = getTexts(db.selectWordsFromPlayList(
+                    bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID)));
         }
 
         Log.wtf("WORDS", words.toString());
@@ -156,10 +157,10 @@ public class GameActivity extends AppCompatActivity {
         fetchViews();
 
         // Initialize the game
-        if (bundle == null || bundle.getString("game") == null) {
+        if (bundle == null || bundle.getString(Util.BUNDLE_KEYS.GAME_JSON) == null) {
             mGame = new Game(numberOfPasses, words, includePasses);
         } else {
-            mGame = Util.jsonToGame(bundle.getString("game"));
+            mGame = Util.jsonToGame(bundle.getString(Util.BUNDLE_KEYS.GAME_JSON));
         }
 
         readyRound();
