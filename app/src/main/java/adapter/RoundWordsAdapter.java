@@ -46,7 +46,7 @@ public class RoundWordsAdapter {
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return mWords.get(position).getId();
         }
 
         @SuppressLint("InflateParams")
@@ -99,7 +99,7 @@ public class RoundWordsAdapter {
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return mWords.get(position).getId();
         }
 
         @SuppressLint("InflateParams")

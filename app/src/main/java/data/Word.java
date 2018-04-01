@@ -31,6 +31,10 @@ public class Word {
         return words;
     }
 
+    public long getId() {
+        return mId;
+    }
+
     public String getText() {
         return mText;
     }
