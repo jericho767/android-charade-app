@@ -71,7 +71,7 @@ public class RoundWordsAdapter {
             Word word = mWords.get(position);
             viewWordHolder.mViewText.setText(word.getText());
 
-            if (position == mIndexOfLastWord) {
+            if (position == getCount() - 1) {
                 viewWordHolder.mViewSubtext.setText(mContext.getResources()
                         .getString(R.string.round_subtext_last_word));
             } else {
@@ -126,10 +126,8 @@ public class RoundWordsAdapter {
             viewWordHolder.mViewText.setText(mWords.get(position).getText());
 
             if (position == mIndexOfLastWord) {
-                viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale()
-                        , "%s | %s"
-                        , mContext.getResources().getString(R.string.round_subtext_checked)
-                        , mContext.getResources().getString(R.string.round_subtext_last_word)));
+                viewWordHolder.mViewSubtext.setText(String.format(Util.getLocale(), "%s"
+                        , mContext.getResources().getString(R.string.round_subtext_checked)));
             } else {
                 viewWordHolder.mViewSubtext.setText(mContext.getResources()
                         .getString(R.string.round_subtext_checked));
