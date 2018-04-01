@@ -35,7 +35,7 @@ public class ListAddActivity extends AppCompatActivity {
 
                 if (playListId == -1) {
                     Toast.makeText(ListAddActivity.this
-                            , getResources().getString(R.string.playlist_error_message_not_insert)
+                            , getResources().getString(R.string.err_msg_crash)
                             , Toast.LENGTH_SHORT).show();
                     Util.nextActivity(ListAddActivity.this
                             , new ListListActivity());
@@ -53,7 +53,7 @@ public class ListAddActivity extends AppCompatActivity {
             if (name.length() < DBPlayList.NAME_LENGTH_MIN
                     || name.length() > DBPlayList.NAME_LENGTH_MAX) {
                 return String.format(Util.getLocale()
-                        , getResources().getString(R.string.playlist_error_message_length)
+                        , getResources().getString(R.string.err_msg_char_length)
                         , "Name", DBPlayList.NAME_LENGTH_MIN, DBPlayList.NAME_LENGTH_MAX);
             } else {
                 return "";

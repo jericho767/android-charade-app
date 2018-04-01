@@ -40,7 +40,7 @@ public class ListIndexActivity extends AppCompatActivity {
                         mToast, validateItemName);
             } else {
                 mToast = Util.showToast(ListIndexActivity.this, mToast
-                        , getResources().getString(R.string.playlist_success_message_add_item));
+                        , getResources().getString(R.string.playlist_message_item_added));
 
                 mPlayListAdapter.addItem(new DBWord(mViewItemName.getText().toString()));
                 mViewItemName.setText(null);
@@ -51,7 +51,7 @@ public class ListIndexActivity extends AppCompatActivity {
             if (name.length() < DBWord.TEXT_LENGTH_MIN
                     || name.length() > DBWord.TEXT_LENGTH_MAX) {
                 return String.format(
-                        getResources().getString(R.string.playlist_error_message_length),
+                        getResources().getString(R.string.err_msg_char_length),
                         "Text", DBWord.TEXT_LENGTH_MIN, DBWord.TEXT_LENGTH_MAX);
             } else {
                 return "";
