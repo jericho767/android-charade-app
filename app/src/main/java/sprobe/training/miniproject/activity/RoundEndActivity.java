@@ -10,9 +10,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import adapter.RoundWordsAdapter;
 import common.Util;
 import data.Game;
+import data.Word;
 import sprobe.training.miniproject.R;
 
 public class RoundEndActivity extends AppCompatActivity {
@@ -44,9 +48,14 @@ public class RoundEndActivity extends AppCompatActivity {
         }
 
         // Set round parameters
+        ArrayList<Word> uncheckedWords = mGame.getUncheckedWordsInCurrentRound();
+        ArrayList<Word> checkedWords = mGame.getCheckedWordsInCurrentRound();
+
+        Collections.reverse(uncheckedWords);
+        Collections.reverse(checkedWords);
+
         RoundWordsAdapter adapter = new RoundWordsAdapter(this
-                , mGame.getUncheckedWordsInCurrentRound()
-                , mGame.getCheckedWordsInCurrentRound());
+                , uncheckedWords, checkedWords, mGame.getCurrentWord());
 
         mListUncheckedWords.setAdapter(adapter.getUncheckedWordsAdapter());
         mListCheckedWords.setAdapter(adapter.getCheckedWordsAdapter());

@@ -109,14 +109,12 @@ public class Game {
     }
 
     public ArrayList<Word> getUncheckedWordsInCurrentRound() {
-        ArrayList<Word> words = new ArrayList<>();
+        ArrayList<Word> words = getPassedWordsInCurrentRound();
 
         if (!mWords.get(mCurrentWordIndex).isChecked()) {
             // Include last word in the unchecked words
             words.add(mWords.get(mCurrentWordIndex));
         }
-
-        words.addAll(getPassedWordsInCurrentRound());
 
         return words;
     }

@@ -18,6 +18,7 @@ public class RoundWordsAdapter {
     private CheckedWordsAdapter mCheckedWordsAdapter;
     private UncheckedWordsAdapter mUncheckedWordsAdapter;
     private Context mContext;
+    private Word mLastWord;
 
     public CheckedWordsAdapter getCheckedWordsAdapter() {
         return mCheckedWordsAdapter;
@@ -68,8 +69,13 @@ public class RoundWordsAdapter {
             Word word = mWords.get(position);
             viewWordHolder.mViewText.setText(word.getText());
 
-            viewWordHolder.mViewSubtext.setText(mContext.getResources()
+            if (position == 0 && mLastWord.getId() == word.getId()) {
+                viewWordHolder.mViewSubtext.setText(mContext.getResources()
+                        .getString(R.string.round_subtext_last_word));
+            } else {
+                viewWordHolder.mViewSubtext.setText(mContext.getResources()
                         .getString(R.string.round_subtext_passed));
+            }
 
             return convertView;
         }
@@ -113,18 +119,27 @@ public class RoundWordsAdapter {
                 viewWordHolder = (ViewWordHolder) convertView.getTag();
             }
 
-            viewWordHolder.mViewText.setText(mWords.get(position).getText());
-            viewWordHolder.mViewSubtext.setText(mContext.getResources()
+            Word word = mWords.get(position);
+            viewWordHolder.mViewText.setText(word.getText());
+
+            if (position == 0 && mLastWord.getId() == word.getId()) {
+                viewWordHolder.mViewSubtext.setText(String.format("%s | %s"
+                        , mContext.getResources().getString(R.string.round_subtext_checked)
+                        , mContext.getResources().getString(R.string.round_subtext_last_word)));
+            } else {
+                viewWordHolder.mViewSubtext.setText(mContext.getResources()
                         .getString(R.string.round_subtext_checked));
+            }
 
             return convertView;
         }
     }
 
     public RoundWordsAdapter(Context context, ArrayList<Word> uncheckedWords,
-                             ArrayList<Word> checkedWords) {
+                             ArrayList<Word> checkedWords, Word lastWord) {
         mCheckedWordsAdapter = new CheckedWordsAdapter(checkedWords);
         mUncheckedWordsAdapter = new UncheckedWordsAdapter(uncheckedWords);
+        mLastWord = lastWord;
         mContext = context;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
