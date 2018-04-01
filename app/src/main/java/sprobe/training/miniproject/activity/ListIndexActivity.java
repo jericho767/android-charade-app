@@ -51,8 +51,9 @@ public class ListIndexActivity extends AppCompatActivity {
             if (name.length() < DBWord.TEXT_LENGTH_MIN
                     || name.length() > DBWord.TEXT_LENGTH_MAX) {
                 return String.format(
-                        getResources().getString(R.string.err_msg_char_length),
-                        "Text", DBWord.TEXT_LENGTH_MIN, DBWord.TEXT_LENGTH_MAX);
+                        getResources().getString(R.string.err_msg_char_length)
+                        , getResources().getString(R.string.playlist_label_list_item)
+                        , DBWord.TEXT_LENGTH_MIN, DBWord.TEXT_LENGTH_MAX);
             } else {
                 return "";
             }

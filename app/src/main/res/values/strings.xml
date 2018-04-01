@@ -42,6 +42,8 @@
     <string name="playlist_message_item_added">Item successfully added.</string>
     <string name="playlist_label_word_count">Has %d words.</string>
 
+    <string name="playlist_label_name">Name</string>
+    <string name="playlist_label_list_item">Text</string>
     <string name="placeholder_list_name">Enter play-list name</string>
     <string name="placeholder_add_list_item">Enter play-list item</string>
 

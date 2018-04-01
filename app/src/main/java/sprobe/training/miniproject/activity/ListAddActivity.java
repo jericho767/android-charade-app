@@ -54,7 +54,8 @@ public class ListAddActivity extends AppCompatActivity {
                     || name.length() > DBPlayList.NAME_LENGTH_MAX) {
                 return String.format(Util.getLocale()
                         , getResources().getString(R.string.err_msg_char_length)
-                        , "Name", DBPlayList.NAME_LENGTH_MIN, DBPlayList.NAME_LENGTH_MAX);
+                        , getResources().getString(R.string.playlist_label_name)
+                        , DBPlayList.NAME_LENGTH_MIN, DBPlayList.NAME_LENGTH_MAX);
             } else {
                 return "";
             }

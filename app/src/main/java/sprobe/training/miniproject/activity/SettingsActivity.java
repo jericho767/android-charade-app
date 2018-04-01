@@ -46,10 +46,10 @@ public class SettingsActivity extends AppCompatActivity {
 
             if (strTimeLimit.length() == 0) {
                 return String.format(getResources().getString(R.string.err_msg_required)
-                        , "Time limit");
+                        , getResources().getString(R.string.settings_text_time_limit));
             } else if (strNumPasses.length() == 0) {
                 return String.format(getResources().getString(R.string.err_msg_required)
-                        , "Number of passes");
+                        , getResources().getString(R.string.settings_text_number_of_passes));
             }
 
             try {
@@ -58,13 +58,13 @@ public class SettingsActivity extends AppCompatActivity {
                 if (timeLimit < Util.SHARED_PREF.SETTINGS_MIN_TIME_LIMIT
                         || timeLimit > Util.SHARED_PREF.SETTINGS_MAX_TIME_LIMIT) {
                     return String.format(getResources().getString(R.string.err_msg_length)
-                            , "Time limit"
+                            , getResources().getString(R.string.settings_text_time_limit)
                             , Util.SHARED_PREF.SETTINGS_MIN_TIME_LIMIT
                             , Util.SHARED_PREF.SETTINGS_MAX_TIME_LIMIT);
                 }
             } catch (NumberFormatException e) {
                 return String.format(getResources().getString(R.string.err_msg_invalid)
-                        , "Time limit");
+                        , getResources().getString(R.string.settings_text_time_limit));
             }
 
             try {
@@ -73,13 +73,13 @@ public class SettingsActivity extends AppCompatActivity {
                 if (numPasses < Util.SHARED_PREF.SETTINGS_MIN_NUM_PASSES
                         || numPasses > Util.SHARED_PREF.SETTINGS_MAX_NUM_PASSES) {
                     return String.format(getResources().getString(R.string.err_msg_length)
-                            , "Number of passes"
+                            , getResources().getString(R.string.settings_text_number_of_passes)
                             , Util.SHARED_PREF.SETTINGS_MIN_NUM_PASSES
                             , Util.SHARED_PREF.SETTINGS_MAX_NUM_PASSES);
                 }
             } catch (NumberFormatException e) {
                 return String.format(getResources().getString(R.string.err_msg_invalid)
-                        , "Number of passes ");
+                        , getResources().getString(R.string.settings_text_number_of_passes));
             }
 
             return null;
