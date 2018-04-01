@@ -104,9 +104,17 @@ public class RoundEndActivity extends AppCompatActivity {
         menu.findItem(R.id.action_upload).setVisible(false);
 
         MenuItem actionPlay = menu.findItem(R.id.action_play);
-        actionPlay.setTitle(getResources().getString(R.string.round_label_button_start_round));
+
+        if (mGame.pollOfWordsCount() == 0) {
+            // TODO: Change icon for this one. Okay?
+            actionPlay.setTitle(getResources().getString(R.string.action_go_to_list));
+        } else {
+            actionPlay.setTitle(getResources().getString(R.string.action_next_round));
+        }
+
         actionPlay.setShowAsAction(
                 MenuItem.SHOW_AS_ACTION_ALWAYS|MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
         return true;
     }
 
@@ -117,9 +125,13 @@ public class RoundEndActivity extends AppCompatActivity {
         if (id == R.id.action_play) {
             mGame.endRound();
 
-            Bundle bundle = new Bundle();
-            bundle.putString(Util.BUNDLE_KEYS.GAME_JSON, new Gson().toJson(mGame));
-            Util.nextActivity(this, new GameActivity(), bundle);
+            if (mGame.pollOfWordsCount() == 0) {
+                Util.nextActivity(this, new ListListActivity());
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putString(Util.BUNDLE_KEYS.GAME_JSON, new Gson().toJson(mGame));
+                Util.nextActivity(this, new GameActivity(), bundle);
+            }
 
             return true;
         }

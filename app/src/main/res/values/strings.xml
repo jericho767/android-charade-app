@@ -15,6 +15,9 @@
     <string name="action_download">Download</string>
     <string name="action_sort">Sort</string>
 
+    <string name="action_next_round">NEXT ROUND</string>
+    <string name="action_go_to_list">GO TO LIST</string>
+
     <string name="action_delete_order">40</string>
     <string name="action_delete_items_order">50</string>
     <string name="action_play_order">60</string>
@@ -63,7 +66,6 @@
     <string name="round_title_unchecked_words">Unchecked words</string>
     <string name="round_title_checked_words">Checked words</string>
     <string name="round_title_statistics">Statistics</string>
-    <string name="round_label_button_start_round">NEXT ROUND</string>
 
     <string name="settings_text_time_limit">Time Limit</string>
     <string name="settings_subtext_time_limit">Duh. Time limit? Per round?</string>
