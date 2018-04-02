@@ -1,9 +1,11 @@
 package common;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -42,6 +44,85 @@ public class Util {
     public static final class BUNDLE_KEYS {
         public static final String PLAYLIST_ID = "id";
         public static final String GAME_JSON = "game";
+    }
+
+    /**
+     * Dialog listener that will show the confirm dialog.
+     *
+     * @param activity pass here <code>this</code> or <code>CurrentActivity.this</code>
+     * @param listenerConfirm what to do if confirm?
+     *
+     * @return listener that will show confirm dialog
+     */
+    public static DialogInterface.OnClickListener dialogListenerShowConfirmDialog(
+            final AppCompatActivity activity
+            , final DialogInterface.OnClickListener listenerConfirm) {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Util.showConfirmDialog(activity, listenerConfirm);
+            }
+        };
+    }
+
+    /**
+     * Dialog listener that will close the dialog.
+     *
+     * @return listener that will close the dialog
+     */
+    public static DialogInterface.OnClickListener dialogListenerDismissDialog() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+    }
+
+    /**
+     * Shows that annoying confirm dialog that keeps on confirming.
+     *
+     * @param activity pass here <code>this</code> or <code>CurrentActivity.this</code>
+     * @param onConfirmListener what to do when confirm?
+     */
+    private static void showConfirmDialog(AppCompatActivity activity
+            , DialogInterface.OnClickListener onConfirmListener) {
+
+        Util.createAlertDialog(activity
+                , activity.getResources().getString(R.string.button_confirm)
+                , activity.getResources().getString(R.string.msg_conf)
+                , activity.getResources().getString(R.string.button_yes_positive)
+                , onConfirmListener
+                , activity.getResources().getString(R.string.button_abort)
+                , Util.dialogListenerDismissDialog()).show();
+    }
+
+    /**
+     * Create an alert dialog. Duh.
+     *
+     * @param activity pass here <code>this</code> or <code>CurrentActivity.this</code>
+     * @param title the title of the dialog
+     * @param message what's your message?
+     * @param btnPositiveText what text should be displayed on positive button
+     * @param onPositiveListener what to do when that button is clicked?
+     * @param btnNegativeText what text should be displayed on negative button
+     * @param onNegativeListener what to do when that button is clicked?
+     *
+     * @return of course the <code>AlertDialog</code> you asked for.
+     */
+    public static AlertDialog.Builder createAlertDialog(AppCompatActivity activity
+            , String title
+            , String message
+            , String btnPositiveText
+            , DialogInterface.OnClickListener onPositiveListener
+            , String btnNegativeText
+            , DialogInterface.OnClickListener onNegativeListener) {
+
+        return new AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(btnPositiveText, onPositiveListener)
+                .setNegativeButton(btnNegativeText, onNegativeListener);
     }
 
     /**

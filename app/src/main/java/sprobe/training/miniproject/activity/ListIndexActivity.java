@@ -1,7 +1,9 @@
 package sprobe.training.miniproject.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -28,6 +30,7 @@ public class ListIndexActivity extends AppCompatActivity {
     private DBPlayList mPlayList;
     private DatabaseHelper db;
     private PlayListWordsAdapter mPlayListAdapter;
+    private AlertDialog.Builder mDeleteDialog;
 
     private View.OnClickListener listenerAddListItem = new View.OnClickListener() {
         @Override
@@ -81,6 +84,7 @@ public class ListIndexActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_index);
         Util.addToolbar(this, true);
 
+        setDialog();
         fetchViews();
         mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
         db = new DatabaseHelper(this);
@@ -109,6 +113,28 @@ public class ListIndexActivity extends AppCompatActivity {
         }
 
         bindListeners();
+    }
+
+    private void setDialog() {
+        DialogInterface.OnClickListener listenerDelete = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deletePlayList();
+            }
+        };
+
+        mDeleteDialog = Util.createAlertDialog(this
+                , getResources().getString(R.string.button_delete)
+                , getResources().getString(R.string.msg_delete)
+                , getResources().getString(R.string.button_delete)
+                , Util.dialogListenerShowConfirmDialog(this, listenerDelete)
+                , getResources().getString(R.string.button_cancel)
+                , Util.dialogListenerDismissDialog());
+    }
+
+    private void deletePlayList() {
+        // TODO: Implement delete of playlist
+        Log.wtf("DELETE: ", "Deleting...");
     }
 
     @Override
@@ -142,6 +168,8 @@ public class ListIndexActivity extends AppCompatActivity {
                 Util.showToast(this, mToast
                         , getResources().getString(R.string.game_message_no_words));
             }
+        } else if (id == R.id.action_delete) {
+            mDeleteDialog.show();
         }
 
         return super.onOptionsItemSelected(item);

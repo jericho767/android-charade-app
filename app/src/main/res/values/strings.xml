@@ -29,6 +29,8 @@
     <string name="action_help_order">180</string>
     <string name="action_about_order">200</string>
 
+    <string name="button_yes_positive">YES! I\'M POSITIVE</string>
+    <string name="button_abort">Abort</string>
     <string name="button_submit">Submit</string>
     <string name="button_create">Create</string>
     <string name="button_confirm">Confirm</string>
@@ -42,6 +44,7 @@
     <string name="button_game_start">Tap timer to start.</string>
     <string name="button_game_resume">Tap timer to resume.</string>
 
+    <string name="playlist_message_delete">Delete playlist?</string>
     <string name="playlist_message_item_added">Item successfully added.</string>
     <string name="playlist_label_word_count">Has %d words.</string>
 
@@ -84,6 +87,9 @@
     <string name="title_activity_game">Game Activity</string>
     <string name="title_activity_list_add">Create new playList</string>
     <string name="title_activity_list">PLAY-lists</string>
+
+    <string name="msg_delete">Delete? You sure?</string>
+    <string name="msg_conf">REALLY? Like for real?</string>
 
     <string name="err_msg_required">%s is required.</string>
     <string name="err_msg_length">%s must be %d to %d only.</string>
