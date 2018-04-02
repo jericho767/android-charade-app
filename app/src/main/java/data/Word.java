@@ -55,7 +55,4 @@ public class Word {
         return mCheckedAtRound > 0;
     }
 
-    int getCheckedAtRound() {
-        return mCheckedAtRound;
-    }
 }
