@@ -133,8 +133,18 @@ public class ListIndexActivity extends AppCompatActivity {
     }
 
     private void deletePlayList() {
-        // TODO: Implement delete of playlist
-        Log.wtf("DELETE: ", "Deleting...");
+        int rowsAffected = db.deletePlayListById(mPlayList.getId());
+
+        if (rowsAffected == 1) {
+            Util.nextActivity(this, new ListListActivity());
+            Toast.makeText(this
+                    , getResources().getString(R.string.playlist_message_deleted)
+                    , Toast.LENGTH_LONG).show();
+        } else if (rowsAffected > 1) {
+            Log.wtf("IMPOSSIBLE: ", "Deleted id is: " + mPlayList.getId());
+        } else {
+            Log.wtf("HUH: ", "ID trying to be deleted is: " + mPlayList.getId());
+        }
     }
 
     @Override

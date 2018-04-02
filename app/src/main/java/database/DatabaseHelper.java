@@ -92,4 +92,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return null;
         }
     }
+
+    public Integer deletePlayListById(long id) {
+        deleteWordsByPlayListId(id);
+
+        return db.delete(DatabaseContract.PlayList.TABLE_NAME
+                , DatabaseContract.PlayList.COLUMN_ID + " = ?"
+                , new String[] {String.valueOf(id)});
+    }
+
+    public Integer deleteWordsByPlayListId(long playlistId) {
+        return db.delete(DatabaseContract.Word.TABLE_NAME
+                , DatabaseContract.Word.COLUMN_PLAYLIST_ID + " = ?"
+                , new String[] {String.valueOf(playlistId)});
+    }
+
 }

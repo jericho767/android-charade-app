@@ -45,6 +45,7 @@
     <string name="button_game_resume">Tap timer to resume.</string>
 
     <string name="playlist_message_delete">Delete playlist?</string>
+    <string name="playlist_message_deleted">Playlist was deleted.</string>
     <string name="playlist_message_item_added">Item successfully added.</string>
     <string name="playlist_label_word_count">Has %d words.</string>
 
