@@ -44,10 +44,13 @@
     <string name="button_game_start">Tap timer to start.</string>
     <string name="button_game_resume">Tap timer to resume.</string>
 
+    <string name="playlist_message_delete_list_item_oops">Oops. Sorry. Try again.</string>
+    <string name="playlist_message_deleted_list_item">Item was deleted.</string>
+    <string name="playlist_message_delete_list_item">Tap again to delete item.</string>
     <string name="playlist_message_delete">Delete playlist?</string>
     <string name="playlist_message_deleted">Playlist was deleted.</string>
     <string name="playlist_message_item_added">Item successfully added.</string>
-    <string name="playlist_label_word_count">Has %d words.</string>
+    <string name="playlist_label_word_count">Has %d word(s).</string>
 
     <string name="playlist_label_name">Name</string>
     <string name="playlist_label_list_item">Text</string>

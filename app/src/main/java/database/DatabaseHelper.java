@@ -101,8 +101,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 , new String[] {String.valueOf(id)});
     }
 
-    public Integer deleteWordsByPlayListId(long playlistId) {
+    public Integer deleteWordById(long id) {
         return db.delete(DatabaseContract.Word.TABLE_NAME
+                , DatabaseContract.Word.COLUMN_ID + " = ?"
+                , new String[] {String.valueOf(id)});
+    }
+
+    private void deleteWordsByPlayListId(long playlistId) {
+        db.delete(DatabaseContract.Word.TABLE_NAME
                 , DatabaseContract.Word.COLUMN_PLAYLIST_ID + " = ?"
                 , new String[] {String.valueOf(playlistId)});
     }

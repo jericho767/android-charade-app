@@ -23,16 +23,44 @@ import sprobe.training.miniproject.R;
 
 public class ListIndexActivity extends AppCompatActivity {
 
+    private DatabaseHelper db;
     private EditText mViewItemName;
     private Toast mToast;
     private ImageButton mBtnSubmit;
     private ListView mListWords;
     private DBPlayList mPlayList;
-    private DatabaseHelper db;
     private PlayListWordsAdapter mPlayListAdapter;
     private AlertDialog.Builder mDeleteDialog;
 
-    private View.OnClickListener listenerAddListItem = new View.OnClickListener() {
+    private View.OnClickListener mListenerDeleteItem = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int position = (Integer) v.getTag();
+            long wordId = mPlayListAdapter.getItemId(position);
+            int rowsAffected = 0;
+
+            if (wordId != 0) {
+                rowsAffected = db.deleteWordById(wordId);
+            }
+
+            if (wordId != 0 && rowsAffected == 0) {
+                Util.showToast(ListIndexActivity.this, mToast
+                        , getResources().getString(
+                                R.string.playlist_message_delete_list_item_oops));
+            } else {
+                if (rowsAffected > 1) {
+                    Log.wtf("IMPOSSIBLE: ", "Delete WORDS with id of " + wordId);
+                }
+
+                Util.showToast(ListIndexActivity.this, mToast
+                        , getResources().getString(
+                                R.string.playlist_message_deleted_list_item));
+                mPlayListAdapter.deleteItem(position);
+            }
+        }
+    };
+
+    private View.OnClickListener mListenerAddListItem = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             String itemName = mViewItemName.getText().toString();
@@ -86,7 +114,7 @@ public class ListIndexActivity extends AppCompatActivity {
 
         setDialog();
         fetchViews();
-        mToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
+        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         db = new DatabaseHelper(this);
 
         // Get the bundle from the intent
@@ -102,7 +130,8 @@ public class ListIndexActivity extends AppCompatActivity {
 
             // Set list
             mPlayListAdapter = new PlayListWordsAdapter(this
-                    , db.selectWordsFromPlayList(mPlayList.getId()));
+                    , db.selectWordsFromPlayList(mPlayList.getId())
+                    , mListenerDeleteItem);
             mListWords.setAdapter(mPlayListAdapter);
         }
 
@@ -160,7 +189,7 @@ public class ListIndexActivity extends AppCompatActivity {
     }
 
     private void bindListeners() {
-        mBtnSubmit.setOnClickListener(listenerAddListItem);
+        mBtnSubmit.setOnClickListener(mListenerAddListItem);
     }
 
     @Override
