@@ -20,6 +20,10 @@ public class DBWord {
         mPlayListId = playListId;
     }
 
+    public long getPlayListId() {
+        return mPlayListId;
+    }
+
     public long getId() {
         return mId;
     }
