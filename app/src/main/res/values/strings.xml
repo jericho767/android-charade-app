@@ -16,7 +16,7 @@
     <string name="action_sort">Sort</string>
 
     <string name="action_next_round">NEXT ROUND</string>
-    <string name="action_go_to_list">GO TO LIST</string>
+    <string name="action_go_to_list">GO TO PLAYLIST</string>
 
     <string name="action_delete_order">40</string>
     <string name="action_delete_items_order">50</string>

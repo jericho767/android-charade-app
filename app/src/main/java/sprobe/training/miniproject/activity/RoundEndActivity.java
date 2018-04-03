@@ -106,7 +106,7 @@ public class RoundEndActivity extends AppCompatActivity {
         MenuItem actionPlay = menu.findItem(R.id.action_play);
 
         if (mGame.pollOfWordsCount() == 0) {
-            // TODO: Change icon for this one. Okay?
+            actionPlay.setIcon(R.drawable.ic_home);
             actionPlay.setTitle(getResources().getString(R.string.action_go_to_list));
         } else {
             actionPlay.setTitle(getResources().getString(R.string.action_next_round));
