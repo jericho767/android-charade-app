@@ -64,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return words;
     }
 
-    public ArrayList<DBPlayList> selectPlayListById(ArrayList<Integer> playListIds) {
+    public ArrayList<DBPlayList> selectPlayListById(ArrayList<Long> playListIds) {
         Cursor res = db.rawQuery(
                 String.format(DatabaseContract.PlayList.SELECT_IN_IDs
                         , Util.implode(playListIds))
