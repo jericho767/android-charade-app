@@ -20,6 +20,7 @@ public class DBWord {
         mPlayListId = playListId;
     }
 
+    // TODO: I really don't know where I can use this. But for formality, let it be.
     public long getPlayListId() {
         return mPlayListId;
     }

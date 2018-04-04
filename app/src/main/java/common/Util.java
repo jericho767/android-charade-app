@@ -75,28 +75,62 @@ public class Util {
 
     public static final Type PLAYLISTS_TYPE = new TypeToken<ArrayList<DBPlayList>>(){}.getType();
 
-    // TODO: Add javadoc
+    /**
+     * Will you go out on a PROM with me? Like THAT! Ask permission.
+     * Difference is just that this method asks permission for writing/reading files
+     * into storage.
+     *
+     * @param activity pass here <code>this</code> or <code>CurrentActivity.this</code>
+     */
     public static void askFilePermissions(AppCompatActivity activity) {
         ActivityCompat.requestPermissions(activity, Util.PERMISSIONS_FILE_HANDLING
                 , Util.RESULT_LOAD_LIST_FILE);
     }
 
-    // TODO: Add javadoc
+    /**
+     * Uploaded playlist WILL have different name, they will be appended with the
+     * date they are uploaded. <br><br>
+     *
+     * So does this function was born. *cue baby cries*
+     *
+     * @param name the name of the playlist
+     *
+     * @return name of the playlist that will be used to insert in Database
+     */
     public static String createPlayListNameFromUpload(String name) {
         return name + "_" + generateDatetimeString();
     }
 
-    // TODO: Add javadoc
+    /**
+     * Generate filename for downloaded files.
+     *
+     * @param prefix usually this is a filename, then what the function does is
+     *               just add the identifier, like the date.
+     *
+     * @return generated filename. Get it? HAHAHA
+     */
     public static String generateFilename(String prefix) {
         return prefix + generateDatetimeString() + "." + WHAT_FILE_EXTENSION;
     }
 
+    /**
+     * Formats the current datetime into a string.
+     *
+     * @return formatted current datetime INTO a string. Read the description.
+     */
     private static String generateDatetimeString() {
         return new SimpleDateFormat("yyyyMMddHHmmss"
                 , Util.getLocale()).format(new Date());
     }
 
-    // TODO: Add javadoc
+    /**
+     * KABOOM! Concatinates an <code>ArrayList</code> into a string
+     * separated with the delimiter.
+     *
+     * @param list list of something
+     *
+     * @return I don't know what to say... aside from... READ THE DESCRIPTION!
+     */
     public static String implode(ArrayList<?> list) {
         StringBuilder stringBuilder = new StringBuilder();
         String delimiter = ",";
@@ -112,7 +146,15 @@ public class Util {
         return stringBuilder.toString();
     }
 
-    // TODO: Add javadoc
+    /**
+     * Pass an input stream, and this method will return you the
+     * content of the file you are opening.
+     *
+     * @param is the <code>InputStream</code> you are opening
+     *
+     * @return contents of the file
+     * @throws IOException Boom!
+     */
     public static String convertStreamToString(InputStream is) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -124,19 +166,42 @@ public class Util {
         return sb.toString();
     }
 
-    // TODO: Add javadoc
+    /**
+     * Is this extension acceptable or not?
+     * This method will judge.
+     *
+     * @param ext the extension that will be judged
+     *
+     * @return TO BE or NOT TO BE. That is the question.
+     */
     public static boolean isAcceptableFileExtension(String ext) {
         String extension = ext.toLowerCase();
 
         return extension.equals(WHAT_FILE_EXTENSION.toLowerCase());
     }
 
-    // TODO: Add javadoc
+    /**
+     * Read the method name OUT LOUD.
+     * Then tell me what you understand.
+     *
+     * @param uri this is the selected file.
+     *
+     * @return Again. Read the method name OUT LOUD.
+     */
     public static String getFileExtensionFromUri(Uri uri) {
         return MimeTypeMap.getFileExtensionFromUrl(uri.toString());
     }
 
-    // TODO: Add javadoc
+    /**
+     * Gets the path of... of... that.. Uri.
+     * Yeah! the path of that URI!
+     * Actually just copied this from the internet. LOL!
+     *
+     * @param context pass here <code>this</code> or <code>CurrentActivity.this</code>
+     * @param uri this is the selected file.
+     *
+     * @return Read the method name. PLEASE! PLEASE?
+     */
     public static String getPath(final Context context, final Uri uri) {
         final boolean isMarshmallow = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
 
