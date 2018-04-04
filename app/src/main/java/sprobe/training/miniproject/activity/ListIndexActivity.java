@@ -295,7 +295,6 @@ public class ListIndexActivity extends AppCompatActivity {
                     mViewPlaylistNameError.setText(error);
                     mViewPlaylistNameError.setVisibility(View.VISIBLE);
                 } else {
-                    storeWords();
                     db.updatePlayListById(mPlayList.getId(), newName);
                     mEditNameDialog.hide();
                     Util.refreshActivity(ListIndexActivity.this);
