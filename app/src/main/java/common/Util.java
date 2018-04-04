@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.DocumentsContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,15 +20,21 @@ import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import data.Game;
+import database.DBPlayList;
 import sprobe.training.miniproject.R;
 
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -59,13 +66,29 @@ public class Util {
 
     public static final int RESULT_LOAD_LIST_FILE = 1;
 
-    public static final String[] PERMISSIONS_FILE_HANDLING = {
+    private static final String[] PERMISSIONS_FILE_HANDLING = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    private static final String UPLOADED_FILE_EXTENSION = "what";
-    private static final String UPLOADED_FILE_MIMETYPE = "application/octet-stream";
+    private static final String WHAT_FILE_EXTENSION = "what";
+    private static final String WHAT_FILE_MIMETYPE = "application/octet-stream";
+
+    public static final Type PLAYLISTS_TYPE = new TypeToken<ArrayList<DBPlayList>>(){}.getType();
+
+    // TODO: Add javadoc
+    public static void askFilePermissions(AppCompatActivity activity) {
+        ActivityCompat.requestPermissions(activity, Util.PERMISSIONS_FILE_HANDLING
+                , Util.RESULT_LOAD_LIST_FILE);
+    }
+
+    // TODO: Add javadoc
+    public static String generateFilename(String prefix) {
+        String date = new SimpleDateFormat("yyyyMMddHHmmss"
+                , Util.getLocale()).format(new Date());
+
+        return prefix + date + "." + WHAT_FILE_EXTENSION;
+    }
 
     // TODO: Add javadoc
     public static String implode(ArrayList<?> list) {
@@ -99,7 +122,7 @@ public class Util {
     public static boolean isAcceptableFileExtension(String ext) {
         String extension = ext.toLowerCase();
 
-        return extension.equals(UPLOADED_FILE_EXTENSION.toLowerCase());
+        return extension.equals(WHAT_FILE_EXTENSION.toLowerCase());
     }
 
     // TODO: Add javadoc
@@ -143,7 +166,7 @@ public class Util {
      */
     public static void openFileChooser(AppCompatActivity activity) {
         Intent fileChooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        fileChooserIntent.setType(UPLOADED_FILE_MIMETYPE);
+        fileChooserIntent.setType(WHAT_FILE_MIMETYPE);
         fileChooserIntent.addCategory(Intent.CATEGORY_OPENABLE);
 
         activity.startActivityForResult(

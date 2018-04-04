@@ -3,6 +3,7 @@ package sprobe.training.miniproject.activity;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +14,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import adapter.PlayListWordsAdapter;
 import common.Util;
@@ -144,6 +152,46 @@ public class ListIndexActivity extends AppCompatActivity {
         bindListeners();
     }
 
+    private void downloadList() {
+        ArrayList<Long> id = new ArrayList<>();
+        id.add(mPlayList.getId());
+        ArrayList<DBPlayList> dbPlayLists = db.selectPlayListById(id);
+        String json = new Gson().toJson(dbPlayLists, Util.PLAYLISTS_TYPE);
+
+        File directory;
+
+        if (Environment.getExternalStorageState() == null) {
+            directory = Environment.getDataDirectory();
+        } else {
+            directory = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DOWNLOADS);
+        }
+
+        File file = new File(directory + File.separator +
+                Util.generateFilename(mPlayList.getName()));
+
+        try {
+            while (!file.createNewFile()) {
+                file = new File(directory + File.separator +
+                        Util.generateFilename(mPlayList.getName()));
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(json.getBytes());
+            outputStream.close();
+
+            int originalToastDuration = mToast.getDuration();
+            mToast.setDuration(Toast.LENGTH_LONG);
+
+            Util.showToast(this, mToast, String.format(
+                    getResources().getString(R.string.playlist_message_downloaded)
+                    , file.getAbsolutePath()));
+            mToast.setDuration(originalToastDuration);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setDialog() {
         DialogInterface.OnClickListener listenerDelete = new DialogInterface.OnClickListener() {
             @Override
@@ -209,6 +257,8 @@ public class ListIndexActivity extends AppCompatActivity {
             }
         } else if (id == R.id.action_delete) {
             mDeleteDialog.show();
+        } else if (id == R.id.action_download) {
+            downloadList();
         }
 
         return super.onOptionsItemSelected(item);

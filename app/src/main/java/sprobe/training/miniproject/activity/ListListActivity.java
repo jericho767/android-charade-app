@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,8 +102,7 @@ public class ListListActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Util.nextActivity(this, new SettingsActivity());
         } else if (id == R.id.action_upload) {
-            ActivityCompat.requestPermissions(this, Util.PERMISSIONS_FILE_HANDLING
-                    , Util.RESULT_LOAD_LIST_FILE);
+            Util.askFilePermissions(this);
             Util.openFileChooser(this);
         }
 
@@ -139,6 +137,7 @@ public class ListListActivity extends AppCompatActivity {
                         FileInputStream fin = new FileInputStream(file);
                         mUploadedFileContents = Util.convertStreamToString(fin);
                         fin.close();
+                        insertLists();
                     }
                 } catch (NullPointerException | IOException ex) {
                     ex.printStackTrace();
