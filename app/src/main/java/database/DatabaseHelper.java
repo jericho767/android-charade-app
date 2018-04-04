@@ -79,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 // TODO: Soon implement condition if to add words or not
                 playList.setWords(selectWordsByPlayListId(playList.getId()));
+
+                playLists.add(playList);
             }
         }
 
