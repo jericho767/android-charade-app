@@ -46,6 +46,7 @@
     <string name="button_upload">Upload</string>
     <string name="button_select_file">Select .what file</string>
 
+    <string name="playlist_message_uploaded">Added %d playlist(s).</string>
     <string name="playlist_message_downloaded">File saved at %s</string>
     <string name="playlist_message_delete_list_item_oops">Oops. Sorry. Try again.</string>
     <string name="playlist_message_deleted_list_item">Item was deleted.</string>

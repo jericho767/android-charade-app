@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -83,11 +82,18 @@ public class Util {
     }
 
     // TODO: Add javadoc
-    public static String generateFilename(String prefix) {
-        String date = new SimpleDateFormat("yyyyMMddHHmmss"
-                , Util.getLocale()).format(new Date());
+    public static String createPlayListNameFromUpload(String name) {
+        return name + "_" + generateDatetimeString();
+    }
 
-        return prefix + date + "." + WHAT_FILE_EXTENSION;
+    // TODO: Add javadoc
+    public static String generateFilename(String prefix) {
+        return prefix + generateDatetimeString() + "." + WHAT_FILE_EXTENSION;
+    }
+
+    private static String generateDatetimeString() {
+        return new SimpleDateFormat("yyyyMMddHHmmss"
+                , Util.getLocale()).format(new Date());
     }
 
     // TODO: Add javadoc

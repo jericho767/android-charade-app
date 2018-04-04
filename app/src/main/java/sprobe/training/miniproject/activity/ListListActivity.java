@@ -14,21 +14,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import adapter.PlayListListAdapter;
 import common.Util;
 import database.DBPlayList;
+import database.DBWord;
 import database.DatabaseHelper;
 import sprobe.training.miniproject.R;
 
 public class ListListActivity extends AppCompatActivity {
+    private DatabaseHelper db;
     private FloatingActionButton mFabAdd;
     private ListView mListPlayList;
     private Toast mExitAppToast;
@@ -60,7 +60,7 @@ public class ListListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_list);
         Util.addToolbar(this, false);
-        DatabaseHelper db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);
 
         fetchViews();
         mExitAppToast = Toast.makeText(this, "", Toast.LENGTH_LONG);
@@ -152,9 +152,27 @@ public class ListListActivity extends AppCompatActivity {
 
     private void insertLists() {
         if (mUploadedFileContents != null) {
-            ArrayList playLists;
-            Type playListType = new TypeToken<DBPlayList>() {}.getType();
-            playLists = new Gson().fromJson(mUploadedFileContents, playListType);
+            ArrayList<DBPlayList> dbPlayLists = new Gson().fromJson(mUploadedFileContents
+                    , Util.PLAYLISTS_TYPE);
+
+            long playListId;
+
+            for (DBPlayList playList : dbPlayLists) {
+                playListId = db.insertPlaylist(
+                        Util.createPlayListNameFromUpload(playList.getName()));
+
+                for (DBWord word : playList.getWords()) {
+                    db.insertWord(word.getText(), playListId);
+                }
+            }
+
+            Toast.makeText(this, String.format(
+                    getResources().getString(R.string.playlist_message_uploaded)
+                        , dbPlayLists.size())
+                    , Toast.LENGTH_LONG).show();
+
+            finish();
+            startActivity(getIntent());
         }
     }
 
