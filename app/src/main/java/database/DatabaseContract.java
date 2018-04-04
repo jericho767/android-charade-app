@@ -1,5 +1,6 @@
 package database;
 
+import android.database.Cursor;
 import android.provider.BaseColumns;
 
 final class DatabaseContract {
@@ -22,6 +23,12 @@ final class DatabaseContract {
                 TABLE_NAME);
         static final String SELECT_ALL = String.format("SELECT * FROM %s", TABLE_NAME);
         static final String SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE id = %d";
+        static final String SELECT_IN_IDs = "SELECT * FROM " + TABLE_NAME + " WHERE id IN (%s)";
+
+        static DBPlayList getPlayListFromCursor(Cursor res) {
+            return new DBPlayList(res.getLong(0)
+                    , res.getString(1));
+        }
     }
 
     static abstract class Word implements BaseColumns {
@@ -39,5 +46,11 @@ final class DatabaseContract {
                 TABLE_NAME);
         static final String SELECT_BY_PLAYLIST_ID = "SELECT * FROM " + TABLE_NAME +
                 " WHERE " + COLUMN_PLAYLIST_ID + " = %d";
+
+        static DBWord getWordFromCursor(Cursor res) {
+            return new DBWord(res.getLong(0)
+                    , res.getString(1)
+                    , res.getLong(2));
+        }
     }
 }

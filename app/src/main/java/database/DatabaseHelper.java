@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import common.Util;
+
 @SuppressLint({"DefaultLocale", "Recycle"})
 public class DatabaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
@@ -55,27 +57,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (res.getCount() != 0) {
             while(res.moveToNext()) {
-                words.add(new DBWord(res.getLong(0)
-                        , res.getString(1)
-                        , res.getLong(2)));
+                words.add(DatabaseContract.Word.getWordFromCursor(res));
             }
         }
 
         return words;
     }
 
-    public ArrayList<DBPlayList> selectAllPlayLists() {
-        Cursor res = db.rawQuery(DatabaseContract.PlayList.SELECT_ALL, null);
+    public ArrayList<DBPlayList> selectPlayListById(ArrayList<Integer> playListIds) {
+        Cursor res = db.rawQuery(
+                String.format(DatabaseContract.PlayList.SELECT_IN_IDs
+                        , Util.implode(playListIds))
+                , null);
 
         ArrayList<DBPlayList> playLists = new ArrayList<>();
         DBPlayList playList;
 
         if (res.getCount() != 0) {
             while (res.moveToNext()) {
-                playList = new DBPlayList(res.getLong(0)
-                        , res.getString(1));
+                playList = DatabaseContract.PlayList.getPlayListFromCursor(res);
 
-                playLists.add(playList);
+                // TODO: Soon implement condition if to add words or not
+                playList.setWords(selectWordsByPlayListId(playList.getId()));
+            }
+        }
+
+        return playLists;
+    }
+
+    public ArrayList<DBPlayList> selectAllPlayLists() {
+        Cursor res = db.rawQuery(DatabaseContract.PlayList.SELECT_ALL, null);
+
+        ArrayList<DBPlayList> playLists = new ArrayList<>();
+
+        if (res.getCount() != 0) {
+            while (res.moveToNext()) {
+                playLists.add(DatabaseContract.PlayList.getPlayListFromCursor(res));
             }
         }
 
@@ -90,8 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DBPlayList playList = null;
 
             while (res.moveToNext()) {
-                playList = new DBPlayList(res.getLong(0)
-                        , res.getString(1));
+                playList = DatabaseContract.PlayList.getPlayListFromCursor(res);
             }
 
             return playList;

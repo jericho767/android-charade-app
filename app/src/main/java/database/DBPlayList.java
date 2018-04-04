@@ -15,7 +15,7 @@ public class DBPlayList {
         mName = name;
     }
 
-    public void setWords(ArrayList<DBWord> words) {
+    void setWords(ArrayList<DBWord> words) {
         mWords = words;
     }
 

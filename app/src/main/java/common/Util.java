@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import data.Game;
@@ -66,6 +67,23 @@ public class Util {
     private static final String UPLOADED_FILE_EXTENSION = "what";
     private static final String UPLOADED_FILE_MIMETYPE = "application/octet-stream";
 
+    // TODO: Add javadoc
+    public static String implode(ArrayList<?> list) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String delimiter = ",";
+
+        for (int i = 0 ; i < list.size() ; i++) {
+            stringBuilder.append(list.get(i).toString());
+
+            if (i != list.size() - 1) {
+                stringBuilder.append(delimiter);
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+    // TODO: Add javadoc
     public static String convertStreamToString(InputStream is) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -77,16 +95,19 @@ public class Util {
         return sb.toString();
     }
 
+    // TODO: Add javadoc
     public static boolean isAcceptableFileExtension(String ext) {
         String extension = ext.toLowerCase();
 
         return extension.equals(UPLOADED_FILE_EXTENSION.toLowerCase());
     }
 
+    // TODO: Add javadoc
     public static String getFileExtensionFromUri(Uri uri) {
         return MimeTypeMap.getFileExtensionFromUrl(uri.toString());
     }
 
+    // TODO: Add javadoc
     public static String getPath(final Context context, final Uri uri) {
         final boolean isMarshmallow = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
 
