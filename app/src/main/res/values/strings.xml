@@ -33,6 +33,7 @@
     <string name="button_abort">Abort</string>
     <string name="button_submit">Submit</string>
     <string name="button_create">Create</string>
+    <string name="button_edit">Edit</string>
     <string name="button_confirm">Confirm</string>
     <string name="button_delete">Delete</string>
     <string name="button_add">Add</string>
@@ -56,6 +57,7 @@
     <string name="playlist_message_item_added">Item successfully added.</string>
     <string name="playlist_label_word_count">Has %d word(s).</string>
 
+    <string name="playlist_edit_name">Edit name</string>
     <string name="playlist_label_name">Name</string>
     <string name="playlist_label_list_item">Text</string>
     <string name="placeholder_list_name">Enter play-list name</string>

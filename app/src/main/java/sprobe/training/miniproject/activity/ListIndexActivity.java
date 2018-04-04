@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -39,6 +41,11 @@ public class ListIndexActivity extends AppCompatActivity {
     private DBPlayList mPlayList;
     private PlayListWordsAdapter mPlayListAdapter;
     private AlertDialog.Builder mDeleteDialog;
+    private AlertDialog mEditNameDialog;
+
+    private EditText mViewPlaylistName;
+    private Button mBtnSave;
+    private TextView mViewPlaylistNameError;
 
     private View.OnClickListener mListenerDeleteItem = new View.OnClickListener() {
         @Override
@@ -259,9 +266,48 @@ public class ListIndexActivity extends AppCompatActivity {
             mDeleteDialog.show();
         } else if (id == R.id.action_download) {
             downloadList();
+        } else if (id == R.id.action_settings) {
+            editName();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressLint("InflateParams")
+    private void editName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialog = getLayoutInflater().inflate(R.layout.dialog_edit_playlist_name, null);
+        mViewPlaylistName = dialog.findViewById(R.id.playlist_name);
+        mBtnSave = dialog.findViewById(R.id.playlist_edit_save);
+        mViewPlaylistNameError = dialog.findViewById(R.id.playlist_name_error);
+
+        mViewPlaylistName.setText(mPlayList.getName());
+        mViewPlaylistName.setSelection(mViewPlaylistName.getText().length());
+
+        mBtnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPlaylistNameError.setVisibility(View.GONE);
+                String newName = mViewPlaylistName.getText().toString();
+                String error = ListAddActivity.validateName(newName
+                        , ListIndexActivity.this);
+
+                if (!error.isEmpty()) {
+                    mViewPlaylistNameError.setText(error);
+                    mViewPlaylistNameError.setVisibility(View.VISIBLE);
+                } else {
+                    storeWords();
+                    db.updatePlayListById(mPlayList.getId(), newName);
+                    mEditNameDialog.hide();
+                    Util.refreshActivity(ListIndexActivity.this);
+                }
+            }
+        });
+
+        builder.setView(dialog);
+        mEditNameDialog = builder.create();
+        Util.showKeyboard(mEditNameDialog.getWindow());
+        mEditNameDialog.show();
     }
 
     @Override
@@ -279,8 +325,13 @@ public class ListIndexActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_settings).setVisible(false);
-        menu.findItem(R.id.action_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        // Use settings action menu for renaming playlist name
+        MenuItem menuEdit = menu.findItem(R.id.action_settings);
+        menuEdit.setIcon(R.drawable.ic_edit);
+        menuEdit.setTitle(R.string.button_edit);
+        menuEdit.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        menu.findItem(R.id.action_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.findItem(R.id.action_upload).setVisible(false);
         menu.findItem(R.id.action_about).setVisible(false);
 

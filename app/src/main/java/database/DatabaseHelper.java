@@ -49,6 +49,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(DatabaseContract.Word.TABLE_NAME, null, values);
     }
 
+    public int updatePlayListById(long playlistId, String newName) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseContract.PlayList.COLUMN_NAME, newName);
+
+        return db.update(DatabaseContract.PlayList.TABLE_NAME
+                , contentValues
+                , DatabaseContract.PlayList.COLUMN_ID + " = ?"
+                , new String[] {String.valueOf(playlistId)});
+    }
+
     public ArrayList<DBWord> selectWordsByPlayListId(long playListId) {
         Cursor res = db.rawQuery(String.format(DatabaseContract.Word.SELECT_BY_PLAYLIST_ID
                 , playListId), null);

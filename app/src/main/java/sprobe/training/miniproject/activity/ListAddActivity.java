@@ -24,7 +24,7 @@ public class ListAddActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             String name = mViewName.getText().toString();
-            String validateName = validateName(name);
+            String validateName = validateName(name, ListAddActivity.this);
 
             if (!validateName.isEmpty()) {
                 mLayoutName.setError(validateName);
@@ -49,22 +49,22 @@ public class ListAddActivity extends AppCompatActivity {
             }
         }
 
-        private String validateName(String name) {
-            if (name.length() < DBPlayList.NAME_LENGTH_MIN
-                    || name.length() > DBPlayList.NAME_LENGTH_MAX) {
-                return String.format(Util.getLocale()
-                        , getResources().getString(R.string.err_msg_char_length)
-                        , getResources().getString(R.string.playlist_label_name)
-                        , DBPlayList.NAME_LENGTH_MIN, DBPlayList.NAME_LENGTH_MAX);
-            } else {
-                return "";
-            }
-        }
-
         private long storeList(String name) {
             return db.insertPlaylist(name);
         }
     };
+
+    public static String validateName(String name, AppCompatActivity activity) {
+        if (name.length() < DBPlayList.NAME_LENGTH_MIN
+                || name.length() > DBPlayList.NAME_LENGTH_MAX) {
+            return String.format(Util.getLocale()
+                    , activity.getResources().getString(R.string.err_msg_char_length)
+                    , activity.getResources().getString(R.string.playlist_label_name)
+                    , DBPlayList.NAME_LENGTH_MIN, DBPlayList.NAME_LENGTH_MAX);
+        } else {
+            return "";
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

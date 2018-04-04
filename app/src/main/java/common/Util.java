@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
@@ -74,6 +75,16 @@ public class Util {
     private static final String WHAT_FILE_MIMETYPE = "application/octet-stream";
 
     public static final Type PLAYLISTS_TYPE = new TypeToken<ArrayList<DBPlayList>>(){}.getType();
+
+    /**
+     * Refresh activity.
+     *
+     * @param activity pass here <code>this</code> or <code>CurrentActivity.this</code>
+     */
+    public static void refreshActivity(AppCompatActivity activity) {
+        activity.finish();
+        activity.startActivity(activity.getIntent());
+    }
 
     /**
      * Will you go out on a PROM with me? Like THAT! Ask permission.
@@ -333,6 +344,15 @@ public class Util {
     public static void showKeyboard(AppCompatActivity activity) {
         activity.getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+
+    /**
+     * The method name says it ALL! And I mean ALL!!!
+     *
+     * @param window TO THE WINDOW!!!!
+     */
+    public static void showKeyboard(Window window) {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     /**

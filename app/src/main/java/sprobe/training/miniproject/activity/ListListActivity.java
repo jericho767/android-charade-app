@@ -171,8 +171,7 @@ public class ListListActivity extends AppCompatActivity {
                         , dbPlayLists.size())
                     , Toast.LENGTH_LONG).show();
 
-            finish();
-            startActivity(getIntent());
+            Util.refreshActivity(this);
         }
     }
 
