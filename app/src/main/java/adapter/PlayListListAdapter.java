@@ -60,7 +60,7 @@ public class PlayListListAdapter extends BaseAdapter {
         viewPlayListHolder.mViewName.setText(playList.getName());
         viewPlayListHolder.mViewWordCount.setText(String
                 .format(mContext.getResources().getString(R.string.playlist_label_word_count)
-                , db.selectWordsFromPlayList(playList.getId()).size()));
+                , db.selectWordsByPlayListId(playList.getId()).size()));
 
         return view;
     }

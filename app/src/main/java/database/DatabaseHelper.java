@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(DatabaseContract.Word.TABLE_NAME, null, values);
     }
 
-    public ArrayList<DBWord> selectWordsFromPlayList(long playListId) {
+    public ArrayList<DBWord> selectWordsByPlayListId(long playListId) {
         Cursor res = db.rawQuery(String.format(DatabaseContract.Word.SELECT_BY_PLAYLIST_ID
                 , playListId), null);
 
@@ -55,7 +55,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (res.getCount() != 0) {
             while(res.moveToNext()) {
-                words.add(new DBWord(res.getLong(0), res.getString(1), res.getLong(2)));
+                words.add(new DBWord(res.getLong(0)
+                        , res.getString(1)
+                        , res.getLong(2)));
             }
         }
 
@@ -66,10 +68,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery(DatabaseContract.PlayList.SELECT_ALL, null);
 
         ArrayList<DBPlayList> playLists = new ArrayList<>();
+        DBPlayList playList;
 
         if (res.getCount() != 0) {
             while (res.moveToNext()) {
-                playLists.add(new DBPlayList(res.getLong(0), res.getString(1)));
+                playList = new DBPlayList(res.getLong(0)
+                        , res.getString(1));
+
+                playLists.add(playList);
             }
         }
 
@@ -84,7 +90,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DBPlayList playList = null;
 
             while (res.moveToNext()) {
-                playList = new DBPlayList(res.getLong(0), res.getString(1));
+                playList = new DBPlayList(res.getLong(0)
+                        , res.getString(1));
             }
 
             return playList;

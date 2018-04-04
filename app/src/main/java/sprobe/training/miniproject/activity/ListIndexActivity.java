@@ -130,7 +130,7 @@ public class ListIndexActivity extends AppCompatActivity {
 
             // Set list
             mPlayListAdapter = new PlayListWordsAdapter(this
-                    , db.selectWordsFromPlayList(mPlayList.getId())
+                    , db.selectWordsByPlayListId(mPlayList.getId())
                     , mListenerDeleteItem);
             mListWords.setAdapter(mPlayListAdapter);
         }

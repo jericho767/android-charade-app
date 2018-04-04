@@ -145,7 +145,7 @@ public class GameActivity extends AppCompatActivity {
 
             if (bundle != null && bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID) > 0) {
                 DatabaseHelper db = new DatabaseHelper(this);
-                words = db.selectWordsFromPlayList(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
+                words = db.selectWordsByPlayListId(bundle.getLong(Util.BUNDLE_KEYS.PLAYLIST_ID));
             }
 
             if (words.size() == 0) {

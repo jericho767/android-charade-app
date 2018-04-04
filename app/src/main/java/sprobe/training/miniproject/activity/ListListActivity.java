@@ -14,9 +14,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 import adapter.PlayListListAdapter;
 import common.Util;
 import database.DBPlayList;
@@ -142,6 +148,14 @@ public class ListListActivity extends AppCompatActivity {
                         , getResources().getString(R.string.err_msg_wrong_uploaded_file)
                         , Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void insertLists() {
+        if (mUploadedFileContents != null) {
+            ArrayList playLists;
+            Type playListType = new TypeToken<DBPlayList>() {}.getType();
+            playLists = new Gson().fromJson(mUploadedFileContents, playListType);
         }
     }
 
