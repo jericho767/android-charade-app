@@ -44,7 +44,6 @@ public class ListIndexActivity extends AppCompatActivity {
     private AlertDialog mEditNameDialog;
 
     private EditText mViewPlaylistName;
-    private Button mBtnSave;
     private TextView mViewPlaylistNameError;
 
     private View.OnClickListener mListenerDeleteItem = new View.OnClickListener() {
@@ -278,13 +277,13 @@ public class ListIndexActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialog = getLayoutInflater().inflate(R.layout.dialog_edit_playlist_name, null);
         mViewPlaylistName = dialog.findViewById(R.id.playlist_name);
-        mBtnSave = dialog.findViewById(R.id.playlist_edit_save);
+        Button btnSave = dialog.findViewById(R.id.playlist_edit_save);
         mViewPlaylistNameError = dialog.findViewById(R.id.playlist_name_error);
 
         mViewPlaylistName.setText(mPlayList.getName());
         mViewPlaylistName.setSelection(mViewPlaylistName.getText().length());
 
-        mBtnSave.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewPlaylistNameError.setVisibility(View.GONE);
