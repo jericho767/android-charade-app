@@ -43,6 +43,8 @@
     <string name="button_check">CHECK</string>
     <string name="button_game_start">Tap timer to start.</string>
     <string name="button_game_resume">Tap timer to resume.</string>
+    <string name="button_upload">Upload</string>
+    <string name="button_select_file">Select .what file</string>
 
     <string name="playlist_message_delete_list_item_oops">Oops. Sorry. Try again.</string>
     <string name="playlist_message_deleted_list_item">Item was deleted.</string>
@@ -95,6 +97,7 @@
     <string name="msg_delete">Delete? You sure?</string>
     <string name="msg_conf">REALLY? Like for real?</string>
 
+    <string name="err_msg_wrong_uploaded_file">Please don\'t test me.</string>
     <string name="err_msg_required">%s is required.</string>
     <string name="err_msg_length">%s must be %d to %d only.</string>
     <string name="err_msg_invalid">%s value is invalid.</string>

@@ -7,6 +7,7 @@
     <color name="colorDefault">#c6cdd1</color>
     <color name="colorDefaultDark">#7b8083</color>
     <color name="colorDefaultAccent">#3e3e3e</color>
+    <color name="colorClearDefault">#7fc6cdd1</color>
 
     <color name="colorSuccess">#00CC48</color>
     <color name="colorSuccessDark">#197F3D</color>

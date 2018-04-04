@@ -1,19 +1,29 @@
 package common;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.DocumentsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Locale;
 
 import data.Game;
@@ -44,6 +54,81 @@ public class Util {
     public static final class BUNDLE_KEYS {
         public static final String PLAYLIST_ID = "id";
         public static final String GAME_JSON = "game";
+    }
+
+    public static final int RESULT_LOAD_LIST_FILE = 1;
+
+    public static final String[] PERMISSIONS_FILE_HANDLING = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    private static final String UPLOADED_FILE_EXTENSION = "what";
+    private static final String UPLOADED_FILE_MIMETYPE = "application/octet-stream";
+
+    public static String convertStreamToString(InputStream is) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static boolean isAcceptableFileExtension(String ext) {
+        String extension = ext.toLowerCase();
+
+        return extension.equals(UPLOADED_FILE_EXTENSION.toLowerCase());
+    }
+
+    public static String getFileExtensionFromUri(Uri uri) {
+        return MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+    }
+
+    public static String getPath(final Context context, final Uri uri) {
+        final boolean isMarshmallow = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+
+        // DocumentProvider
+        if (isMarshmallow && DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                // This is for checking Main Memory
+                if ("primary".equalsIgnoreCase(type)) {
+                    if (split.length > 1) {
+                        return Environment.getExternalStorageDirectory() + "/" + split[1] + "/";
+                    } else {
+                        return Environment.getExternalStorageDirectory() + "/";
+                    }
+                    // This is for checking SD Card
+                } else {
+                    return "storage" + "/" + docId.replace(":", "/");
+                }
+
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Opens the gallery for uploading files.
+     *
+     * @param activity pass here <code>this</code> or <code>CurrentActivity.this</code>
+     */
+    public static void openFileChooser(AppCompatActivity activity) {
+        Intent fileChooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        fileChooserIntent.setType(UPLOADED_FILE_MIMETYPE);
+        fileChooserIntent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        activity.startActivityForResult(
+                Intent.createChooser(fileChooserIntent
+                        , activity.getResources().getString(R.string.button_select_file))
+                , RESULT_LOAD_LIST_FILE);
     }
 
     /**

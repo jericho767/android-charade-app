@@ -1,8 +1,11 @@
 package sprobe.training.miniproject.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import adapter.PlayListListAdapter;
 import common.Util;
 import database.DBPlayList;
@@ -21,6 +27,7 @@ public class ListListActivity extends AppCompatActivity {
     private FloatingActionButton mFabAdd;
     private ListView mListPlayList;
     private Toast mExitAppToast;
+    private String mUploadedFileContents;
 
     private View.OnClickListener listenerAddList = new View.OnClickListener() {
         @Override
@@ -89,6 +96,10 @@ public class ListListActivity extends AppCompatActivity {
 
         if (id == R.id.action_settings) {
             Util.nextActivity(this, new SettingsActivity());
+        } else if (id == R.id.action_upload) {
+            ActivityCompat.requestPermissions(this, Util.PERMISSIONS_FILE_HANDLING
+                    , Util.RESULT_LOAD_LIST_FILE);
+            Util.openFileChooser(this);
         }
 
         return super.onOptionsItemSelected(item);
@@ -99,6 +110,39 @@ public class ListListActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         mExitAppToast.cancel();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Util.RESULT_LOAD_LIST_FILE && resultCode == RESULT_OK && data != null) {
+            Uri selectedFile = data.getData();
+            String selectedFileExtension = "";
+
+            if (selectedFile != null) {
+                selectedFileExtension = Util.getFileExtensionFromUri(selectedFile);
+            }
+
+            if (Util.isAcceptableFileExtension(selectedFileExtension)) {
+                String selectedFilePath = Util.getPath(this, selectedFile);
+
+                try {
+                    if (selectedFilePath != null) {
+                        File file = new File(selectedFilePath);
+                        FileInputStream fin = new FileInputStream(file);
+                        mUploadedFileContents = Util.convertStreamToString(fin);
+                        fin.close();
+                    }
+                } catch (NullPointerException | IOException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                Toast.makeText(this
+                        , getResources().getString(R.string.err_msg_wrong_uploaded_file)
+                        , Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
